@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>儿童福利院</title>
+    <style type="text/css">
+        * {
+            background-color: #f2f2f2;
+        }
+
+        body {
+            width: 1349px;
+            height: 915px;
+            overflow: hidden;
+
+        }
+
+        .nav {
+            list-style-type: none;
+            position: relative;
+            top: 70px;
+            left: 55px;
+        }
+
+        li {
+            float: left;
+        }
+
+        .nav a:link,
+        .nav a:visited {
+            display: block;
+            width: 180px;
+            height: 30px;
+            font-weight: bold;
+            background-color: #4B7902;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 4px;
+            line-height: 30px;
+            /* 去掉列表的下划线 */
+            text-decoration: none;
+        }
+
+        .nav a:hover,
+        .nav a:active {
+            background-color: darkgreen;
+        }
+
+        #log img {
+            position: absolute;
+            left: 100px;
+            top: 10px;
+        }
+
+        #log a {
+            position: absolute;
+            left: 90%;
+            top: 45px;
+        }
+
+        video {
+            position: relative;
+            top: 80px;
+            left: 93px;
+        }
+
+        .list {
+            width: 0px;
+            height: 378px;
+            position: relative;
+            top: -307px;
+            left: 820px;
+
+        }
+
+        .volunteer,
+        .activity {
+            width: 400px;
+            height: 50%;
+            border: 1px solid #000000;
+            background-color: #FFFFFF;
+        }
+
+        .activity {
+            margin-top: 3px;
+        }
+
+        h4 {
+            padding-left: 10px;
+            margin-top: 10px;
+            color: #000000;
+            background-color: #FFFFFF;
+        }
+
+        .list ul {
+            list-style-type: circle;
+            color: #bfbf00;
+            margin-top: -10px;
+        }
+
+        .list a:link,
+        .list a:visited {
+            display: block;
+
+            color: #bfbf00;
+            /* 去掉列表的下划线 */
+            background-color: #FFFFFF;
+            text-decoration: none;
+            width: 200px;
+        }
+
+        .list a:hover,
+        .list a:active {
+            /* background-color: darkgreen; */
+            text-decoration: underline;
+        }
+
+        .footer{
+            text-align: center;
+            position: relative;
+            top:-305px;
+            height:100px;
+            background-color:rgba(186, 248, 250,0.3);
+        }
+
+        .footer p{
+            /* font-style: italic; */
+            font-size: 12px;
+            position: relative;
+            top:15px;
+            background-color: rgba(186, 248, 250,0);
+        }
+        </style>
+
+<body>
+<div id="hearder">
+    <div id="log">
+        <img src="/welfare/images/logo.png" alt="儿童福利院" border="0">
+        <a href="">登录/注册</a>
+    </div>
+    <div id="nv">
+        <ul class="nav">
+            <li><a href="/" hidefocus="true" title="福利院首页">首页</a></li>
+            <li><a href="/" hidefocus="true" title="来访预约">来访预约</a></li>
+            <li><a href="/" hidefocus="true" title="申请来院活动">活动申请</a></li>
+            <li><a href="/" hidefocus="true" title="社工招聘">社工招聘</a></li>
+            <li><a href="/" hidefocus="true" title="寄/领养申请">寄/领养申请</a></li>
+            <li><a href="/" hidefocus="true" title="关于我们">关于我们</a></li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <video width="700" height="383" controls autoplay loop>
+        <source src="/welfare/images/chalk.mp4" type="video/mp4">
+    </video>
+    <div class="list">
+        <div class="volunteer">
+            <h4>社工招聘</h4>
+            <ul>
+                <li><a href="/welfare/index" hidefocus="true" title="福利院首页">招聘1</a></li>
+                <li><a href="/" hidefocus="true" title="来访预约">招聘2</a></li>
+                <li><a href="/" hidefocus="true" title="申请来院活动">招聘3</a></li>
+                <li><a href="/" hidefocus="true" title="社工招聘">招聘4</a></li>
+                <li><a href="/" hidefocus="true" title="寄/领养申请">招聘5</a></li>
+                <li><a href="/" hidefocus="true" title="关于我们">招聘6</a></li>
+            </ul>
+        </div>
+        <div class="activity">
+            <h4>活动组织</h4>
+            <ul>
+                <li><a href="/" hidefocus="true" title="孤儿网首页">活动1</a></li>
+                <li><a href="/" hidefocus="true" title="孤儿网首页">活动2</a></li>
+                <li><a href="/" hidefocus="true" title="孤儿网首页">活动3</a></li>
+                <li><a href="/" hidefocus="true" title="孤儿网首页">活动4</a></li>
+                <li><a href="/" hidefocus="true" title="孤儿网首页">活动5</a></li>
+                <li><a href="/" hidefocus="true" title="孤儿网首页">活动6</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p class="v2-fmu1">Copyright &copy; 2006 - 2019 福利院 All rights reserved. 鲁ICP备13018343号</p>
+    <p class="xs0">Powered by Fuqian X3.2. Theme designed by 符倩.</p>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+ * {
+      background-color: #f2f2f2;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+
+.nav {
+    list-style-type: none;
+    position: relative;
+    top: 70px;
+    left: 55px;
+}
+
+li {
+    float: left;
+}
+
+.nav a:link,
+.nav a:visited {
+    display: block;
+    width: 180px;
+    height: 30px;
+    font-weight: bold;
+    background-color: #4B7902;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 4px;
+    line-height: 30px;
+    /* 去掉列表的下划线 */
+    text-decoration: none;
+}
+
+.nav a:hover,
+.nav a:active {
+    background-color: darkgreen;
+}
+
+#log img {
+    position: absolute;
+    left: 100px;
+    top: 10px;
+}
+
+#log a {
+    position: absolute;
+    left: 85%;
+    top: 45px;
+}
+
+video {
+    position: relative;
+    top: 90px;
+    left: 93px;
+}
+
+.list {
+    width: 0px;
+    height: 378px;
+    position: relative;
+    top: -297px;
+    left: 820px;
+
+}
+
+.volunteer,
+.activity {
+    width: 400px;
+    height: 50%;
+    border: 1px solid #000000;
+    background-color: #FFFFFF;
+}
+
+.activity {
+    margin-top: 3px;
+}
+
+h4 {
+    padding-left: 10px;
+    margin-top: 10px;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+.list ul {
+    list-style-type: circle;
+    color: #bfbf00;
+    margin-top: -10px;
+}
+
+.list a:link,
+.list a:visited {
+    display: block;
+
+    color: #bfbf00;
+    /* 去掉列表的下划线 */
+    background-color: #FFFFFF;
+    text-decoration: none;
+    width: 200px;
+}
+
+.list a:hover,
+.list a:active {
+    /* background-color: darkgreen; */
+    text-decoration: underline;
+}
+
+.footer{
+    text-align: center;
+    position: relative;
+    top:-285px;
+    height:200px;
+    background-color:rgb(186, 248, 250,0.3);
+}
+
+.footer p{
+    /* font-style: italic; */
+    font-size: 12px;
+    position: relative;
+    top:40px;
+    background-color: rgb(186, 248, 250,0);
+}
