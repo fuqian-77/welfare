@@ -1,0 +1,22 @@
+<chart bgColor="FFFFFF"  caption="%title1%" subcaption="%title2%" showBorder="0" showValues="0" showNames="0" decimalPrecision="1"  numberPrefix="$" 
+  animation="0" pyramidYScale="40" isSliced="1" chartTopMargin="10" chartBottomMargin="0" chartLeftMargin="0" chartRightMargin="40" showToolTip="0">
+   <set value="%value%" name="%name%" color="AFD8F8" />
+   <customObjects>
+   <objectGroup showBelow="0">
+	<object type="rectangle" xPos="2" yPos="2" toXPos="%width%" toYPos="%height%" fillAlpha="0" radius="15" showBorder="1" borderThickness="2" color="333333" />
+	<%object%>
+</objectGroup>
+</customObjects>
+   <styles>
+      <definition>
+         <style type="font" name="captionFont" size="15" />
+         <style type="font" name="subcaptionFont" size="13" />
+      </definition>
+      <application>
+      <apply toObject="CAPTION" styles="captionFont" />
+      <apply toObject="SUBCAPTION" styles="subcaptionFont" />
+      </application>
+   </styles>
+</chart>
+
+

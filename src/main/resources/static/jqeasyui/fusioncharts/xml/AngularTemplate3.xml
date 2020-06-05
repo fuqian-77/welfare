@@ -1,0 +1,35 @@
+<chart bgColor="000000" bgAlpha="100"  gaugestartAngle="235" gaugeendAngle="-55" upperLimit="%upperlimit%" lowerLimit="%lowerlimit%"  majorTMNumber="11" 
+majorTMThickness="5" majorTMColor="F48900" majorTMHeight="15" minorTMNumber="4" minorTMThickness="2" minorTMColor="FFFFFF" minorTMHeight="13"
+ placeValuesInside="1" gaugeOuterRadius="110" gaugeInnerRadius="85%25" baseFontColor="F48900" baseFont="Impact" baseFontSize="20"
+ showShadow="0" pivotRadius="20" pivotFillColor="000000,383836"  pivotFillType="linear" pivotFillRatio="50,50" pivotFillAngle="240" annRenderDelay="0">
+	<dials>
+		<dial value="%value1%" color="E70E00" borderColor="E70E00" baseWidth="25" topWidth="1" radius="85" />
+	</dials>
+	<trendpoints>
+        <point startValue="65" endValue="100"  radius="110" editMode="1" innerRadius="0" color="F48900" alpha="35" showBorder="0"/>
+	</trendpoints>
+	<annotations autoScale="0">
+		<annotationGroup id="Grp1" showBelow="0" xScale="200" yScale="120" x="164" y="157">
+			<annotation type="circle" x="0" y="0" color="FFFFFF" alpha="15" radius="7" />
+		</annotationGroup>
+    <annotationGroup xPos='130' yPos='215' showBelow='1'>		
+      <annotation type="text" label="%title1%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos='135' yPos='230' showBelow='1'>		
+      <annotation type="text" label="%title2%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+	</annotations>
+	<styles>
+		<definition>
+			<style name="pivotGlow" type="glow" color="F48900" blurX="15" blurY="15" alpha="60"/>
+			<style name="circleBlur" type="blur"/>
+			<style name="TTipFont" type="font" color="F48900" bgColor="000000" borderColor="F48900" font="Verdana" size="10" />
+		</definition>
+
+		<application>
+			<apply toObject="PIVOT" styles="pivotGlow" />
+			<apply toObject="Grp1" styles="circleBlur" />
+			<apply toObject="TOOLTIP" styles="TTipFont" />
+		</application>
+	</styles>
+</chart>

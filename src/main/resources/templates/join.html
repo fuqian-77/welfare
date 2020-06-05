@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:o="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>儿童福利院-领养申请</title>
+    <link rel="shortcut icon" href="img/home/title_img_03.png" type="images/x-5b">
+    <!--<title>Document</title> 关键字增加所搜性-->
+    <meta name="description" content="">
+    <!--移动端<meta name="keywords" content="">-->
+    <meta name="keywords" content="公司介绍,发展历程,企业文化,家具定制,定制家具,合肥全屋定制,家具品牌,合肥定制家具,全屋定制家具">
+    <!--<meta name="keywords" content="">content="123"给网站关键字增加所搜性-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--做移动端一定要加他.支持手机端的neta标签<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--为了能更好的显示-->
+    <!--这是为了让网站优先兼容最高版本的ie浏览器 -->
+    <!-- CSS -->
+    <!--bootstrap的css-->
+    <link rel="stylesheet" type="text/css" href="plug/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plug/Font-Awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <script type="text/javascript" src="jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+</head>
+<body>
+<!--header头部-->
+<header>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12 col-sm-6 ">
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-6 text-right">
+                    <form class="navbar-form text-right" role="search">
+                        <div class="form-group" style="font-size:12px;color:#000; ">
+                            <div class="sou fl">
+                                <div id="userinfo" class="fl"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="index">
+                    <img class="logo" src="images/logo1.png" alt="">
+                    <h1>儿童福利院</h1>
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index">首页</a></li>
+                        <li><a href="products">来访预约</a></li>
+                        <li><a href="news">新闻动态</a></li>
+                        <li><a href="about">社工/活动招聘</a></li>
+                        <li><a class="active" href="join">领养申请</a></li>
+                        <li><a href="profuile">福利院介绍</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<div class="joinyemian">
+    <div class="join-banner">
+        <div class="banner_img">
+            <img src="images/children4.jpg" alt="" style="width:1200px;margin-left: 12px;"></div>
+        <ul class="join_sul">
+            <li><a href="#shichang">领养<br>条件</a></li>
+            <li><a href="#qiye">领养<br>流程</a></li>
+            <li><a href="#zhaoq">领养<br>手续</a></li>
+            <li><a href="#jiamen">领养<br>申请</a></li>
+            <!--<li><a href="#chanqin">活动<br>申请</a></li>-->
+        </ul>
+    </div>
+    <div class="container">
+        <div class="row">
+            <a href="" name="shichang"></a>
+            <h3><i>1</i> 领养条件</h3>
+            <div class="col-md-6">
+                <br>
+                    根据我国收养法规定， 收养人应当同时具备下列条件：</br></br>
+                    1、具有完全的民事行为能力，即可以独立进行民事活动的且精神正常的成年人;</br>
+                    2、年满三十五周岁。但领养孤儿或者残疾儿童可不受此限制。继父母领养继子女也不受此限制。无配偶的男性领养女性的，领养人与被领养人的年龄应当相差四十周岁以上;但领养三代以内同辈旁系血亲的子女不受此限制。</br>
+                    3、无子女。但领养孤儿或者残疾儿童可不受此限制。继父母领养继子女也不受此限制。华侨领养三代以内同辈旁系血亲的子女也可不受此限制。或者虽有一名子女，但该名子女患有精神病等严重疾病，将来无法尽赡养义务的，也可领养一名健康的小孩。</br>
+                    4、有抚养教育被领养人的能力。如有正当的职业或可靠的经济来源，能够照顾被领养人的生活并可负担其相应的经济开支等。但领养成年人除外。</br>
+                    5、身体健康，无传染性疾病。</br>
+                    6、有正当的领养目的，不违背社会公德和国家法律及国家计划生育的规定。如果是为了玩弄女性或长期姘居而领养异性子女，就不能允许。</br>
+                    7、领养人有配偶的，须征得配偶的同意;而且必须由夫妻共同领养。</br>
+                    8、领养人只能领养一名子女。但领养孤儿或残疾儿童可不受此限制。
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img src="images/law.jpg" alt="">
+            </div>
+        </div>
+        <div class="row">
+
+            <a href="" name="qiye"></a>
+            <h3><i>2</i> 领养流程</h3>
+            <div class="col-md-6">
+                <br>
+                    1、向领养登记机关提交领养申请书;</br></br>
+                    2、向领养登记机关提交证件和材料：</br></br>
+                    (1)领养人的居民户口簿和居民身份证;</br></br>
+                    (2)由领养人所在单位或者村民委员会、居民委员会出具的本人婚姻状况、有无子女和抚养教育被领养人的能力等情况的证明;</br></br>
+                    (3)县级以上医疗机构出具的未患有在医学上认为不应当领养子女的疾病的身体健康检查证明。
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img src="images/jiantou.jpg" alt="" style="width:533px;height:300px">
+            </div>
+        </div>
+
+        <div class="row">
+            <a href="" name="zhaoq"></a>
+            <h3><i>3</i> 领养所需手续</h3>
+            <div class="col-md-6" style="width:700px;margin-left: 250px">
+                根据《中国公民收养子女登记办法》的有关规定，收养小孩需办理以下手续：</br></br>
+                (一)收养人应当向收养登记机关提交收养申请书和下列证件、证明材料：</br></br>
+                1、收养人的居民户口簿和居民身份证;</br></br>
+                2、由收养人所在单位或者村(居)民委员会出具的本人婚姻状况、有无子女和抚养教育被收养人的能力等情况的证明;</br></br>
+                3、县级以上医疗机构出具的未患有在医学上认为不应当收养子女的疾病的身体健康检查证明。</br></br>
+                (二)收养查找不到生父母的弃婴、儿童的，并应当提交收养人经常居住地计划生育部门出具的收养人生育情况证明;</br>其中收养非社会福利机构抚养的查找不到生父母的弃婴、儿童的，收养人还应当提交下列证明材料：</br></br>
+                1、收养人经常居住地计划生育部门出具的收养人无子女的证明;</br></br>
+                2、公安机关出具的捡拾弃婴、儿童报案的证明。收养继子女的，可以只提交居民户口簿、居民身份证和收养人</br>与被收养人生父或生母结婚的证明。</br></br>
+                (三)收养登记必须严格依照分级登记制度进行：</br></br>
+                1、涉及到内地公民与内地公民的收养登记，由孩子户口源头地的县级民政部门办理;</br></br>
+                2、涉及到港、澳、台、华侨与内地公民的收养登记由地级市(州)民政部门办理;</br></br>
+                3、涉外的收养登记，由省(直辖市、自治区)的民政部门或经省(直辖市、自治区)人民政府指定的地级市(州)的民政部门办理。</br></br>
+                (四)当事人亲自到收养登记机关办理成立收养关系的登记关系。
+            </div>
+        </div>
+
+        <div class="row" style="">
+            <!--表单 加入我们-->
+            <a href="" name="jiamen"></a>
+            <h3><i>4</i>领养申请 </h3>
+            <div class="about_form" style="height:400px;">
+                <div class="container" >
+                    <form action="" style="height:350px;">
+                        <h2 style="font-size:20px;">我要申请</h2>
+                        <div class="hrs"></div>
+                        <ul>
+                            <li class="row">
+                                <div class="name">
+                                    <span>领养要求 : <b></b> </span>
+                                    <textarea  id="request" style="resize:none" rows="6" cols="30"></textarea>
+                                </div>
+                            </li>
+                            <li class="row">
+                                    <span>手续是否齐全：<b></b> </span>
+                                    <select id="flag"  typed="true" style="width:70px;position: relative;left:100px;top:-30px;" data-options="editable:false,panelHeight:'auto'">
+                                        <option value="是" selected = "selected">是</option>
+                                        <option value="否">否</option>
+                                    </select>
+                            </li>
+                            <li style="margin-top: -10px;">
+                                <p><input class="about_form_submit" id="fosterage" type="button" value="提交"></p>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer style="margin-top: 0;">
+    <!--备案号-->
+    <div class="footer-button">
+        <div class="container">
+            <p>Copyright &copy; 2006 - 2019 福利院 All rights reserved. 鲁ICP备13018343号</p>
+            <p>Powered by Fuqian X3.2. Theme designed by 符倩.</p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!--自己写的js-->
+<script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<script>
+    var userid=window.localStorage.getItem("userid");
+    var infouser="";
+    console.log("userid"+userid);
+    $.ajax({
+        url: "/welfare/user/findById",
+        type: "POST",
+        dataType:"json",
+        contentType : 'application/json',
+        data: JSON.stringify({"userid":userid
+        }),
+        async: false,
+        success: function(result){
+            console.log("result"+result);
+            if(result==null){
+                infouser = "你好! 请&nbsp;<a href=\"userlogin\" >登录</a>&nbsp;|&nbsp;\n" +
+                    "<a href=\"register\" >注册</a>";
+            }else{
+                infouser = "欢迎&nbsp;"+ result.name +"&nbsp;|&nbsp;\n" +
+                    "<a href=\"userlogin\" >退出</a>&nbsp;|&nbsp;<a href=\"personal\">个人中心</a>";
+            }
+            $("#userinfo").append(infouser);
+        }
+    });
+
+    // 领养申请提交
+   $("#fosterage").click(function(){
+        var request=$("#request").val();
+        var flag=$("#flag").val();
+        var date=new Date().Format("yyyy-MM-dd");
+        console.log("flag"+flag);
+        console.log("userid111===="+userid);
+        if(userid=="" || userid==null || userid==undefined){
+            alert('请先登录！');
+            location.href="userlogin";
+        } else{
+            if(request=="" || request==null){
+                alert('请输入领养要求！');
+                location.href="#jiamen";
+            }else if(flag=="否" || flag==null){
+                alert('请确保手续完整！');
+                location.href="#jiamen";
+                $("#request").textarea('setValue',request);
+            }else{
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/apply/insert",
+                    data:JSON.stringify({
+                        "userid":userid,
+                        "date":date,
+                        "type":"领养",
+                        "request":request,
+                        "flag":flag,
+                        "code":"寄养部门",
+                        "estimate":"审核中"
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        location.href="foster";
+                    }
+                });
+            }
+        }
+    });
+
+
+</script>
+</body>
+</html>

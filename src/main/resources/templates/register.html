@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" th:href="@{/css/base1.css}">
+    <link rel="stylesheet" th:href="@{/css/register1.css}">
+</head>
+
+<body>
+    <header id="headNav">
+        <div class="innerNav cf">
+            <a class="fl" href="#"><img src="images/logo1.png" alt=""></a>
+            <div class="headFont fr">
+                <span>您好，欢迎光临儿童福利院！<a href="userlogin">请登录</a></span>
+            </div>
+        </div>
+    </header>
+    <section id="secTab">
+        <div id="registerForm">
+            <div class="innerTab">
+                <h2>注册</h2>
+                <div class="tableItem">
+                    <input id="userid" type="text" name="phone" required placeholder="账号名"/>
+                </div>
+                <div class="tableItem">
+                    <input id="email" type="email" name="email" required placeholder="邮箱"/>
+                </div>
+                <div class="tableItem">
+                    <input id="password" type="password" name="password" required placeholder="设置密码"/>
+                </div>
+                <div class="tableItem">
+                    <input id="password1" type="password" name="rePassword" required placeholder="确认密码"/>
+                </div>
+                <p class="clickRegist">点击注册，表示您同意 儿童福利院<a href="#">《服务协议》</a></p>
+                <input id="register" type="submit" class="tableBtn" value="同意协议并注册">
+            </div>
+        </div>
+    </section>
+    <footer id="footNav">
+        <p>Copyright &copy; 2019 - 2029 儿童福利院 All Rights Reserved</p>
+    </footer>
+</body>
+<script th:src="@{/js/jquery-1.11.1.js}"></script>
+<script type="text/javascript" >
+    var btn = document.getElementById("register");
+
+    btn.addEventListener("click",function(){
+        var userid = document.getElementById("userid").value;
+        var password = document.getElementById("password").value;
+        var password1 = document.getElementById("password1").value;
+        var email = document.getElementById("email").value;
+        var str =
+            $.ajax({
+                url: "/welfare/user/register",
+                type: "POST",
+                dataType:"json",
+                contentType : 'application/json',
+                data: JSON.stringify({"userid":userid,
+                    "password":password,
+                    "email":email,
+                }),
+                async: false,
+                success: function(result){
+                    console.log(result);
+                    var userinfo = JSON.stringify(result);
+                    newData = eval("("+userinfo+")");
+                    if(userid != ""){
+                        if(newData.Msg == "注册成功!" ){
+                            window.localStorage.setItem('userid',result.userid);
+                            window.location.href="index";
+                            alert(newData.Msg);
+                        }else{
+                            // $.messager.show({
+                            //     title:'提示信息',
+                            //     msg:newData.Msg,
+                            //     timeout:1000,
+                            //     showType:'slide'
+                            // });
+                            alert(newData.Msg);
+                        }
+                        if(email != ""){
+                            if(password != "" ){
+                                if(password1 != ""){
+                                    if(password != password1){
+                                        alert("两次密码不一致！");
+                                    }
+                                }else{
+                                    alert("请确认密码！");
+                                }
+                            }else{
+                                alert("请填写密码！");
+                            }
+                        }else{
+                            alert("请填写邮箱！");
+                        }
+                    }else{
+                        alert("请填写账号名！");
+                    }
+                }
+            });
+    })
+</script>
+
+</html>

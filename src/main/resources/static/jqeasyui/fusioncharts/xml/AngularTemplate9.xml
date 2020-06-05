@@ -1,0 +1,29 @@
+<Chart palette="3" bgColor="333333, 453269" bgAlpha="100" upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" gaugeStartAngle="240" numberSuffix="%25"
+  gaugeEndAngle="-60" gaugeInnerRadius="60%" gaugeFillMix="{light-10},{light-30},{light-20},{dark-5},{color},{light-30},{light-20},{dark-10}" 
+  gaugeFillRatio=""  baseFontColor="FFFFFF" toolTipBgColor="333333" toolTipBorderColor="333333" decimals="1">
+  <colorRange>
+    <color minValue="%lowerlimit%" maxValue="%colorrange1%" />
+    <color minValue="%colorrange1%" maxValue="%colorrange2%" /> 
+    <color minValue="%colorrange2%" maxValue="%upperlimit%" /> 
+  </colorRange> 
+  <dials> 
+    <dial id="Dial1" value="%value1%" baseWidth="6" topWidth="1" editMode="1" showValue="1" rearExtension="10" valueY="250" />
+    <dial id="Dial2" value="%value2%" baseWidth="6" topWidth="1" editMode="1" rearExtension="10" showValue="1" valueY="230"/>	
+  </dials>
+  <annotations>
+    <annotationGroup xPos="135" yPos="160" showBelow="1">		
+      <annotation type="text" label="%title1%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="175" showBelow="1">		
+      <annotation type="text" label="%title2%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+  </annotations>
+  <styles>
+      <definition>
+          <style type="font" name="valueFont" borderColor="FFFFFF" bold="1" size="13"/>
+      </definition>
+      <application>
+          <apply toObject="value" styles="valueFont"/>
+      </application>
+   </styles>
+</Chart>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base1.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login1.css}">
+
+</head>
+
+<body>
+<header id="headNav">
+    <div class="innerNav cf">
+        <a class="fl" href="#"><img src="images/logo1.png" alt="" /></a>
+        <div class="headFont fr">
+            <span>您好，欢迎光临儿童福利院！<a href="register">请注册</a></span>
+        </div>
+    </div>
+</header>
+<section id="secBody">
+    <div id="loadForm">
+        <div class="innerBody cf" style="margin-top: -40px;">
+            <div class="tableWrap fr" style="position:absolute;left:450px;top:120px;">
+                <div class="tableTap cf">
+                    <h3 class="fl">用户登录</h3>
+                    <a class="fr" href="register">注册账号</a>
+                </div>
+                <div class="tableItem">
+                    <input id="username" type="text" name="userName" placeholder="用户名"  />
+                </div>
+                <div class="tableItem">
+                    <input id="password" type="password" name="password" placeholder="密码"  />
+                </div>
+                <div class="tableAuto cf">
+                    <a class="autoMatic fl" href="#"><input class="loadGiet" type="checkbox" />记住账号</a>
+                    <a class="fr" href="#">忘记密码？</a>
+                </div>
+                <!--<button class="tableBtn">登录</button>-->
+                <input id="login" type="button" class="tableBtn" value="登录" />
+            </div>
+        </div>
+    </div>
+</section>
+<footer id="footNav" style="position: absolute;top:450px;left:120px;">
+    <p>Copyright &copy; 2019 - 2029 儿童福利院 All Rights Reserved</p>
+</footer>
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
+<script type="text/javascript" >
+    localStorage.clear();
+    var btn = document.getElementById("login");
+    btn.addEventListener("click",function(){
+        var userid = $("#username").val();
+        console.log("userid"+userid);
+        var password = $("#password").val();
+        if(userid=="" || userid==null){
+            $.messager.show({
+                title:'提示信息',
+                msg:"请输入账号",
+                timeout:1000,
+                showType:'slide'
+            });
+        }else if(password=="" || password==null){
+            $.messager.show({
+                title:'提示信息',
+                msg:"请输入密码",
+                timeout:1000,
+                showType:'slide'
+            });
+        }else {
+            $.ajax({
+                url: "/welfare/user/login",
+                type: "POST",
+                dataType: "json",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "userid": userid,
+                    "password": password
+                }),
+                async: false,
+                success: function (result) {
+                    console.log(result);
+                    var userinfo = JSON.stringify(result);
+                    newData = eval("(" + userinfo + ")");
+                    console.log("newData"+newData);
+                    if (newData.usernameMsg != undefined || newData.usernameMsg != null) {
+                        alert(newData.usernameMsg);
+                    } else if (newData.passwordMsg != undefined || newData.passwordMsg != null) {
+                        alert(newData.passwordMsg);
+                    } else {
+                        window.localStorage.setItem('userid', userid);
+                        window.location.href = "index";
+                    }
+                }
+            });
+        }
+    })
+</script>
+</html>

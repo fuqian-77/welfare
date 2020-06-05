@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>护理部门-离院信息</title>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <script type="text/javascript" src="../js/functions.js"></script>
+    <meta charset="utf-8">
+    </head>
+
+<div id="main" title="儿童管理"  paddingdata-options="fit:true" style="height:auto">
+</div>
+
+<!-- CRUD 菜单栏 -->
+<div id="tb" style="position: absolute;top:2px;left:600px; ">
+    <input type="text" placeholder="请输入姓名/类别" name="" id="search" value="" style="margin-bottom:2px;height:20px;font-size: 10px"/>
+    <a id="btn" href="javascript:search()" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: -5px"></a>
+    <!--plain="true"去掉边框-->
+    <!--<a href="javascript:newStaff()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>-->
+    <a href="javascript:updateStaff()" class="easyui-linkbutton" iconCls="icon-edit" plain="true" style="margin-left:20px ">修改</a>
+    <!--<a href="javascript:deleteStaff()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>-->
+</div>
+
+<!--增加form表单-->
+<div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+    <br id="fm" method="post" onSubmit="return checkForm()">
+        <input id="staffid1" class="text" type="hidden" >
+    <div class="fitem" style="margin-left: 40px">
+        <label>出院编号:</label>
+        <input id="leaveid" class="easyui-textbox" required="true">
+    </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>儿童姓名:</label>
+            <input id="childrenid" class="easyui-combobox" required="true" data-options="editable:false,panelHeight:'auto'">
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>去&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;向:</label>
+            <input id="goes" class="easyui-textbox" required="true">
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期:</label>
+            <input id="date" class="easyui-datebox" required="true">
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</label>
+            <input id="phone" class="easyui-textbox" required="true">
+        </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>原&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因:</label>
+        <input id="reason" class="easyui-textbox" required="true">
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
+        <select id="type" class="easyui-combobox" required="true" style="width:138px" data-options="editable:false,panelHeight:'auto'">
+            <option value="0" selected = "selected">出院</option>
+            <option value="1">死亡</option>
+        </select>
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+    <label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</label>
+    <input id="note" class="easyui-textbox">
+    </div></br>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveStaff()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+</div>
+<div class="mask" style="display:none;"></div>
+<!--编辑弹框-->
+<div class="bj" style="display:none;">
+    <h3 style="margin-top: 0px">儿童基础资料</h3>
+    <form action="#" method="get" style="margin-top: -30px;">
+        <label>编号：</label><input id="userid1" type="text" readonly="readonly"/></br>
+        <label>姓名：</label><input id="name1" type="text" /></br>
+        <label>性别：</label><input  id="sex1" type="text"   readonly="readonly" /></br>
+        <label>年龄：</label><input id="age1" type="text"   readonly="readonly" /></br>
+        <label>当前状态：</label><input id="status1" type="text"  readonly="readonly" /></br>
+        <label>出生日期：</label><input id="birthdate1" type="text"  readonly="readonly" /></br>
+        <label>身份证号：</label><input id="cardid1" type="text"  readonly="readonly" /></br>
+        <label>入院时间：</label><input id="addmissiondate1"type="text"  readonly="readonly" /></br>
+        <label>护理级别：</label><input id="nurse1" type="text" readonly="readonly"  /></br>
+        <div class="bc">
+            <input id="cancel" type="button" value="返回" />
+        </div>
+    </form>
+</div>
+    <script>
+        var staffid = localStorage.getItem("staffid");
+        var str='<div id="myGrid1" class="easyui-datagrid"></div>';
+        $("#main").append($(str));
+        var xcolumns=[
+            [
+                { title: '出院编号', field: 'leaveid', width: 90,  sortable: true, align: 'center'},
+                { title: '儿童姓名', field: 'childrenid', width: 90,  sortable: true, halign:'center', align: 'center',
+                    formatter : function(value, row, index) {
+                        var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="cdetail(this)">'+value+'</a>';
+                        return str1;
+                    }},
+            { title: '类别', field: 'type', width: 90, halign:'center', align: 'center', },
+            { title: '原因', field: 'reason', width: 190, halign:'center', align: 'center' },
+            { title: '去向', field: 'goes', width: 100, halign:'center', align: 'center' },
+            { title: '电话号码', field: 'phone', width: 100, halign:'center', align: 'center' },
+            { title: '日期', field:'date', width: 100, halign:'center', align: 'center' },
+                { title: '备注', field:'note', width: 100, halign:'center', align: 'left' },
+                { title: '记录人', field:'staffid', width: 100, halign:'center', align: 'center' },
+                { title: '审核人', field:'checker', width: 80, halign:'center', align: 'center' }
+        ]
+        ];
+
+        $("#myGrid1").datagrid({
+            title: '&nbsp;出院列表',
+            iconCls: "panelIcon",
+            width:1055,
+            height:450,
+            singleSelect:true,
+            columns: xcolumns,
+            url: 'http://localhost:8080/welfare/leave/findAll',
+        });
+
+        //儿童下拉框的数据加载
+        $('#childrenid').combobox({
+            url:'http://localhost:8080/welfare/children/findAll',
+            valueField:'childrenid',
+            textField:'name'
+        });
+
+        /*弹出增加form表单*/
+        function newStaff(){
+             flag=1;
+            $('#dlg').dialog('open').dialog('setTitle','新增儿童出院信息');
+            $('#leaveid').textbox('textbox').attr('readonly',false);
+            $('#childrenid').combobox('setValue','');
+            $('#leaveid').textbox('setValue','');
+            date = new Date().Format("yyyy-MM-dd");
+            $('#date').datebox('setValue',date);
+            $('#goes').textbox('setValue','');
+            $('#type').combobox('setValue','');
+            $('#reason').textbox('setValue','');
+            $('#phone').textbox('setValue','');
+            $('#note').textbox('setValue','');
+        }
+        function updateStaff(leaveid) {
+            $('#dlg').dialog('open').dialog('setTitle', '修改儿童出院信息');
+            $('#leaveid').textbox('textbox').attr('readonly',true);
+            flag = 2;
+            var row = $('#myGrid1').datagrid('getSelected');
+            console.log(row.leaveid);
+            $('#leaveid').textbox('setValue',row.leaveid);
+            $('#childrenid').combobox('setValue',row.childrenid);
+            $('#date').datebox('setValue',row.date);
+            $('#reason').textbox('setValue',row.reason);
+            $('#goes').textbox('setValue',row.goes);
+            $('#phone').textbox('setValue',row.phone);
+            $('#type').combobox('setValue',row.type);
+            $('#note').textbox('setValue',row.note);
+        }
+
+        // 删除
+        function deleteStaff(leaveid){
+            $.messager.confirm('确认提示', '确定删除出院信息？', function (r) {
+                if (r) {
+                    var row = $('#myGrid1').datagrid('getSelected');
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        contentType: 'application/json',
+                        url: "http://localhost:8080/welfare/leave/delete",
+                        data: JSON.stringify({
+                            "leaveid": row.leaveid
+                        }),
+                        success: function (result) {
+                            console.log(result);
+                            $.messager.show({
+                                title:'提示信息',
+                                msg:'删除成功！',
+                                timeout:1000,
+                                showType:'slide'
+                            });
+                            $("#myGrid1").datagrid("reload");
+                        }
+                    });
+                }
+            })
+        }
+        //点击确认修改按钮
+        function  saveStaff() {
+            var row=$('#myGrid1').datagrid('getSelected');
+            var n=$('#myGrid1').datagrid('getRowIndex', row);
+            var leaveid=$('#leaveid').val();
+                var childrenid=$('#childrenid').combobox('getValue');
+               var  date=$('#date').datebox('getValue');
+                var type=$('#type').combobox('getText');
+            var phone=$('#phone').val();
+            var goes=$('#goes').val();
+            var reason=$('#reason').val();
+            var note=$('#note').val();
+                if (flag == 1) {//插入
+                    if(leaveid=="" || leaveid==null){
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:'请输入编号！',
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                    }else{
+                        if(childrenid=="" || childrenid==null){
+                            $.messager.show({
+                                title:'提示信息',
+                                msg:'请先选择儿童！',
+                                timeout:1000,
+                                showType:'slide'
+                            });
+                        }else{
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                contentType: 'application/json',
+                                url: "http://localhost:8080/welfare/leave/register",
+                                data: JSON.stringify({
+                                    "leaveid": leaveid,
+                                    "childrenid": childrenid,
+                                    "date": date,
+                                    "phone": phone,
+                                    "goes": goes,
+                                    "type": type,
+                                    "reason": reason,
+                                    "note": note,
+                                    "staffid": staffid
+                                }),
+                                success: function (result) {
+                                    var userinfo = JSON.stringify(result);
+                                    console.log(userinfo);
+                                    newData = eval("(" + userinfo + ")");
+                                    console.log(newData);
+                                    if (newData.Msg == "添加成功!") {
+                                        $.messager.show({
+                                            title:'提示信息',
+                                            msg:'添加成功！',
+                                            timeout:1000,
+                                            showType:'slide'
+                                        });
+                                        $("#myGrid1").datagrid("reload");
+                                        $('#dlg').dialog('close');
+                                        var data = $('#myGrid1').datagrid('getData');
+                                        $('#myGrid1').datagrid('selectRow', data.rows.length);
+                                    } else {
+                                        alert(newData.Msg);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                } else {//修改
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        contentType: 'application/json',
+                        url: "http://localhost:8080/welfare/leave/updateById",
+                        data: JSON.stringify({
+                            "leaveid": leaveid,
+                            "childrenid": childrenid,
+                            "date": date,
+                            "phone": phone,
+                            "goes": goes,
+                            "type": type,
+                            "reason": reason,
+                            "note": note,
+                            "staffid": staffid
+                        }),
+                        success: function (result) {
+                            console.log(result);
+                            $.messager.show({
+                                title:'提示信息',
+                                msg:'修改成功！',
+                                timeout:1000,
+                                showType:'slide'
+                            });
+                            $('#dlg').dialog('close');
+                            $('#myGrid1').datagrid('selectRow', n);
+                            $("#myGrid1").datagrid("reload");
+                            console.log(n);
+                        }
+                    });
+                }
+        }
+        function cdetail(e){
+            var row=$('#myGrid1').datagrid('getSelected');
+            console.log("row===="+row);
+            $(".mask").show();
+            $(".bj").show();
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                contentType: 'application/json',
+                url: "http://localhost:8080/welfare/children/findByName",
+                data: JSON.stringify({
+                    "name": row.childrenid
+                }),
+                success: function (result) {
+                    console.log(result);
+                    document.getElementById("userid1").value=result.childrenid;
+                    document.getElementById("name1").value=row.childrenid;
+                    document.getElementById("age1").value=result.age;
+                    document.getElementById("sex1").value=result.sex;
+                    document.getElementById("status1").value=result.status;
+                    document.getElementById("addmissiondate1").value=result.admissiondate;
+                    document.getElementById("nurse1").value=result.nurse;
+                    document.getElementById("birthdate1").value=result.birthdate;
+                    document.getElementById("cardid1").value=result.cardid;
+                }
+            });
+        }
+        //	取消按钮
+        $("#cancel").click(function(){
+            $(".mask").hide();
+            $(".bj").hide();
+        });
+        function search(){
+            var keywords = document.getElementById("search").value;
+            $.ajax({
+                url: "/welfare/leave/findByCondition",
+                type: "POST",
+                dataType:"json",
+                contentType : 'application/json',
+                data: JSON.stringify({"childrenid":keywords}),
+                async: false,
+                success: function(result){
+                    console.log(result);
+                    $("#myGrid1").datagrid('loadData',result);
+                }
+            });
+        }
+    </script>
+
+    </body>
+
+    </html>

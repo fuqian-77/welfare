@@ -1,0 +1,20 @@
+<chart bgColor="FFFFFF" showBorder="0" caption="%title1%" subcaption="%title2%" decimalPrecision="2" numberPrefix="" showPercentageValues="0" isSliced="1" 
+  chartLeftMargin="5" chartRightMargin="20" baseFontColor="453269">
+   <set value="%value%" name="%name%" color="FFCC33" />
+   <annotations>
+      <annotationGroup showBelowChart="1">
+         <object type="rectangle" xPos="5" yPos="5" toXPos="%width%" toYPos="%height%" Color="453269, FFFFFF" fillAlpha="10" fillAngle="90" radius="15" showBorder="1" 
+          borderColor="453269" borderThickness="7"/>
+      </annotationGroup>
+   </annotations>
+   <styles>
+      <definition>
+         <style type="font" name="captionFont" size="15" />
+         <style type="font" name="subcaptionFont" size="13" />
+      </definition>
+      <application>
+      <apply toObject="CAPTION" styles="captionFont" />
+      <apply toObject="SUBCAPTION" styles="subcaptionFont" />
+      </application>
+   </styles>
+</chart>

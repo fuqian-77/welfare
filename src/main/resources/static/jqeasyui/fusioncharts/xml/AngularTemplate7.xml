@@ -1,0 +1,23 @@
+<chart upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" numberSuffix="%25"  chartTopMargin="20" bgColor="FFFFFF" showBorder="0" 
+chartBottomMargin="80" basefontColor="FFFFFF" toolTipBgColor="453269">
+   <colorRange>
+      <color minValue="%lowerlimit%" maxValue="%colorrange1%" code="FF654F"/>
+      <color minValue="%colorrange1%" maxValue="%colorrange2%" code="F6BD0F"/>
+      <color minValue="%colorrange2%" maxValue="%upperlimit%" code="8BBA00"/>
+   </colorRange>
+   <dials>
+      <dial value="%value1%" rearExtension="10" editMode="1"/>
+   </dials>
+   <annotations>
+      <annotationGroup id="Grp1" showBelow="1" >
+	<annotation type="rectangle" x="0" y="0" toX="270" toY="270" radius="10" fillColor="333333, 453269" fillAngle="180" />
+	<annotation type="rectangle" x="5" y="5" toX="265" toY="265" radius="10" color="000000" fillAlpha="0" showBorder="1" borderColor="FFFFFF" borderThickness="3"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="225" showBelow="1">		
+      <annotation type="text" label="%title1%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="240" showBelow="1">		
+      <annotation type="text" label="%title2%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+	</annotations>
+</chart>

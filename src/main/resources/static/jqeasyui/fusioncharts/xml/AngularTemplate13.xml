@@ -1,0 +1,35 @@
+<chart animation="1" bgColor="000000" bgAlpha="100" upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" gaugeStartAngle="180" gaugeEndAngle="0" 
+  gaugeOuterRadius="100" gaugeInnerRadius="90%25" gaugeOriginY="180" showTickValues="0" majorTMNumber="2" minorTMNumber="19" 
+  majorTMColor="FFFFFF" minorTMColor="EE0000" majorTMHeight="15" majorTMThickness="2" minorTMHeight="15" minorTMThickness="2" 
+  baseFontColor="FFFFFF" placeValuesInside="1" pivotFillMix="414340, 272727" pivotFillRatio="50,50" pivotBorderThickness="40" 
+  pivotBorderColor="CCCCCC" pivotRadius="20" showShadow="0" toolTipBgColor="000000">
+  <dials>
+    <dial radius="120" baseWidth="12" topWidth="1" editMode="1" color="FF8F02,FFFFFF" fillRatio="90, 10" borderColor="FFFFFF"  value="%value1%"/>
+  </dials>
+  <trendpoints>
+    <point startValue="6"  color="000000" alpha="0" radius="90" innerRadius="88" displayValue="E"/>
+    <point startValue="94" color="000000" alpha="0" radius="90" innerRadius="88" displayValue="F"/>
+    <point value="%value2%" displayValue="Ô¤¾¯Öµ" fontcolor="FF4400" useMarker="1" dashed="1" dashLen="2" dashGap="2" valueInside="1" />
+  </trendpoints>
+  <annotations>
+    <annotationGroup id="Grp1" showBelow="1">
+	<annotation type="circle" x="135" y="180" radius="106" startAngle="0" endAngle="180" fillAngle="90" fillRatio="50,50" color="606417, 000000" fillPattern="linear" borderColor="FFFFFF" borderThickness="2"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="230" showBelow="1">		
+      <annotation type="text" label="%title1%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="245" showBelow="1">		
+      <annotation type="text" label="%title2%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+  </annotations>
+  <styles>
+    <definition>
+	<style name="LimitFont" type="font" face="Verdana" size="14" color="FFFFFF" bold="1"/>
+	<style name="pivotGlow" type="glow" color="FFFFFF" />
+    </definition>
+	<application>
+	  <apply toObject="TRENDVALUES" styles="LimitFont" />
+	  <apply toObject="PIVOT" styles="pivotGlow" />
+	</application>
+  </styles>
+</chart>

@@ -1,0 +1,23 @@
+<Chart upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" lowerLimitDisplay="S" bgColor="FFFFFF" bgAlpha="0" 
+  showBorder="0" majorTMNumber="12" majorTMHeight="9" minorTMNumber="5" minorTMColor="000000" minorTMHeight="3" majorTMThickness="2" 
+  gaugeInnerRadius="0" gaugeScaleAngle="360" displayValueDistance="15" chartTopMargin="15" chartLeftMargin="30" chartRightMargin="30" 
+  chartBottomMargin="30" baseFontColor="333333">
+  <colorRange>
+    <color minValue="%lowerlimit%"  maxValue="%colorrange1%" code="00B900" alpha="60" borderColor="00B900" /> 
+    <color minValue="%colorrange1%" maxValue="%colorrange2%" code="FDC12E" alpha="60" borderColor="FDC12E" /> 
+    <color minValue="%colorrange2%" maxValue="%upperlimit%" code="E95D0F" alpha="60" borderColor="E95D0F" /> 
+  </colorRange>
+  <dials>
+    <dial value="%value1%" radius="85" editMode="1" /> 
+  </dials>
+  <annotations>
+    <annotationGroup>
+      <annotation type="rectangle" xPos="1" yPos="1" radius="15" toXPos="269" toYPos="269" showBorder="1" fillColor="333333" borderColor="333333" borderThickness="2" /> 
+      <annotation type="rectangle" xPos="8" yPos="8" radius="15" toXPos="262" toYPos="262" showBorder="1" fillColor="FFFFFF,009999,FFFFFF" fillAngle="45" fillAlpha="60" borderColor="333333" /> 
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="245" showBelow="1">		
+      <annotation type="text" label="%title1%" fontColor="000000" fontSize="12" isBold="0"/>
+    </annotationGroup>
+  </annotations>
+  </Chart>
+

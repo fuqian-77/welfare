@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>护理部门-社工/活动招聘</title>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <script type="text/javascript" src="../js/functions.js"></script>
+    <meta charset="utf-8">
+    </head>
+
+<div id="main" title="社工/活动招聘" paddingdata-options="fit:true" style="height:auto">
+</div>
+
+<body class="easyui-layout" data-options="fit:true" style="overflow:hidden;margin: 1px 1px 1px 1px;">
+<div id='toolbar' class='easyui-panel' data-options="region:'north'" style="overflow:hidden; background-color: #E0ECFF; height:30px; padding: 3px 1px 1px 10px; border-width:1px">
+    <a href="#" class="btn-separator"></a>
+    <a href="javascript:newStaff()" id="btnadd" class="easyui-linkbutton" style="margin:-2px 0px 0px 0px" data-options="iconCls:'addIcon', plain:true">新增</a>
+    <a href="#" class="btn-separator"></a>
+    <a href="javascript:updateStaff()" id="btnedit" class="easyui-linkbutton" style="margin:-2px 0px 0px 0px" data-options="iconCls:'editIcon', plain:true">修改</a>
+    <a href="#" class="btn-separator"></a>
+    <a href="javascript:deleteStaff()" id="btnrefresh" class="easyui-linkbutton" style="margin:-2px 0px 0px 0px" data-options="iconCls:'deleteIcon',plain:true" >删除</a>
+    <a href="#" class="btn-separator"></a>
+
+</div>
+<div id="tree" data-options="region:'west', split:true" style="overflow:hidden; width:129px;">
+
+</div>
+<div data-options="region:'center'" style="border-width:0px;" >
+    <div id="myForm1" class="easyui-panel" data-options="fit:true" style="">
+
+    </div>
+</div>
+
+<!--增加form表单-->
+<div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 20px" closed="true" draggable="true" buttons="#dlg-buttons">
+    <br id="fm" method="post" onSubmit="return checkForm()">
+    <input id="staffid1" class="text" type="hidden" >
+    <div class="fitem" style="margin-left: 40px">
+        <label>招聘编号:</label>
+        <input id="recruitid" class="easyui-textbox" required="true" >
+        <span id="account_msg1"></span>
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
+        <select id="category" class="easyui-combobox" required="true" style="width:138px" data-options="editable:false,panelHeight:'auto'">
+            <option value="0" selected = "selected">活动</option>
+            <option value="1">社工</option>
+        </select>
+
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容:</label>
+        <input id="content"  class="easyui-textbox" required="true" >
+        <span id="account_msg"></span>
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>开始时间:</label>
+        <input id="starttime" class="easyui-datetimebox" required="true">
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>结束时间:</label>
+        <input id="endtime" class="easyui-datetimebox" required="true">
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>要&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;求:</label>
+        <input id="require" class="easyui-textbox" data-options="multiline:true" required="true "style="height:50px;" >
+    </div></br>
+
+    <div class="fitem" style="margin-left: 40px">
+        <label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</label>
+        <input id="note" class="easyui-textbox" >
+    </div></br>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveStaff()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+</div>
+<div class="mask" style="display:none;"></div>
+<!--编辑弹框-->
+<div class="bj" style="display:none;">
+    <h3 style="margin-top: 0px">用户基础资料</h3>
+    <form action="#" method="get" style="margin-top: -30px;">
+        <label>账号：</label><input id="userid1" type="text" readonly="readonly"/></br>
+        <label>姓名：</label><input id="name1" type="text" readonly="readonly"/></br>
+        <label>性别：</label><input  id="sex1" type="text"   readonly="readonly" /></br>
+        <label>年龄：</label><input id="age1" type="text"   readonly="readonly" /></br>
+        <label>电话号码：</label><input id="phone1" type="text"  readonly="readonly" /></br>
+        <label>地址：</label><input id="address1" type="text"  readonly="readonly" /></br>
+        <label>身份证号：</label><input id="cardid1" type="text"  readonly="readonly" /></br>
+        <label>email：</label><input id="email1"type="text"  readonly="readonly" /></br>
+        <label>微信号：</label><input id="wechat1" type="text" readonly="readonly"  /></br>
+        <label>QQ：</label><input id="qq1" type="text"  readonly="readonly" /></br>
+        <label>工作：</label><input id="job1" type="text" readonly="readonly"  /></br>
+        <label>工作单位：</label><input id="work1" type="text"  readonly="readonly" /></br>
+        <div class="bc">
+            <input id="cancel" type="button" value="返回" />
+        </div>
+    </form>
+</div>
+
+<script>
+    var staffid = localStorage.getItem("staffid");
+    $("#tree").tree({
+        data:[{
+            "id":1,
+            "text":"全部",
+            "checked":true,
+            "children":[{
+                "id":3,
+                "text":"招聘中"
+            }, {
+                "id":2,
+                "text": "审核中"
+            }, {
+                "id": 4,
+                "text": "已完成"
+                }, {
+                "id": 5,
+                "text": "已拒绝"
+            }]
+            }]
+    });
+
+    var str='<div id="myGrid1" class="easyui-datagrid"></div>';
+    $("#myForm1").append($(str));
+
+
+    $('#tree').tree({
+        onSelect:function(row) {
+            if(row.id<=4){
+                var xcolumns=[
+                    [
+                        { title: '招聘编号', field: 'recruitid', width: 70,  sortable: true, align: 'center'},
+                        { title: '类别', field: 'category', width: 70,  sortable: true, halign:'center', align: 'center'	},
+                        { title: '内容', field: 'content', width: 240, halign:'center', align: 'left', },
+                        { title: '开始时间', field: 'starttime', width: 140, halign:'center', align: 'center' },
+                        { title: '结束时间', field: 'endtime', width: 140, halign:'center', align: 'center' },
+                        { title: '要求', field: 'require', width: 180, halign:'center', align: 'center' },
+                        { title: '员工编码', field:'recordid', width: 70, halign:'center', align: 'center' },
+                        { title: '备注', field:'note', width: 70, halign:'center', align: 'center' },
+                        { title: '审核员工', field:'checker', width: 70, halign:'center', align: 'center' },
+                        { title: '申请人', field: 'userid', width: 70, halign:'center', align: 'center' ,
+                            formatter : function(value, row, index) {
+                                var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="detail(this)">'+value+'</a>';
+                                return str1;
+                            }
+                            },
+                        { title: '状态', field: 'state', width: 90, halign:'center', align: 'center' },
+                        {
+                            field : 'operation',
+                            title : '操作',
+                            width : 90,
+                            halign:'center', align: 'center',
+                            formatter : function(value, row,
+                                                 index) {
+                                if(row.state=='招聘中'){
+                                    if(row.userid=="" || row.userid==null){//无申请人
+                                        var str = '<a href="javascript:;" target="_Blank" class="easyui-linkbutton" style="text-decoration: none; cursor: default; opacity: 0.2" ></a>';
+                                    }else{
+                                        var str = '<a href ="#"  class="easyui-linkbutton"   onclick="ok(this)">接受</a>&nbsp;&nbsp;&nbsp;';
+                                        str = str+'<a href ="#"  class="easyui-linkbutton"   onclick="reject(this)">拒绝</a>';
+                                    }
+                                }else if(row.state=='审核中'){
+                                    var str = '<a href ="#"  class="easyui-linkbutton"   onclick="giveup(this)">弃审</a>';
+                                }
+                                return str;
+                            }
+                        }
+                    ]
+                ];
+                $("#myGrid1").datagrid({
+                    title: '&nbsp;招聘列表',
+                    iconCls: "panelIcon",
+                    width:1380,
+                    height:435,
+                    singleSelect:true,
+                    columns: xcolumns
+                });
+                if (row.id == 1) {    //全部
+                    $("#myGrid1").datagrid('hideColumn','operation');
+                    $("#myGrid1").datagrid({
+                        url: 'http://localhost:8080/welfare/recruit/findAll',
+                    });
+                } else if (row.id == 3) {     //招聘中
+                    $("#myGrid1").datagrid('showColumn','operation');
+                    $("#myGrid1").datagrid({
+                        url: 'http://localhost:8080/welfare/recruit/findAll2',
+                    });
+                } else if (row.id == 2) {    //审核中
+                    $("#myGrid1").datagrid('showColumn','operation');
+                    $("#myGrid1").datagrid({
+                        url: 'http://localhost:8080/welfare/recruit/findAll1',
+                    });
+                } else{   //已完成
+                    $("#myGrid1").datagrid('hideColumn','operation');
+                    $("#myGrid1").datagrid({
+                        url: 'http://localhost:8080/welfare/recruit/findAll3',
+                    });
+                }
+            }
+            else{      //已拒绝
+                var xcolumns=[
+                    [
+                        // { title: '招聘编号', field: 'recruitid', width: 80,  sortable: true, align: 'center'},
+                        { title: '编号', field: 'id', width: 120,  sortable: true, halign:'center', align: 'center'	},
+                        { title: '时间', field: 'date', width: 170, halign:'center', align: 'center' },
+                        { title: '员工编码', field:'staffid', width: 170, halign:'center', align: 'center' },
+                        { title: '申请人', field: 'userid', width: 150, halign:'center', align: 'center' ,formatter : function(value, row, index) {
+                                var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="detail(this)">'+value+'</a>';
+                                return str1;
+                            }},
+                        { title: '类别', field: 'flag', width: 170, halign:'center', align: 'center' },
+
+                    ]
+                ];
+                $("#myGrid1").datagrid({
+                    title: '&nbsp;拒绝列表',
+                    iconCls: "panelIcon",
+                    width:870,
+                    height:445,
+                    singleSelect:true,
+                    columns: xcolumns,
+                    url: 'http://localhost:8080/welfare/reject/findAllr'
+                });
+            }
+        }
+    });
+    cnodes=$('#tree').tree('getRoot');
+    cnodess=$('#tree').tree('getChildren',cnodes.target);
+    $('#tree').tree('select', cnodess[0].target);
+
+    /*弹出增加form表单*/
+    function newStaff(){
+        flag=1;
+        $('#dlg').dialog('open').dialog('setTitle','新增招聘信息');
+        $('#recruitid').textbox('textbox').attr('readonly',false);
+        $('#recruitid').textbox('setValue','');
+        $('#category').textbox('setValue','');
+        $('#endtime').datetimebox('setValue','');
+        $('#content').textbox('setValue','');
+        $('#note').textbox('setValue','');
+        $('#require').textbox('setValue','');
+        // document.getElementById('require').innerHTML="";
+        $('#starttime').datetimebox('setValue','');
+    }
+    function updateStaff(recruitid) {
+        $('#dlg').dialog('open').dialog('setTitle', '修改招聘信息');
+        flag = 2;
+        var row = $('#myGrid1').datagrid('getSelected');
+        console.log(row.recruitid);
+        $('#recruitid').textbox('textbox').attr('readonly',true);
+        $('#recruitid').textbox('setValue',row.recruitid);
+        $('#category').combobox('setValue',row.category);
+        $('#endtime').datetimebox('setValue',row.endtime);
+        $('#content').textbox('setValue',row.content);
+        $('#note').textbox('setValue',row.note);
+        $('#require').textbox('setValue',row.require);
+        // document.getElementById('require').innerHTML=row.require;
+        $('#starttime').datetimebox('setValue',row.starttime);
+    }
+
+    // 删除
+    function deleteStaff(recruitid){
+        // var mymessage=confirm("确定删除招聘信息？");
+        $.messager.confirm('确认提示', '确定删除招聘信息？', function(r){
+            if (r){
+                // exit action;
+                var row=$('#myGrid1').datagrid('getSelected');
+                console.log("row"+row);
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/recruit/delete",
+                    data:JSON.stringify({
+                        "recruitid":row.recruitid
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:'删除成功！',
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                        $("#myGrid1").datagrid("reload");
+                    }
+                });
+            }
+        });
+    }
+    //点击确认修改按钮
+    function  saveStaff() {
+        var row=$('#myGrid1').datagrid('getSelected');
+        var n=$('#myGrid1').datagrid('getRowIndex', row);
+        var recruitid=$('#recruitid').val();
+        var  category=$('#category').combobox('getText');
+        var endtime=$('#endtime').datetimebox('getValue');
+        var note=$('#note').val();
+        var starttime = $("#starttime").datetimebox('getValue');
+        var content=$('#content').val();
+        var require=$('#require').val();
+        if(recruitid== null || recruitid==""){
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入招聘编号！',
+                timeout:1000,
+                showType:'slide'
+            });
+        }else if(content== null || content==""){
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入具体内容！',
+                timeout:1000,
+                showType:'slide'
+            });
+        }else if(starttime==null || starttime==""){
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入开始时间！',
+                timeout:1000,
+                showType:'slide'
+            });
+        }else if(endtime==null || endtime==""){
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入结束时间！',
+                timeout:1000,
+                showType:'slide'
+            });
+        }else{
+            if (flag==1) {//插入
+                var state= "招聘中";
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/recruit/register",
+                    data:JSON.stringify({
+                        "recruitid":recruitid,
+                        "category": category,
+                        "note":note,
+                        "content":content,
+                        "require":require,
+                        "starttime":starttime,
+                        "endtime":endtime,
+                        "state":state,
+                        "flag":0,
+                        "type":1
+                    }),
+                    success: function (result) {
+                        var userinfo = JSON.stringify(result);
+                        console.log(userinfo);
+                        newData = eval("("+userinfo+")");
+                        console.log(newData);
+                        if(newData.Msg =="添加成功!" ){
+                            $.messager.show({
+                                title:'提示信息',
+                                msg:'添加成功！',
+                                timeout:1000,
+                                showType:'slide'
+                            });
+                            $("#myGrid1").datagrid("reload");
+                            $('#dlg').dialog('close');
+                            var data=$('#myGrid1').datagrid('getData');
+                            $('#myGrid1').datagrid('selectRow', data.rows.length);
+                        }else{
+                            alert(newData.Msg);
+                        }
+                    }
+                });
+            }else {//修改
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/recruit/updateById",
+                    data:JSON.stringify({
+                        "recruitid":row.recruitid,
+                        "category": category,
+                        "note":note,
+                        "content":content,
+                        "require":require,
+                        "starttime":starttime,
+                        "endtime":endtime
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:'修改成功！',
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                        $('#dlg').dialog('close');
+                        $("#myGrid1").datagrid("reload");
+                        $('#myGrid1').datagrid('selectRow', n);
+                        console.log(n);
+                    }
+                });
+            }
+        }
+    }
+
+    function ok(e){   //接受申请，进入审核
+        var row=$('#myGrid1').datagrid('getSelected');
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/recruit/updateById",
+            data:JSON.stringify({
+                "recruitid":row.recruitid,
+                "recordid":staffid,
+                "state":"审核中"
+            }),
+            success: function (result) {
+                console.log(result);
+                $.messager.show({
+                    title:'提示信息',
+                    msg:'申请通过，已进入审核！',
+                    timeout:1000,
+                    showType:'slide'
+                });
+                $("#myGrid1").datagrid("reload");
+            }
+        });
+    }
+
+    function reject(e){    //拒绝申请，生成拒绝清单，userid设为null
+        var row=$('#myGrid1').datagrid('getSelected');
+        var n=$('#myGrid1').datagrid('getRowIndex', row);
+        var userid=row.userid;
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/recruit/updateById",
+            data:JSON.stringify({
+                "recruitid":row.recruitid,
+                "flag":userid,
+                "userid":""
+
+            }),
+            success: function (result) {
+                var date =new Date().Format("yyyy-MM-dd hh:mm:ss");
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/reject/insert",
+                    data:JSON.stringify({
+                        "id":row.recruitid,
+                        "staffid":staffid,
+                        "userid":row.userid,
+                        "date":date,
+                        "flag":row.category
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:'已拒绝该申请！',
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                        $("#myGrid1").datagrid("reload");
+                    }
+                });
+            }
+        });
+    }
+
+    function giveup(e){
+        var row=$('#myGrid1').datagrid('getSelected');
+        var n=$('#myGrid1').datagrid('getRowIndex', row);
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/recruit/updateById",
+            data:JSON.stringify({
+                "recruitid":row.recruitid,
+                "state":'招聘中',
+                "recordid":''
+            }),
+            success: function (result) {
+                $.messager.show({
+                    title:'提示信息',
+                    msg:'已弃审该申请！',
+                    timeout:1000,
+                    showType:'slide'
+                });
+                $("#myGrid1").datagrid("reload");
+            }
+        });
+    }
+
+    function detail(e){
+        var row=$('#myGrid1').datagrid('getSelected');
+        console.log("row===="+row);
+        $(".mask").show();
+        $(".bj").show();
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/user/findById",
+            data: JSON.stringify({
+                "userid": row.userid
+            }),
+            success: function (result) {
+                console.log(result);
+                document.getElementById("userid1").value=row.userid;
+                document.getElementById("name1").value=result.name;
+                document.getElementById("age1").value=result.age;
+                document.getElementById("sex1").value=result.sex;
+                document.getElementById("phone1").value=result.phone;
+                document.getElementById("wechat1").value=result.wechat;
+                document.getElementById("qq1").value=result.qq;
+                document.getElementById("address1").value=result.address;
+                document.getElementById("cardid1").value=result.cardid;
+                document.getElementById("email1").value=result.email;
+                document.getElementById("job1").value=result.job;
+                document.getElementById("work1").value=result.work;
+            }
+        });
+    }
+    //	取消按钮
+    $("#cancel").click(function(){
+        $(".mask").hide();
+        $(".bj").hide();
+    });
+
+
+
+
+</script>
+
+    </body>
+
+    </html>

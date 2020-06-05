@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:o="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>新闻动态</title>
+    <link rel="shortcut icon" href="img/home/title_img_03.png" type="images/x-5b">
+    <!--<title>Document</title> 关键字增加所搜性-->
+    <meta name="description" content="">
+    <!--移动端<meta name="keywords" content="">-->
+    <!--<meta name="keywords" content="公司介绍,发展历程,企业文化,家具定制,定制家具,合肥全屋定制,家具品牌,合肥定制家具,全屋定制家具">-->
+    <!--<meta name="keywords" content="">content="123"给网站关键字增加所搜性-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!--做移动端一定要加他.支持手机端的neta标签<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--为了能更好的显示-->
+    <!--这是为了让网站优先兼容最高版本的ie浏览器 -->
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="plug/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plug/Font-Awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+</head>
+<body>
+<!--header头部-->
+<header>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12 col-sm-6 ">
+                    <!--<p><i class="fa fa-phone"> </i> 400-800-9696</p>-->
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-6 text-right">
+                    <form class="navbar-form text-right" role="search">
+                        <div class="form-group" style="font-size:12px;color:#000; ">
+                            <div class="sou fl">
+                                <div id="userinfo" class="fl"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="index">
+                    <img class="logo" src="images/logo1.png" alt="">
+                    <h1>儿童福利院</h1>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index">首页</a></li>
+                    <!--<li><a href="products">来访预约</a></li>-->
+                    <li><a class="active" href="news">新闻动态</a></li>
+                    <li><a href="about">社工/活动招聘</a></li>
+                    <li><a href="join">领养申请</a></li>
+                    <li><a href="profuile">福利院介绍</a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<div class="profuile" id="body" style="margin-top: -20px;">
+</div>
+
+<footer style="margin-top: -50px">
+    <!--footer-->
+    <!--备案号-->
+    <div class="footer-button">
+        <div class="container">
+            <p>Copyright &copy; 2006 - 2019 福利院 All rights reserved. 鲁ICP备13018343号</p>
+            <p>Powered by Fuqian X3.2. Theme designed by 符倩.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!--自己写的js-->
+<script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+
+</body>
+<script>
+    var userid=window.localStorage.getItem("userid");
+    var infouser="";
+    console.log("userid"+userid);
+    $.ajax({
+        url: "/welfare/user/findById",
+        type: "POST",
+        dataType:"json",
+        contentType : 'application/json',
+        data: JSON.stringify({"userid":userid
+        }),
+        async: false,
+        success: function(result){
+            console.log("result"+result);
+            if(result==null){
+                infouser = "你好! 请&nbsp;<a href=\"userlogin\" >登录</a>&nbsp;|&nbsp;\n" +
+                    "<a href=\"register\" >注册</a>";
+            }else{
+                infouser = "欢迎&nbsp;"+ result.name +"&nbsp;|&nbsp;\n" +
+                    "<a href=\"userlogin\" >退出</a>&nbsp;|&nbsp;<a href=\"personal\">个人中心</a>";
+            }
+            $("#userinfo").append(infouser);
+        }
+    });
+
+    $(function () {
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/news/findAll",
+            success: function (result) {
+                console.log(result);
+                var str = '';
+                for (i = 0; i < result.length; i++) {
+                str+='<div class="profuile" id="news'+i+'" style="margin-top: -10px">';
+                str+='<div class="container" style="margin-top: -50px">';
+                   str+='<div class="row">' ;
+                       str+=' <h2 class="text-center">'+result[i].title+'</h2>';
+                    str+='<div class="col-md-6"> <h6></h6>';
+                        str+='<p class="le">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '+result[i].content+'</p>';
+                    str+='</div>';
+                   str+='<div class="col-md-6" style="margin-top: 20px"> <img src="'+result[i].img+'" alt="">';
+                    str+='</div>\n' +
+                        '                        </div>\n' +
+                        '                        </div>\n' +
+                        '                        </div>';
+
+                }//循环结束
+                $('#body').append($(str));
+            }
+        });
+    })
+
+</script>
+</html>

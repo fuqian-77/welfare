@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>个人中心-社工/活动申请</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="plug/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plug/Font-Awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+</head>
+<body>
+<header>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12 col-sm-6 ">
+                    <!--<p><i class="fa fa-phone"> </i> 400-800-9696</p>-->
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-6 text-right">
+                    <form class="navbar-form text-right" role="search">
+                        <div class="form-group" style="font-size:12px;color:#000; ">
+                            <div class="sou fl">
+                                <div id="userinfo" class="fl"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="index">
+                    <img class="logo" src="images/logo1.png" alt="">
+                    <h1>儿童福利院</h1>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index">首页</a></li>
+                    <!--<li><a href="products">来访预约</a></li>-->
+                    <li><a href="news">新闻动态</a></li>
+                    <li><a href="about">社工/活动招聘</a></li>
+                    <li><a href="join">领养申请</a></li>
+                    <li><a href="profuile">福利院介绍</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<div class="Bott">
+        <div class="wrapper clearfix">
+            <div class="zuo fl">
+                <div >
+                    <ul >
+                        <li><a href="personal">个人信息</a></li>
+                        <li><a style="color:red" href="apply">社工/活动</a></li>
+                        <li><a href="foster">领养申请</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="you fl">
+                <h2>社工/活动申请</h2>
+                <div class="gxin">
+                    <div class="xx">
+                        <h3 class="clearfix"><strong class="fl">社工/活动信息</strong></h3>
+                        <div id="id">编号：<span id="recruitid"></span></div>
+                        <div id="name1" style="display: none">活动名称：<span id="name"></span></div>
+                        <div>类型：<span id="category"></span></div>
+                        <div>具体内容：<span id="content"></span></div>
+                        <div id="date1" style="display: none">活动时间：<span id="date"></span></div>
+                        <div id="organization1" style="display: none">组织单位：<span id="organization"></span></div>
+                        <div id="manager1" style="display: none">负责人：<span id="manager"></span></div>
+                        <div id="phone1" style="display: none">联系电话：<span id="phone"></span></div>
+
+                        <div id="starttime1">开始时间：<span id="starttime"></span></div>
+                        <div id="endtime1">结束时间：<span id="endtime"></span></div>
+                        <div>申请时间：<span id="adate"></span></div>
+                        <div id="require1">要求：<span id="require"></span></div>
+
+                        <div>结果：<span id="flag" style="color:red"></span></div>
+                        <a href="javascript:lastApply()" id="last" style="background-color: #3884c0;color:#fff;" class="tanniu newsa">上一条</a>
+                        <a href="javascript:nextApply()" id="next" style="background-color: #3884c0;color:#fff;" class="tanniu newsa">下一条</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!------------------------------Bott------------------------------>
+
+<!--footer-->
+<footer style="margin-top: 5px;">
+    <!--footer-->
+    <!--备案号-->
+    <div class="footer-button">
+        <div class="container">
+            <p>Copyright &copy; 2006 - 2019 福利院 All rights reserved. 鲁ICP备13018343号</p>
+            <p>Powered by Fuqian X3.2. Theme designed by 符倩.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/user.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!--自己写的js-->
+<script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<script>
+    var userid=window.localStorage.getItem("userid");
+    var infouser="";
+    console.log("userid"+userid);
+    $.ajax({
+        url: "/welfare/user/findById",
+        type: "POST",
+        dataType:"json",
+        contentType : 'application/json',
+        data: JSON.stringify({"userid":userid
+        }),
+        async: false,
+        success: function(result){
+            if(result==null){
+                infouser = "你好! 请&nbsp;<a href=\"userlogin\" >登录</a>&nbsp;|&nbsp;\n" +
+                    "<a href=\"register\" >注册</a>";
+            }else{
+                infouser = "欢迎&nbsp;"+ result.name +"&nbsp;|&nbsp;\n" +
+                    "<a href=\"userlogin\" >退出</a>&nbsp;|&nbsp;<a style=\"color:red\" href=\"personal\">个人中心</a>";
+            }
+            $("#userinfo").append(infouser);
+        }
+    });
+
+    var flag=document.getElementById("flag");
+     $.ajax({
+         url: "/welfare/recruit/findByUId",
+         type: "POST",
+         dataType: "json",
+         contentType: 'application/json',
+         data: JSON.stringify({
+             "userid": userid
+         }),async:false,
+         success: function (result) {
+             var result = result;
+             for (var i = 0; i < result.length; i++) {
+                 if (result[i].type == 1) { //招聘
+                     $("#recruitid").html(result[i].recruitid);
+                     $("#category").html(result[i].category);
+                     $("#content").html(result[i].content);
+                     $("#adate").html(result[i].date);
+                     $("#starttime").html(result[i].starttime);
+                     $("#endtime").html(result[i].endtime);
+                     $("#require").html(result[i].require);
+                     $("#id").show();
+                     $("#category1").show();
+                     $("#starttime1").show();
+                     $("#endtime1").show();
+                     $("#require1").show();
+                     $("#name1").hide();
+                     $("#date1").hide();
+                     $("#manager1").hide();
+                     $("#organization1").hide();
+                     $("#phone1").hide();
+                     if (result[i].flag == userid) {
+                         flag.innerHTML = "抱歉，您不符合我们的要求"
+                     } else {
+                         if (result[i].state == "已完成") {
+                             flag.innerHTML = "通过"
+                         } else {
+                             flag.innerHTML = "审核中，请稍后"
+                         }
+                     }
+                 }else{ //申请
+                     var date2=result[i].recruitid.substring(0,10);
+                     $("#recruitid").html(result[i].recruitid);
+                     console.log("date=="+date2);
+                     $.ajax({
+                         url: "/welfare/activity/findByUId",
+                         type: "POST",
+                         dataType: "json",
+                         contentType: 'application/json',
+                         data: JSON.stringify({
+                             "userid": userid,
+                             "adate":date2
+                         }), async: false,
+                         success: function (result) {
+                             console.log("result=="+result);
+                             for(var j=0;j<1;j++){
+                                 $("#id").hide();
+                                 $("#category1").hide();
+                                 $("#starttime1").hide();
+                                 $("#endtime1").hide();
+                                 $("#require1").hide();
+                                 $("#name1").show();
+                                 $("#name").html(result[j].name);
+                                 $("#date1").show();
+                                 $("#date").html(result[j].date);
+                                 $("#adate").html(result[j].adate);
+                                 console.log
+                                 $("#manager1").show();
+                                 $("#manager").html(result[j].manager);
+                                 $("#organization1").show();
+                                 $("#organization").html(result[j].organization);
+                                 $("#phone1").show();
+                                 $("#phone").html(result[j].phone);
+                                 $("#category").html("活动");
+                                 $("#content").html(result[j].content);
+                                 if(result[j].flag=="通过"){
+                                     flag.innerHTML = "通过";
+                                 }else if(result[j].flag=="已拒绝"){
+                                     flag.innerHTML = "抱歉，您申请的活动未通过审核"
+                                 }else{
+                                     flag.innerHTML = "审核中，请稍后"
+                                 }
+                             }
+                         }
+                     })
+                 }
+             }
+         }
+     });
+
+     //下一条
+    function nextApply(){
+        var recruitid=document.getElementById("recruitid").innerHTML;
+        console.log("recruitid==="+recruitid);
+        $.ajax({
+            url: "/welfare/recruit/findByUId",
+            type: "POST",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "userid": userid
+            }),
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    console.log("result[i-1]"+result[i+1]);
+                    if(result[i].recruitid==recruitid){
+                        if(result[i+1]!='' || result[i+1]!=null || result[i+1]!=undefined){
+                            if (result[i+1].type == 1) { //招聘
+                                $("#recruitid").html(result[i+1].recruitid);
+                                $("#category").html(result[i+1].category);
+                                $("#content").html(result[i+1].content);
+                                $("#adate").html(result[i+1].date);
+                                $("#starttime").html(result[i+1].starttime);
+                                $("#endtime").html(result[i+1].endtime);
+                                $("#require").html(result[i+1].require);
+                                $("#id").show();
+                                $("#category1").show();
+                                $("#starttime1").show();
+                                $("#endtime1").show();
+                                $("#require1").show();
+                                $("#name1").hide();
+                                $("#date1").hide();
+                                $("#manager1").hide();
+                                $("#organization1").hide();
+                                $("#phone1").hide();
+                                if (result[i+1].flag == userid) {
+                                    flag.innerHTML = "抱歉，您不符合我们的要求"
+                                } else {
+                                    if (result[i+1].state == "已完成") {
+                                        flag.innerHTML = "通过"
+                                    } else {
+                                        flag.innerHTML = "审核中，请稍后"
+                                    }
+                                }
+                            }else{ //申请
+                                var date2=result[i+1].recruitid.substring(0,10);
+                                $("#recruitid").html(result[i+1].recruitid);
+                                console.log("date=="+date2);
+                                $.ajax({
+                                    url: "/welfare/activity/findByUId",
+                                    type: "POST",
+                                    dataType: "json",
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        "userid": userid,
+                                        "adate":date2
+                                    }), async: false,
+                                    success: function (result) {
+                                        console.log("result=="+result);
+                                        for(var j=0;j<1;j++){
+                                            $("#id").hide();
+                                            $("#category1").hide();
+                                            $("#starttime1").hide();
+                                            $("#endtime1").hide();
+                                            $("#require1").hide();
+                                            $("#name1").show();
+                                            $("#name").html(result[j].name);
+                                            $("#date1").show();
+                                            $("#date").html(result[j].date);
+                                            $("#adate").html(result[j].adate);
+                                            $("#manager1").show();
+                                            $("#manager").html(result[j].manager);
+                                            $("#organization1").show();
+                                            $("#organization").html(result[j].organization);
+                                            $("#phone1").show();
+                                            $("#phone").html(result[j].phone);
+                                            $("#category").html("活动");
+                                            $("#content").html(result[j].content);
+                                            if(result[j].flag=="通过"){
+                                                flag.innerHTML = "通过";
+                                            }else if(result[j].flag=="已拒绝"){
+                                                flag.innerHTML = "抱歉，您申请的活动未通过审核"
+                                            }else{
+                                                flag.innerHTML = "审核中，请稍后"
+                                            }
+                                        }
+                                    }
+                                })
+
+                            }
+                        }else{
+                            // var button=document.getElementById("next");
+                            // $("#next").attr("disabled",true);
+                            // $("#next").css("pointer-events","none");
+                        }
+                    }
+
+                }
+            }
+        });
+    }
+
+    //上一条
+    function lastApply(){
+        var recruitid=document.getElementById("recruitid").innerHTML;
+        console.log("recruitid==="+recruitid);
+        $.ajax({
+            url: "/welfare/recruit/findByUId",
+            type: "POST",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "userid": userid
+            }),
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    console.log("result[i-1]"+result[i-1]);
+                        if(result[i].recruitid==recruitid){
+                            if(result[i-1]!='' || result[i-1]!=null || result[i-1]!=undefined){
+                                if (result[i-1].type == 1) { //招聘
+                                    $("#recruitid").html(result[i-1].recruitid);
+                                    $("#category").html(result[i-1].category);
+                                    $("#content").html(result[i-1].content);
+                                    $("#adate").html(result[i-1].date);
+                                    $("#starttime").html(result[i-1].starttime);
+                                    $("#endtime").html(result[i-1].endtime);
+                                    $("#require").html(result[i-1].require);
+                                    $("#id").show();
+                                    $("#category1").show();
+                                    $("#starttime1").show();
+                                    $("#endtime1").show();
+                                    $("#require1").show();
+                                    $("#name1").hide();
+                                    $("#date1").hide();
+                                    $("#manager1").hide();
+                                    $("#organization1").hide();
+                                    $("#phone1").hide();
+                                    if (result[i-1].flag == userid) {
+                                        flag.innerHTML = "抱歉，您不符合我们的要求"
+                                    } else {
+                                        if (result[i-1].state == "已完成") {
+                                            flag.innerHTML = "通过"
+                                        } else {
+                                            flag.innerHTML = "审核中，请稍后"
+                                        }
+                                    }
+                                }else{ //申请
+                                    var date2=result[i-1].recruitid.substring(0,10);
+                                    $("#recruitid").html(result[i-1].recruitid);
+                                    console.log("date=="+date2);
+                                    $.ajax({
+                                        url: "/welfare/activity/findByUId",
+                                        type: "POST",
+                                        dataType: "json",
+                                        contentType: 'application/json',
+                                        data: JSON.stringify({
+                                            "userid": userid,
+                                            "adate":date2
+                                        }), async: false,
+                                        success: function (result) {
+                                            console.log("result=="+result);
+                                            for(var j=0;j<1;j++){
+                                                $("#id").hide();
+                                                $("#category1").hide();
+                                                $("#starttime1").hide();
+                                                $("#endtime1").hide();
+                                                $("#require1").hide();
+                                                $("#name1").show();
+                                                $("#name").html(result[j].name);
+                                                $("#date1").show();
+                                                $("#date").html(result[j].date);
+                                                $("#adate").html(result[j].adate);
+                                                $("#manager1").show();
+                                                $("#manager").html(result[j].manager);
+                                                $("#organization1").show();
+                                                $("#organization").html(result[j].organization);
+                                                $("#phone1").show();
+                                                $("#phone").html(result[j].phone);
+                                                $("#category").html("活动");
+                                                $("#content").html(result[j].content);
+                                                if(result[j].flag=="通过"){
+                                                    flag.innerHTML = "通过";
+                                                }else if(result[j].flag=="已拒绝"){
+                                                        flag.innerHTML = "抱歉，您申请的活动未通过审核"
+                                                }else{
+                                                        flag.innerHTML = "审核中，请稍后"
+                                                }
+                                                }
+                                            }
+                                    })
+
+                                }
+                            }else{
+                                // $("#next").attr("disabled",true);
+                                // $("#next").css("pointer-events","none");
+                            }
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

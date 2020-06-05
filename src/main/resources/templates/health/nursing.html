@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>医护部门-护士</title>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <script type="text/javascript" src="../js/functions.js"></script>
+    <meta charset="utf-8">
+    </head>
+
+<div id="main" title="儿童管理"  paddingdata-options="fit:true" style="height:auto">
+</div>
+<body class="easyui-layout" data-options="fit:true" style="overflow:hidden;margin: 1px 1px 1px 1px;">
+<div id="tree" data-options="region:'west', split:true" style="overflow:hidden; width:129px;">
+
+</div>
+<div data-options="region:'center'" style="border-width:0px;" >
+    <div id="myForm1" class="easyui-panel" data-options="fit:true" style="">
+
+    </div>
+</div>
+<div class="mask" style="display:none;"></div>
+<!--编辑弹框-->
+<div class="bj" style="display:none;">
+    <h3 style="margin-top: 0px">儿童基础资料</h3>
+    <form action="#" method="get" style="margin-top: -30px;">
+        <label>编号：</label><input id="userid1" type="text" readonly="readonly"/></br>
+        <label>姓名：</label><input id="name1" type="text" /></br>
+        <label>性别：</label><input  id="sex1" type="text"   readonly="readonly" /></br>
+        <label>年龄：</label><input id="age1" type="text"   readonly="readonly" /></br>
+        <label>当前状态：</label><input id="status1" type="text"  readonly="readonly" /></br>
+        <label>出生日期：</label><input id="birthdate1" type="text"  readonly="readonly" /></br>
+        <label>身份证号：</label><input id="cardid1" type="text"  readonly="readonly" /></br>
+        <label>入院时间：</label><input id="addmissiondate1"type="text"  readonly="readonly" /></br>
+        <label>护理级别：</label><input id="nurse1" type="text" readonly="readonly"  /></br>
+        <div class="bc">
+            <input id="cancel" type="button" value="返回" />
+        </div>
+    </form>
+</div>
+
+    <script>
+        var staffid=localStorage.getItem("staffid");
+        $("#tree").tree({
+            data:[{
+                "id":1,
+                "text":"全部",
+                "checked":true,
+                "children":[{
+                    "id":3,
+                    "text":"未执行"
+                }, {
+                    "id":2,
+                    "text": "执行中"
+                }, {
+                    "id": 4,
+                    "text": "已完成"
+                }]
+            }]
+        });
+        var str='<div id="myGrid1" class="easyui-datagrid"></div>';
+        $("#myForm1").append($(str));
+
+        $('#tree').tree({
+            onSelect: function (row) {
+                var xcolumns = [
+                    [
+                        {title: '医嘱编号', field: 'adviceid', width: 80, sortable: true, align: 'center'},
+                        {title: '儿童姓名', field: 'childrenid', width: 80, sortable: true, align: 'center',
+                            formatter : function(value, row, index) {
+                                var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="detail(this)">'+value+'</a>';
+                                return str1;
+                            }},
+                        {title: '日期', field: 'date', width: 120, halign: 'center', align: 'center',},
+                        {title: '类别', field: 'type', width: 80, halign: 'center', align: 'center'},
+                        {title: '开始时间', field: 'starttime', width: 120, halign: 'center', align: 'center'},
+                        {title: '结束时间', field: 'endtime', width: 120, halign: 'center', align: 'center'},
+                        {title: '医生编码', field: 'doctorid', width: 80, halign: 'center', align: 'center'},
+                        {title: '内容', field: 'content', width: 190, halign: 'center', align: 'left'},
+                        {title: '备注', field: 'nnote', width: 90, halign: 'center', align: 'center'},
+                        {title: '状态', field: 'condition', width: 90, halign: 'center', align: 'center'},
+                        {
+                            field: 'operation',
+                            title: '操作',
+                            width: 90,
+                            halign: 'center', align: 'center',
+                            formatter: function (value, row,
+                                                 index) {
+                                if (row.condition == '未执行') {
+                                    var str = '<a href ="#"  class="easyui-linkbutton"   onclick="ok(this)">执行</a>';
+                                } else if (row.condition == '执行中') {
+                                    var str = '<a href ="#"  class="easyui-linkbutton"   onclick="giveup(this)">取消</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+                                    str += '<a href ="#"  class="easyui-linkbutton"   onclick="finish(this)">完成</a>'
+                                }
+                                return str;
+                            }
+                        }
+                    ]
+                ];
+                $("#myGrid1").datagrid({
+                    title: '&nbsp;医嘱列表',
+                    iconCls: "panelIcon",
+                    width: 1160,
+                    height: 435,
+                    singleSelect: true,
+                    columns: xcolumns
+                });
+                if (row.id == 1) {    //全部
+                    $("#myGrid1").datagrid('hideColumn', 'operation');
+                    $("#myGrid1").datagrid({
+                        url: 'http://localhost:8080/welfare/advice/findAll',
+                    });
+                } else if (row.id == 3) {     //未执行
+                    $("#myGrid1").datagrid('showColumn', 'operation');
+                    $("#myGrid1").datagrid({
+                        url: 'http://localhost:8080/welfare/advice/findAll2',
+                    });
+                } else if (row.id == 2) {    //执行中
+                    $("#myGrid1").datagrid('showColumn', 'operation');
+                    $("#myGrid1").datagrid({
+                        url: 'http://localhost:8080/welfare/advice/findAll1',
+                    });
+                } else {   //已完成
+                    $("#myGrid1").datagrid('hideColumn', 'operation');
+                    $("#myGrid1").datagrid({
+                        url: 'http://localhost:8080/welfare/advice/findAll3',
+                    });
+                }
+            }
+        });
+
+        cnodes=$('#tree').tree('getRoot');
+        cnodess=$('#tree').tree('getChildren',cnodes.target);
+        $('#tree').tree('select', cnodess[0].target);
+
+        function ok(e){   //执行医嘱
+            var row=$('#myGrid1').datagrid('getSelected');
+            if(row.type=='短期'){
+                var condition='已完成';
+            }else {
+                condition='执行中';
+            }
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                contentType: 'application/json',
+                url: "http://localhost:8080/welfare/advice/updateById",
+                data:JSON.stringify({
+                    "adviceid":row.adviceid,
+                    "nurseid":staffid,
+                    "condition":condition
+                }),
+                success: function (result) {
+                    console.log(result);
+                    $.messager.show({
+                        title:'提示信息',
+                        msg:'已执行该医嘱！',
+                        timeout:1000,
+                        showType:'slide'
+                    });
+                    $("#myGrid1").datagrid("reload");
+                }
+            });
+        }
+
+        function giveup(e){    //取消执行中的医嘱
+            var row=$('#myGrid1').datagrid('getSelected');
+            var n=$('#myGrid1').datagrid('getRowIndex', row);
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                contentType: 'application/json',
+                url: "http://localhost:8080/welfare/advice/updateById",
+                data:JSON.stringify({
+                    "adviceid":row.adviceid,
+                    "condition":'未执行'
+                }),
+                success: function (result) {
+                            console.log(result);
+                    $.messager.show({
+                        title:'提示信息',
+                        msg:'已取消执行！',
+                        timeout:1000,
+                        showType:'slide'
+                    });
+                            $("#myGrid1").datagrid("reload");
+                        }
+                    });
+
+        }
+        function finish(e){//完成执行中的医嘱
+            var row=$('#myGrid1').datagrid('getSelected');
+            var n=$('#myGrid1').datagrid('getRowIndex', row);
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                contentType: 'application/json',
+                url: "http://localhost:8080/welfare/advice/updateById",
+                data:JSON.stringify({
+                    "adviceid":row.adviceid,
+                    "condition":'已完成'
+                }),
+                success: function (result) {
+                    $.messager.show({
+                        title:'提示信息',
+                        msg:'该医嘱已完成！',
+                        timeout:1000,
+                        showType:'slide'
+                    });
+                    $("#myGrid1").datagrid("reload");
+                }
+            });
+        }
+
+        function detail(e){
+            var row=$('#myGrid1').datagrid('getSelected');
+            console.log("row===="+row);
+            $(".mask").show();
+            $(".bj").show();
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                contentType: 'application/json',
+                url: "http://localhost:8080/welfare/children/findByName",
+                data: JSON.stringify({
+                    "name": row.childrenid
+                }),
+                success: function (result) {
+                    console.log(result);
+                    document.getElementById("userid1").value=result.childrenid;
+                    document.getElementById("name1").value=row.childrenid;
+                    document.getElementById("age1").value=result.age;
+                    document.getElementById("sex1").value=result.sex;
+                    document.getElementById("status1").value=result.status;
+                    document.getElementById("addmissiondate1").value=result.admissiondate;
+                    document.getElementById("nurse1").value=result.nurse;
+                    document.getElementById("birthdate1").value=result.birthdate;
+                    document.getElementById("cardid1").value=result.cardid;
+                }
+            });
+        }
+        //	取消按钮
+        $("#cancel").click(function(){
+            $(".mask").hide();
+            $(".bj").hide();
+        });
+    </script>
+
+    </body>
+
+    </html>

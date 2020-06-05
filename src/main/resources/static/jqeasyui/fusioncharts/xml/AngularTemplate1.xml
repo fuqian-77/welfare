@@ -1,0 +1,28 @@
+<Chart bgColor='FFFFFF' upperLimit='%upperlimit%' lowerLimit='%lowerlimit%'  baseFontColor='FFFFFF' majorTMNumber='11' 
+  majorTMColor='FFFFFF'  majorTMHeight='8' minorTMNumber='5' minorTMColor='FFFFFF' minorTMHeight='3' 
+  toolTipBorderColor='FFFFFF' toolTipBgColor='333333' gaugeOuterRadius='90' gaugeOriginX='135' gaugeOriginY='135' 
+  gaugeScaleAngle='270' placeValuesInside='1' gaugeInnerRadius='80%25' annRenderDelay='0' gaugeFillMix='' 
+  pivotRadius='10' showPivotBorder='0' pivotFillMix='{CCCCCC},{333333}' pivotFillRatio='50,50' showShadow='0'>
+  <colorRange>	
+    <color minValue='0' maxValue='50' code='C1E1C1' alpha='40'/> 	
+    <color minValue='50' maxValue='85' code='F6F164' alpha='40'/>
+    <color minValue='85' maxValue='120' code='F70118' alpha='40'/>
+  </colorRange> 
+  <dials> 	
+    <dial value='%value1%' borderColor='FFFFFF' editMode='1' bgColor='000000,CCCCCC,000000' borderAlpha='0' baseWidth='10'/>
+  </dials>	
+  <annotations>
+    <annotationGroup xPos='135' yPos='135' showBelow='1'>		
+      <annotation type='circle' xPos='0' yPos='0' radius='130' startAngle='0' endAngle='360' fillColor='CCCCCC,111111'  fillPattern='linear' fillAlpha='100,100'  fillRatio='50,50' fillAngle='-45'/>
+      <annotation type='circle' xPos='0' yPos='0' radius='110' startAngle='0' endAngle='360' fillColor='111111,cccccc'  fillPattern='linear' fillAlpha='100,100'  fillRatio='50,50' fillAngle='-45'/>
+      <annotation type='circle' xPos='0' yPos='0' radius='100' startAngle='0' endAngle='360' color='666666'/>
+    </annotationGroup>
+    <annotationGroup xPos='135' yPos='180' showBelow='1'>		
+      <annotation type="text" label="%title1%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos='135' yPos='195' showBelow='1'>		
+      <annotation type="text" label="%title2%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+  </annotations>
+</Chart>
+

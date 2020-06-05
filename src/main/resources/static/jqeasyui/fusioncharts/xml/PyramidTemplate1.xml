@@ -1,0 +1,18 @@
+<chart bgColor="CCCCCC,FFFFFF" caption="%title1%" subcaption="%title2%" baseFontColor="333333" enableSmartLabels="0" plotfillAlpha="80"
+ decimalPrecision="0" numberSuffix="" pyramidYScale="40" chartLeftMargin="5" chartRightMargin="20" chartBottomMargin="0" chartTopMargin="10" captionPadding="0">
+   <set value="%value%" name="%name%" color="FFCC33" />
+   <styles>
+      <definition>
+         <style type="font" name="captionFont" size="15" />
+         <style type="font" name="subcaptionFont" size="13" />
+      </definition>
+      <application>
+      <apply toObject="CAPTION" styles="captionFont" />
+      <apply toObject="SUBCAPTION" styles="subcaptionFont" />
+      </application>
+   </styles>
+</chart>
+
+
+
+

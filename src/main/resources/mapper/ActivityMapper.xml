@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Activity" >
+    <id column="activityid" property="activityid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="organization" property="organization" jdbcType="VARCHAR" />
+    <result column="manager" property="manager" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="staffid" property="staffid" jdbcType="VARCHAR" />
+    <result column="checker" property="checker" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="adate" property="adate" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    *
+  </sql>
+
+  <select id="selectByUId" resultMap="BaseResultMap" parameterType="com.welfare.entity.Activity" >
+    select 
+    <include refid="Base_Column_List" />
+    from `activity`
+    where userid = #{userid,jdbcType=VARCHAR}
+    and adate = #{adate,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `activity`
+    where activityid = #{actvityid,jdbcType=INTEGER}
+
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `activity`
+  </select>
+
+  <!--复审中-->
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `activity`
+    where flag='复审中'
+  </select>
+
+  <!--初审中-->
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `activity`
+    where flag='初审中'
+  </select>
+
+  <!--通过-->
+  <select id="selectAll3" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `activity`
+    where flag='通过'
+  </select>
+
+  <!--拒绝-->
+  <select id="selectAll4" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `activity`
+    where flag='已拒绝'
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from `activity`
+    where activityid = #{activityid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Activity" >
+    insert into `activity` (activityid, name, content,
+      organization, manager, phone,
+      date, staffid,checker,note,adate,userid,flag)
+    values (#{activityid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+      #{organization,jdbcType=VARCHAR}, #{manager,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+      #{date,jdbcType=VARCHAR}, #{staffid,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR},
+      #{note,jdbcType=VARCHAR},#{adate,jdbcType=VARCHAR},#{userid,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateById" parameterType="com.welfare.entity.Activity" >
+    update `activity`
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null" >
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffid = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="adate != null" >
+        adate = #{adate,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where activityid = #{activityid,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

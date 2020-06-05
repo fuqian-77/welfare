@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:o="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>社工/活动招聘</title>
+    <link rel="shortcut icon" href="img/home/title_img_03.png" type="images/x-5b">
+    <!--<title>Document</title> 关键字增加所搜性-->
+    <meta name="description" content="">
+    <!--移动端<meta name="keywords" content="">-->
+    <!--<meta name="keywords" content="公司介绍,发展历程,企业文化,家具定制,定制家具,合肥全屋定制,家具品牌,合肥定制家具,全屋定制家具">-->
+    <!--<meta name="keywords" content="">content="123"给网站关键字增加所搜性-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!--做移动端一定要加他.支持手机端的neta标签<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--为了能更好的显示-->
+    <!--这是为了让网站优先兼容最高版本的ie浏览器 -->
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="plug/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plug/Font-Awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="jqeasyui/jquery.easyui.min.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="jqeasyui/themes/default/easyui.me.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="jqeasyui/themes/icon.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="system/css/icon.css">-->
+    <!--<script type="text/javascript" src="jqeasyui/easyui-lang-zh_CN.js"></script>-->
+    <!--<script type="text/javascript" src="system/easyui_functions.js"></script>-->
+    <!--<script type="text/javascript" src="functions/functions/functions.js"></script>-->
+
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="css/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="css/elements.css" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+    <!-- libraries -->
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+
+     <!--this page specific styles-->
+    <link rel="stylesheet" href="css/user-list.css" type="text/css" media="screen" />
+
+     <!--open sans font-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+
+    <!--[if lt IE 9]-->
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <meta charset="utf-8">
+
+</head>
+<style>
+    #myForm .datagrid-btable tr{height: 40px;}
+</style>
+<body>
+<!--header头部-->
+<header>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12 col-sm-6 ">
+                    <!--<p><i class="fa fa-phone"> </i> 400-800-9696</p>-->
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-6 text-right">
+                    <form class="navbar-form text-right" role="search">
+                        <div class="form-group" style="font-size:12px;color:#000; ">
+                            <div class="sou fl">
+                                <div id="userinfo" class="fl"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="index">
+                    <img class="logo" src="images/logo.png" alt="">
+                    <h1>儿童福利院</h1>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index">首页</a></li>
+                    <!--<li><a href="products">来访预约</a></li>-->
+                    <li><a href="news">新闻动态</a></li>
+                    <li><a class="active" href="about">社工/活动招聘</a></li>
+                    <li><a href="join">领养申请</a></li>
+                    <li><a href="profuile">福利院介绍</a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<!-- main container -->
+<div class="content" style="margin-left: -20px;overflow: auto;height:450px">
+    <div class="container-fluid" style="width:100%;margin-left: 0px">
+        <div id="pad-wrapper" class="users-list" style="width:100%;padding-right: 0px">
+            <div class="row-fluid header" style="margin-top: -50px">
+                <h3>招聘列表</h3>
+                <div class="span10 pull-right" style="height:40px;margin-left: -400px">
+                    <input type="text" class="span5 search" id="search" style="margin-top: 4px" placeholder="输入活动内容..." />
+                    <a id="btn1" href="javascript:search()" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: -4px;margin-top: -3px;text-decoration : none"></a>
+                    <a id="btn2" href="#" class="easyui-linkbutton" style="margin-left: 24px;margin-top: -3px">没有心动的活动？点击自己申请</a>
+                </div>
+            </div>
+
+            <!-- Users table -->
+            <div class="row-fluid table" style="margin-top: -50px">
+                <table id="ordertable" class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th class="span4" style="width:110px">
+                            <span class="line"></span>招聘编号
+                        </th>
+                        <th class="span3" style="width:110px">
+                            <span class="line"></span>类别
+                        </th>
+                        <th class="span3">
+                            <span class="line"></span>内容
+                        </th>
+                        <th class="span2">
+                            <span class="line"></span>开始时间
+                        </th>
+                        <th class="span3 "  >
+                            <span class="line" style="width:157px"></span>结束时间
+                        </th>
+                        <th class="span2">
+                            <span class="line"></span>要求
+                        </th>
+                        <th class="span3 " style="width:70px" >
+                            <span class="line"></span>操作
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination pull-right" style="margin-top: 0px">
+                <ul>
+                    <li><a href="#">&#8249;</a></li>
+                    <li><a class="active" href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">&#8250;</a></li>
+                </ul>
+            </div>
+            <!-- end users table -->
+        </div>
+    </div>
+</div>
+<div class="mask"></div>
+<!--编辑弹框-->
+<div class="bj" style="height:500px;width:400px">
+    <h4 style="margin-top: 0px">活动申请</h4>
+    <form action="#" method="get" style="margin-top: -30px;">
+        <label>活动名称：</label><input id="name" type="text" /></br>
+        <label>具体内容：</label><textarea id="content" class="span5" style="width:206px;height:60px;" ></textarea></br>
+        <label>活动时间：</label><input id="date" type="date" /></br>
+        <label>组织单位：</label><input  id="organization" type="text"   /></br>
+        <label>负责人：</label><input id="manager" type="text"   /></br>
+        <label>联系电话：</label><input id="phone" type="text"   /></br>
+        <!--<label>申请时间：</label><input id="adate" type="text"  readonly="readonly"  /></br>-->
+        <div class="bc">
+            <input id="save" type="button" value="保存"  />
+            <input id="cancel" type="button" value="取消" />
+        </div>
+    </form>
+</div>
+
+<!-- end main container -->
+<footer style="margin-top: -105px">
+    <!--footer-->
+    <!--备案号-->
+    <div class="footer-button">
+        <div class="container">
+            <p>Copyright &copy; 2006 - 2019 福利院 All rights reserved. 鲁ICP备13018343号</p>
+            <p>Powered by Fuqian X3.2. Theme designed by 符倩.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<!--<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>-->
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!--自己写的js-->
+<script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+
+</body>
+<script>
+    var userid=window.localStorage.getItem("userid");
+    var infouser="";
+    console.log("userid"+userid);
+    $.ajax({
+        url: "/welfare/user/findById",
+        type: "POST",
+        dataType:"json",
+        contentType : 'application/json',
+        data: JSON.stringify({"userid":userid
+        }),
+        async: false,
+        success: function(result){
+            console.log("result"+result);
+            if(result==null){
+                infouser = "你好! 请&nbsp;<a href=\"userlogin\" >登录</a>&nbsp;|&nbsp;\n" +
+                    "<a href=\"register\" >注册</a>";
+            }else{
+                infouser = "欢迎&nbsp;"+ result.name +"&nbsp;|&nbsp;\n" +
+                    "<a href=\"userlogin\" >退出</a>&nbsp;|&nbsp;<a href=\"personal\">个人中心</a>";
+            }
+            $("#userinfo").append(infouser);
+        }
+    });
+
+    var date3 =new Date().Format("yyyy-MM-dd hh:mm:ss");
+    var date2 =new Date().Format("yyyy-MM-dd");
+    loadData();
+function loadData(){
+    $.ajax({
+        type: "post",
+        dataType: "json",
+        contentType: 'application/json',
+        url: "http://localhost:8080/welfare/recruit/findAll",
+        success: function (result) {
+            console.log(result);
+            var str = '';
+            for (i = 0; i < result.length; i++) {
+                str += '<tr id="tr" class="row' + i + '"><td><span id="recruitid' + i + '" style="width:70px" >' + result[i].recruitid + '</span></td>';
+                str += '<td><span><span id="category' + i + '" style="width:70px">' + result[i].category+ ' </span></td>';
+                str += '<td><span id="content' + i + '"  style="width:300px">'+result[i].content+' </span></td>';
+                str += '<td></td><span><span id="starttime' + i + ' "style="width:140px" >' + result[i].starttime + '</span></td>';
+                str += '<td><span id="endtime' + i + '" style="width:140px" > ' + result[i].endtime + '</span></td>';
+                str += '<td><span id="require' + i + '" style="width:220px" > ' + result[i].require + '</span> </td>';
+                starttime = result[i].starttime.replace("-","/");
+                var d2=new Date();//取今天的日期
+                var d1 = new Date(Date.parse(starttime));
+                console.log(d1>d2);
+                // alert(d1);
+                // alert(d2);
+                if(d1>d2){
+                    if((result[i].userid==userid && userid!="") || (result[i].flag==userid && result[i].flag!="")){//已申请
+                        str += '<td><a href="javascript:;" target="_Blank" class="easyui-linkbutton" style="text-decoration: none; cursor: default; opacity: 0.5;width:80px" >已申请</a></td>';
+                    }else{
+                        str+= '<td><a href ="#"  class="easyui-linkbutton"  id="deliver' + i + 'style="width:80px" onclick="ok()">申请</a>&nbsp;&nbsp;&nbsp;</td>';
+                    }
+                }else{
+                    str+= '<td><span style="color:red;width:80px" >招聘失效</span></td>';
+                }
+                str += '</tr>';
+
+            }//循环结束
+            $('#ordertable').append($(str));
+        }
+    });
+}
+function ok(){   //接受申请，进入审核
+    if(userid=="" || userid==null){
+        $.messager.show({
+            title:'提示信息',
+            msg:'请先登录！',
+            timeout:1000,
+            showType:'slide'
+        });
+        location.href="userlogin";
+    }else{
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/recruit/updateById",
+            data:JSON.stringify({
+                "recruitid":"r12",
+                "userid":userid,
+                "state":"招聘中",
+                "date":date2
+            }),
+            success: function (result) {
+                console.log(result);
+                $.messager.show({
+                    title:'提示信息',
+                    msg:'申请成功，已进入审核！',
+                    timeout:1000,
+                    showType:'slide'
+                });
+                location.href="apply";
+            }
+        });
+    }
+}
+function search(){
+        var keywords = document.getElementById("search").value;
+        $.ajax({
+            url: "/welfare/recruit/findByCondition",
+            type: "POST",
+            dataType:"json",
+            contentType : 'application/json',
+            data: JSON.stringify({"recruitid":keywords}),
+            async: false,
+            success: function(result){
+                console.log(result);
+                $("#myGrid1").datagrid('loadData',result);
+
+            }
+        });
+    }
+$("#btn2").click(function(){
+    $(".mask").show();
+    $(".bj").show();
+    document.getElementById("name").value = "";
+    document.getElementById("content").value = "";
+    document.getElementById("date").value = "";
+    // document.getElementById("enddate").value = "";
+    // document.getElementById("adate").value = date2;
+    document.getElementById("phone").value = "";
+    document.getElementById("manager").value = "";
+    document.getElementById("organization").value = "";
+});
+//	取消按钮
+    $("#cancel").click(function(){
+        $(".mask").hide();
+        $(".bj").hide();
+    });
+    //	保存按钮
+    $("#save").click(function(){
+        var name=document.getElementById("name").value;
+        var content=document.getElementById("content").value;
+        var manager=document.getElementById("manager").value;
+        var organization=document.getElementById("organization").value;
+        var date=document.getElementById("date").value;
+        var phone=document.getElementById("phone").value;
+        console.log("content===="+content);
+        var pcheck = checkPhone(phone);
+        if (name == null || name == "") {
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入活动名称！',
+                timeout:1000,
+                showType:'slide'
+            });
+        } else if(content==null || content==""){
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入活动的具体内容！',
+                timeout:1000,
+                showType:'slide'
+            });
+        }else if(date==null || date==""){
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入活动时间！',
+                timeout:1000,
+                showType:'slide'
+            });
+        } else {
+            if (pcheck == true) {
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/activity/insert",
+                    data: JSON.stringify({
+                        "name": name,
+                        "content": content,
+                        "date": date,
+                        "adate": date2,
+                        "manager": manager,
+                        "phone": phone,
+                        "userid": userid,
+                        "organization":organization,
+                        "flag":"初审中"
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        var id=date2+userid;
+                        console.log("id"+id);
+                        $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            contentType: 'application/json',
+                            url: "http://localhost:8080/welfare/recruit/register",
+                            data: JSON.stringify({
+                                "recruitid":id,
+                                "type": 0,
+                                "userid": userid,
+                                "date":date2
+                            }),
+                            success: function (result) {
+                                $.messager.show({
+                                    title:'提示信息',
+                                    msg:'申请成功，已进入审核！',
+                                    timeout:1000,
+                                    showType:'slide'
+                                });
+                                $(".mask").hide();
+                                $(".bj").hide();
+                                location.href="apply";
+                            }
+                        })
+                    }
+                });
+            } else {
+                $.messager.show({
+                    title:'提示信息',
+                    msg:'请输入正确的电话号码！',
+                    timeout:1000,
+                    showType:'slide'
+                });
+            }
+        }
+});
+</script>
+</html>

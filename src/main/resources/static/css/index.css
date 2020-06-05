@@ -68,14 +68,14 @@ video {
 }
 
 .volunteer,
-.activity {
+.staff {
     width: 400px;
     height: 50%;
     border: 1px solid #000000;
     background-color: #FFFFFF;
 }
 
-.activity {
+.staff {
     margin-top: 3px;
 }
 

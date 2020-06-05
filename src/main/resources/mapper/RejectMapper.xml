@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.welfare.dao.RejectMapper">
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Reject">
+    <id column="rejectid" jdbcType="INTEGER" property="rejectid" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="staffid" jdbcType="VARCHAR" property="staffid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="adate" jdbcType="VARCHAR" property="adate" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    rejectid, id, staffid, userid, date,flag,adate
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `reject`
+    where rejectid = #{rejectid,jdbcType=INTEGER}
+  </select>
+
+  <!--拒绝的活动申请-->
+  <select id="selectAllr" parameterType="com.welfare.entity.Reject" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `reject`
+    where id like 'r%'
+  </select>
+
+  <select id="selectr" parameterType="com.welfare.entity.RejectKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `reject`
+    where id=#{id,jdbcType=VARCHAR} and userid=#{userid,jdbcType=VARCHAR}
+  </select>
+
+  <!--拒绝的寄养申请-->
+  <select id="selectAlla" parameterType="com.welfare.entity.Reject" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `reject`
+    where id not like 'r%'
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `reject`
+    where rejectid = #{rejectid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Reject">
+    insert into reject(rejectid, id, staffid,
+      userid, date,flag,adate)
+    values (#{rejectid,jdbcType=INTEGER}, #{id,jdbcType=VARCHAR}, #{staffid,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR},#{adate,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.welfare.entity.Reject">
+    update reject
+    set
+    <if test="id != null">
+    id = #{id,jdbcType=VARCHAR},
+    </if>
+    <if test="staffid !=null">
+      staffid = #{staffid,jdbcType=VARCHAR},
+    </if>
+    <if test="userid !=null">
+      userid = #{userid,jdbcType=VARCHAR},
+    </if>
+    <if test="date !=null">
+      date = #{date,jdbcType=VARCHAR},
+    </if>
+    <if test="flag !=null">
+      flag =#{flag,jdbcType=VARCHAR}
+    </if>
+    <if test="adate !=null">
+      adate =#{adate,jdbcType=VARCHAR}
+    </if>
+    where rejectid = #{rejectid,jdbcType=INTEGER}
+  </update>
+</mapper>

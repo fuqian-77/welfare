@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.welfare.dao.LeaveMapper">
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Leave">
+    <id column="leaveid" jdbcType="VARCHAR" property="leaveid" />
+    <result column="childrenid" jdbcType="VARCHAR" property="childrenid" />
+    <result column="goes" jdbcType="VARCHAR" property="goes" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="staffid" jdbcType="VARCHAR" property="staffid" />
+    <result column="checker" jdbcType="VARCHAR" property="checker" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    leaveid, childrenid, goes, phone, `type`, date, reason, staffid, checker, note
+  </sql>
+
+  <!--全部-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `leave`
+  </select>
+
+  <!--已审核-->
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `leave` where checker!=''
+  </select>
+
+  <!--未审核-->
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `leave` where checker='' or checker is null
+  </select>
+
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from `leave`
+    where leaveid = #{leaveid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByCId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from `leave`
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.Leave" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `leave`
+    where childrenid like CONCAT('%',#{childrenid},'%') or `type` like  CONCAT('%',#{childrenid},'%')
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from `leave`
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Leave">
+    insert into `leave` (leaveid, childrenid, goes,
+      phone, `type`, date, reason,
+      staffid, checker, note
+      )
+    values (#{leaveid,jdbcType=VARCHAR}, #{childrenid,jdbcType=VARCHAR}, #{goes,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR},
+      #{staffid,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
+      )
+  </insert>
+
+
+  <update id="updateById" parameterType="com.welfare.entity.Leave">
+    update `leave`
+    set childrenid = #{childrenid,jdbcType=VARCHAR},
+      goes = #{goes,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      staffid = #{staffid,jdbcType=VARCHAR},
+      checker = #{checker,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where leaveid = #{leaveid,jdbcType=VARCHAR}
+  </update>
+</mapper>

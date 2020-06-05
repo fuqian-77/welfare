@@ -1,0 +1,36 @@
+					/* 
+					str=str+"		waitTitle : '系统提示',";
+					str=str+"		waitMsg:'文件正在上传...',";
+					str=str+"		success: function(form,action){";
+					str=str+"	  	var xfilesize=action.result.filesize;";
+					str=str+"	  	var ximagewidth=action.result.imagewidth;";
+					str=str+"	  	var ximageheight=action.result.imageheight;";
+					str=str+"		Ext.MessageBox.show({";
+        		    str=str+"        	title: '系统提示', ";  
+					str=str+"			msg: '文件上传成功!',"; 
+	                str=str+"        	buttons: Ext.Msg.OK,";
+    	            str=str+"        	autoShow:true,";	                        
+					str=str+"			icon: Ext.MessageBox.INFO";   
+					str=str+"		});";
+					str=str+"		Ext.getCmp('filepath').setValue(xfilename);";
+					str=str+"		Ext.getCmp('filesourcename').setValue(xfilesourcename);"; 	
+					str=str+"		Ext.getCmp('fileosname').setValue(xfileosname);";
+					str=str+"		Ext.getCmp('filesize').setValue(xfilesize);";
+					str=str+"		Ext.getCmp('filesizedesc').setValue(myFileSize(xfilesize));";
+					str=str+"	},";
+					str=str+"	failure : function(form, action) {";
+					str=str+"		var status = action.result.status;";
+					str=str+"		Ext.MessageBox.show({";   
+       		        str=str+"    		title: '系统警告',";   
+                	str=str+"	        msg: status+'<br>文件上传失败！',"; 
+					str=str+"			buttons: Ext.Msg.OK,";
+   	                str=str+"    		autoShow:true,";	                        
+		            str=str+"            icon: Ext.MessageBox.WARNING";   
+   			        str=str+"       });";
+					str=str+"		Ext.getCmp('filepath').setValue('');";
+					str=str+"		Ext.getCmp('filesourcename').setValue('');"; 	
+					str=str+"		Ext.getCmp('fileosname').setValue('');";
+					str=str+"		Ext.getCmp('filesize').setValue('0 KB');";
+					str=str+"		Ext.getCmp('filesizedesc').setValue('');";
+					str=str+"	}";
+					*/

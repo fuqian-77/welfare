@@ -1,0 +1,37 @@
+<Chart bgColor="FFFFFF"upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" majorTMNumber="7" showTickValues="0" majorTMHeight="8"
+  minorTMNumber="0" showToolTip="0" majorTMThickness="3" gaugeOuterRadius="120" gaugeOriginX="135" gaugeOriginY="200"
+  gaugeStartAngle="125" gaugeScaleAngle="70" placeValuesInside="1" gaugeInnerRadius="115" annRenderDelay="0" 
+  pivotFillMix="{000000},{FFFFFF}" pivotFillRatio="50,50" showPivotBorder="1" pivotBorderColor="444444" pivotBorderThickness="2" 
+  showShadow="0" pivotRadius="18" pivotFillType="linear">
+  <dials>
+    <dial value="%value1%" borderAlpha="0" bgColor="FF0000" editMode="1" baseWidth="6" topWidth="6" radius="100"/>
+  </dials>
+  <!--To display E and F which can"t be shown as upper and lower limit text because the tick values have been hidden-->
+  <trendpoints>
+    <point value="%lowerlimit%" displayValue="E" alpha="0"/>
+    <point value="%upperlimit%" displayValue="F" alpha="0"/>
+    <point value="%value2%"     displayValue="¾¯½äÏß" alpha="0"/>
+  </trendpoints>
+  <annotations>
+    <!-- Draw the background arc -->
+    <annotationGroup xPos="135" yPos="200">
+	<annotation type="arc" xPos="0" yPos="0" radius="150" innerRadius="132" startAngle="53" endAngle="127" showBorder="1" borderColor="444444" borderThickness="2" />
+	<annotation type="arc" xPos="0" yPos="0" radius="150" innerRadius="132" startAngle="53" endAngle="107" showBorder="1" color="ffffff" borderColor="444444" borderThickness="2" />
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="230" showBelow="1">		
+      <annotation type="text" label="%title1%" fontColor="000000" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="245" showBelow="1">		
+      <annotation type="text" label="%title2%" fontColor="000000" fontSize="12" isBold="0"/>
+    </annotationGroup>  
+  </annotations>
+  <styles>
+    <definition>
+	<style name="trendValueFont" type="font" bold="1" size="12"/>
+    </definition>
+    <application>
+	<apply toObject="TRENDVALUES" styles="trendValueFont" />
+    </application>
+  </styles>
+</Chart>
+

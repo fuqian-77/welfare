@@ -1,0 +1,109 @@
+.group:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.group {
+    min-height: 1%;
+}
+* html .group {
+    height: 1%;
+}
+html, body, div,p{
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    vertical-align: baseline;
+}
+body {
+    color: #444444;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 75%;
+    line-height: 1;
+}
+#message-dock {
+    background-color: #164673;
+    color: #FFFFFF;
+    line-height: 1.75em;
+    padding-left: 500px;
+    position: fixed;
+    top: -60px;
+    width: 100%;
+    z-index: 9999;
+}
+#message-dock a {
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: underline;
+}
+#message-dock p {
+    border-radius: 5px 5px 5px 5px;
+    float: left;
+    padding: 5px 6px;
+}
+#message-dock .dismiss {
+    background: url("../images/stop3.png")  no-repeat;
+    border-radius: 0 5px 5px 0;
+    display: none;
+    float: left;
+    height: 21px;
+    padding-left: 10px;
+    text-indent: -999999px;
+    width: 20px;
+    cursor: pointer;
+    background-position-y:center;
+    background-size:20px 20px;
+}
+.sprite {
+    background: url("../images/drop-yes.gif") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    vertical-align: top;
+}
+#message-sleeve {
+    margin: 0 auto;
+    max-width: 1200px;
+    min-width: 1000px;
+}
+.fixed #message-sleeve {
+    width: 1000px;
+}
+#message-text {
+    float: left;
+    font-size: 1.16667em;
+    padding: 0 10px 0 0;
+}
+.success p {
+    background-color: #7AA13D;
+}
+.alert p {
+    background-color: #FFF095;
+    color: #333333;
+}
+.alert a {
+    color: #333333 !important;
+}
+.error p {
+    background-color: #A12A2A;
+    padding-right: 0 !important;
+}
+.error #message-text {
+    padding-right: 0;
+}
+.error .dismiss {
+    display: block !important;
+}
+.error .message-icon, .alert .message-icon {
+    background-position: 0 -249px;
+}
+.message-icon {
+    background-position: -21px -249px;
+    float: left;
+    height: 21px;
+    margin-right: 6px;
+    position: relative;
+    width: 21px;
+}

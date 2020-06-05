@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>院长办公室-数据统计</title>
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <meta charset="utf-8">
+    <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts-en.common.min.js"></script>
+</head>
+<body>
+<div id="main" >
+    <div id="chart1" style="position:absolute;top:20px;left:20px;width: 500px;height:200px;"></div>
+    <div id="chart2" style="position:absolute;top:20px;left:520px;width: 500px;height:200px;"></div>
+    <div id="chart3" style="position:absolute;top:220px;left:20px;width: 500px;height:250px;"></div>
+    <div id="chart4" style="position:absolute;top:220px;left:520px;width: 500px;height:250px;"></div>
+</div>
+<script>
+    //饼状图
+    var myChart1 = echarts.init(document.getElementById("chart1"));
+
+    option1 = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data:['在院儿童','死亡儿童','出院儿童','领养儿童','寄养儿童']
+        },
+        series: [
+            {
+                name:'儿童状态',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'left'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '20',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:126, name:'在院儿童'},
+                    {value:3, name:'死亡儿童'},
+                    {value:44, name:'出院儿童'},
+                    {value:13, name:'领养儿童'},
+                    {value:12, name:'寄养儿童'}
+                ]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart1.setOption(option1);
+//条形图
+    var myChart2 = echarts.init(document.getElementById("chart2"));
+
+    //   app.title = '坐标轴刻度与标签对齐';
+
+    option2 = {
+        title: {
+            text: '儿童入院数量'
+        },
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : ['2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'儿童入院数量',
+                type:'bar',
+                barWidth: '60%',
+                data:[10, 13, 15, 13, 8, 13, 14]
+            }
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart2.setOption(option2);
+    //折现图
+    var myChart3 = echarts.init(document.getElementById("chart3"));
+    option3 = {
+        title: {
+            text: '入院员工数量'
+        },
+            xAxis: {
+            type: 'category',
+            data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [10, 13, 12, 5, 7, 21, 13],
+            type: 'line'
+        }]
+    };
+    myChart3.setOption(option3);
+
+    //折现图
+    var myChart4 = echarts.init(document.getElementById("chart4"));
+    option4 = {
+        title: {
+            text: '入院拜访数量'
+        },
+        xAxis: {
+            type: 'category',
+            data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [50, 55, 60, 115, 74, 133, 134],
+            type: 'line'
+        }]
+    };
+    myChart4.setOption(option4);
+    </script>
+
+    </body>
+
+    </html>

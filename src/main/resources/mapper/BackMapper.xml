@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.BackMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Back" >
+    <id column="backid" property="backid" jdbcType="INTEGER" />
+    <result column="childrenid" property="childrenid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="condition" property="condition" jdbcType="VARCHAR" />
+    <result column="staffid" property="staffid" jdbcType="VARCHAR" />
+    <result column="checker" property="checker" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="fosterageid" property="fosterageid" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    backid,childrenid, name, `type`,date,reason,`condition`,staffid,checker,note,fosterageid
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `back`
+    where backid = #{backid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByCId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `back`
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `back`
+  </select>
+
+  <!--已审核-->
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `back` where checker!=''
+  </select>
+
+  <!--未审核-->
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `back`  where checker='' or checker is null
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from `back`
+    where backid = #{backid,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from `back`
+    where fosterageid = #{fosterageid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Back" >
+    insert into `back` (backid, childrenid,name, date,
+      `type`, `condition`, reason,
+      staffid,checker,note,fosterageid)
+    values (#{backid,jdbcType=INTEGER}, #{childrenid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{date,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{condition,jdbcType=VARCHAR},
+      #{reason,jdbcType=VARCHAR}, #{staffid,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR},
+      #{note,jdbcType=VARCHAR},#{fosterageid,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.welfare.entity.Back" >
+    update `back`
+    <set >
+      <if test="childrenid != null" >
+        childrenid = #{childrenid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        `condition` = #{condition,jdbcType=VARCHAR},
+      </if>
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffid = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="fosterageid != null" >
+        fosterageid = #{fosterageid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where backid = #{backid,jdbcType=INTEGER}
+  </update>
+
+
+
+</mapper>

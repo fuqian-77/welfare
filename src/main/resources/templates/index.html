@@ -1,190 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:o="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
     <title>儿童福利院</title>
-    <style type="text/css">
-        * {
-            background-color: #f2f2f2;
-        }
-
-        body {
-            width: 1349px;
-            height: 915px;
-            overflow: hidden;
-
-        }
-
-        .nav {
-            list-style-type: none;
-            position: relative;
-            top: 70px;
-            left: 55px;
-        }
-
-        li {
-            float: left;
-        }
-
-        .nav a:link,
-        .nav a:visited {
-            display: block;
-            width: 180px;
-            height: 30px;
-            font-weight: bold;
-            background-color: #4B7902;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 4px;
-            line-height: 30px;
-            /* 去掉列表的下划线 */
-            text-decoration: none;
-        }
-
-        .nav a:hover,
-        .nav a:active {
-            background-color: darkgreen;
-        }
-
-        #log img {
-            position: absolute;
-            left: 100px;
-            top: 10px;
-        }
-
-        #log a {
-            position: absolute;
-            left: 90%;
-            top: 45px;
-        }
-
-        video {
-            position: relative;
-            top: 80px;
-            left: 93px;
-        }
-
-        .list {
-            width: 0px;
-            height: 378px;
-            position: relative;
-            top: -307px;
-            left: 820px;
-
-        }
-
-        .volunteer,
-        .activity {
-            width: 400px;
-            height: 50%;
-            border: 1px solid #000000;
-            background-color: #FFFFFF;
-        }
-
-        .activity {
-            margin-top: 3px;
-        }
-
-        h4 {
-            padding-left: 10px;
-            margin-top: 10px;
-            color: #000000;
-            background-color: #FFFFFF;
-        }
-
-        .list ul {
-            list-style-type: circle;
-            color: #bfbf00;
-            margin-top: -10px;
-        }
-
-        .list a:link,
-        .list a:visited {
-            display: block;
-
-            color: #bfbf00;
-            /* 去掉列表的下划线 */
-            background-color: #FFFFFF;
-            text-decoration: none;
-            width: 200px;
-        }
-
-        .list a:hover,
-        .list a:active {
-            /* background-color: darkgreen; */
-            text-decoration: underline;
-        }
-
-        .footer{
-            text-align: center;
-            position: relative;
-            top:-305px;
-            height:100px;
-            background-color:rgba(186, 248, 250,0.3);
-        }
-
-        .footer p{
-            /* font-style: italic; */
-            font-size: 12px;
-            position: relative;
-            top:15px;
-            background-color: rgba(186, 248, 250,0);
-        }
-        </style>
-
+    <link rel="shortcut icon" href="img/home/title_img_03.png" type="images/x-5b">
+    <!--<title>Document</title> 关键字增加所搜性-->
+    <meta name="description" content="">
+    <!--移动端<meta name="keywords" content="">-->
+    <!--<meta name="keywords" content="公司介绍,发展历程,企业文化,家具定制,定制家具,合肥全屋定制,家具品牌,合肥定制家具,全屋定制家具">-->
+    <!--<meta name="keywords" content="">content="123"给网站关键字增加所搜性-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!--做移动端一定要加他.支持手机端的neta标签<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!--为了能更好的显示-->
+    <!--这是为了让网站优先兼容最高版本的ie浏览器 -->
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="plug/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plug/Font-Awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+</head>
 <body>
-<div id="hearder">
-    <div id="log">
-        <img src="/welfare/images/logo.png" alt="儿童福利院" border="0">
-        <a href="">登录/注册</a>
-    </div>
-    <div id="nv">
-        <ul class="nav">
-            <li><a href="/" hidefocus="true" title="福利院首页">首页</a></li>
-            <li><a href="/" hidefocus="true" title="来访预约">来访预约</a></li>
-            <li><a href="/" hidefocus="true" title="申请来院活动">活动申请</a></li>
-            <li><a href="/" hidefocus="true" title="社工招聘">社工招聘</a></li>
-            <li><a href="/" hidefocus="true" title="寄/领养申请">寄/领养申请</a></li>
-            <li><a href="/" hidefocus="true" title="关于我们">关于我们</a></li>
-        </ul>
-    </div>
-</div>
-<div class="content">
-    <video width="700" height="383" controls autoplay loop>
-        <source src="/welfare/images/chalk.mp4" type="video/mp4">
-    </video>
-    <div class="list">
-        <div class="volunteer">
-            <h4>社工招聘</h4>
-            <ul>
-                <li><a href="/welfare/index" hidefocus="true" title="福利院首页">招聘1</a></li>
-                <li><a href="/" hidefocus="true" title="来访预约">招聘2</a></li>
-                <li><a href="/" hidefocus="true" title="申请来院活动">招聘3</a></li>
-                <li><a href="/" hidefocus="true" title="社工招聘">招聘4</a></li>
-                <li><a href="/" hidefocus="true" title="寄/领养申请">招聘5</a></li>
-                <li><a href="/" hidefocus="true" title="关于我们">招聘6</a></li>
-            </ul>
-        </div>
-        <div class="activity">
-            <h4>活动组织</h4>
-            <ul>
-                <li><a href="/" hidefocus="true" title="孤儿网首页">活动1</a></li>
-                <li><a href="/" hidefocus="true" title="孤儿网首页">活动2</a></li>
-                <li><a href="/" hidefocus="true" title="孤儿网首页">活动3</a></li>
-                <li><a href="/" hidefocus="true" title="孤儿网首页">活动4</a></li>
-                <li><a href="/" hidefocus="true" title="孤儿网首页">活动5</a></li>
-                <li><a href="/" hidefocus="true" title="孤儿网首页">活动6</a></li>
-            </ul>
+<!--header头部-->
+<header>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12 col-sm-6 ">
+                    <!--<p><i class="fa fa-phone"> </i> 400-800-9696</p>-->
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-6 text-right">
+                    <form class="navbar-form text-right" role="search">
+                        <div class="form-group" style="font-size:12px;color:#000; ">
+                            <div class="sou fl">
+                                <div id="userinfo" class="fl"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<div class="footer">
-    <p class="v2-fmu1">Copyright &copy; 2006 - 2019 福利院 All rights reserved. 鲁ICP备13018343号</p>
-    <p class="xs0">Powered by Fuqian X3.2. Theme designed by 符倩.</p>
-</div>
-</body>
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="index">
+                    <img class="logo" src="images/logo1.png" alt="">
+                    <h1>儿童福利院</h1>
+                </a>
+            </div>
 
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="active" href="#">首页</a></li>
+                    <!--<li><a href="products">来访预约</a></li>-->
+                    <li><a href="news">新闻动态</a></li>
+                    <li><a href="about">社工/活动招聘</a></li>
+                    <li><a href="join">领养申请</a></li>
+                    <li><a href="profuile">福利院介绍</a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<!--banner-->
+<!--轮播开始-->
+<div id="carousel-example-generic" class="carousel slide banner" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="images/children1.jpg" alt="...">
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
+            <img src="images/children2.jpg" alt="...">
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
+            <img src="images/children3.jpg" alt="...">
+            <div class="carousel-caption">
+            </div>
+        </div>
+    </div>
+    <!---->
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!--轮播结束-->
+
+<div class="profuile">
+    <div class="container">
+        <div class="row">
+        <h2 class="text-center">儿童福利院介绍</h2>
+        <div class="col-md-6">
+            <h6></h6>
+            <p class="le">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 天津市儿童福利院是我市唯一一家收容收养孤残儿童的国办儿童福利机构，前身系1794年（清乾隆五十九年）建立的长芦育婴堂，和1878年（光绪四年）建立的津河广仁堂，距今已有二百余年的历史。在解放后，天津市人民政府对旧有的福利救济机构逐步进行了调整和整顿，重新建立了由人民政府所属民政局领导的新型福利事业单位，于1958年7月正式合并为天津市儿童教养院。1959年正式更名为天津市儿童福利院。1988年成立了天津市民政局残疾儿童康复中心。<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2010年作为天津市二十项民心工程之一的儿童福利院白堤路院改建工程，在各级政府和部门的支持下，于2011年12月24日正式投入使用。白堤路院址占地6200平方米，建筑面积8500平方米，外墙色彩鲜艳，红瓦坡顶，置身其中，宛如徜徉于童话的世界。五马路院址占地面积近8000平方米，建筑面积5000余平方米，绿荫曲径、古迹新貌，书写了我院百年风雨发展的厚重历史。两院一脉相承，彼此依托，一所集收养、教育、医疗、康复、娱乐、培训、教学为一体的一级儿童福利机构逐渐呈现在世人面前。<br />
+            </p>
+            <p>
+                <span style="font-size:12px;"><span style="font-family: arial,helvetica,sans-serif;"><big>&nbsp;&nbsp;&nbsp; 地点：天津市南开区白堤路57号（邮编：300193）</big></span></span><span style="font-size:12px;"><span style="font-family: arial,helvetica,sans-serif;"><big> </big></span></span></p>
+            <p>
+                <span style="font-size:12px;"><span style="font-family: arial,helvetica,sans-serif;"><big>&nbsp;&nbsp;&nbsp; 乘车路线：乘公交车609、640、849、859路到南开文化宫站下</big></span></span><span style="font-size:12px;"><span style="font-family: arial,helvetica,sans-serif;"><big>&nbsp;</big></span></span></p>
+            <p>
+                <span style="font-size:12px;"><span style="font-family: arial,helvetica,sans-serif;"><big>&nbsp;&nbsp;&nbsp; 联系电话：27354895、27429396</big></span></span></p>
+        </div>
+        <div class="col-md-6">
+            <img src="images/welfare.jpg" alt="">
+        </div>
+    </div>
+    </div>
+</div>
+
+</div>
+<div class="news"><!--公司新闻动态介绍-->
+    <div class="container">
+        <h2 class="text-center">新闻动态</h2>
+        <div class="row" id="row">
+            <!--<div class="col-md-4 ">-->
+                <!--<a href=""><img src="images/news1.jpg" class="img-xz" alt=""></a>-->
+                <!--<h4 class="text-left"><a href="">福利院员工的战“疫”</a></h4>-->
+                <!--<p> “福利院的服务对象聚集生活，多有基础疾病，身体免疫力低，属于易感人群，如果一旦发生感染，后果不堪设想……”</p>-->
+                <!--<p class="cen"><a href="news" class="tanniu newsa">了解详情</a></p>-->
+            <!--</div>-->
+            <!--<div class="col-md-4">-->
+                <!--<a href="">  <img src="images/news2.jpg" class="img-xz" alt=""></a>-->
+                <!--<h4 class="text-left"><a href="">疫情期间来福利院防控工作这样做</a></h4>-->
+                <!--<p> 为防止聚集性疫情发生，我县全面加大对福利院的管控力度，实行全封闭式管理, 严禁一切人员出入福利院，严格执行……</p>-->
+                <!--<p class="cen"><a href="news#news2" class="tanniu newsa">了解详情</a></p>-->
+            <!--</div>-->
+            <!--<div class="col-md-4">-->
+                <!--<a href=""><img src="images/news3.jpg" class="img-xz" alt=""></a>-->
+                <!--<h4 class="text-left"><a href="">“大手牵小手，情暖儿童福利院”志愿活动 </a></h4>-->
+                <!--<p>-->
+                    <!--为了弘扬尊老爱幼的中华传统美德,提高大学生的思想道德素质,增强关爱孤残儿童的意识,6月10早晨，XXX校团委国季老师……</p>-->
+                <!--</p>-->
+                <!--<p class="cen"><a href="news#news3" class="tanniu newsa">了解详情</a></p>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<footer>
+    <!--footer-->
+    <!--备案号-->
+    <div class="footer-button">
+        <div class="container">
+            <p>Copyright &copy; 2006 - 2019 福利院 All rights reserved. 鲁ICP备13018343号</p>
+            <p>Powered by Fuqian X3.2. Theme designed by 符倩.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!--自己写的js-->
+<script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+
+</body>
+<script>
+    var userid=window.localStorage.getItem("userid");
+    var infouser="";
+    $.ajax({
+        url: "/welfare/user/findById",
+        type: "POST",
+        dataType:"json",
+        contentType : 'application/json',
+        data: JSON.stringify({"userid":userid
+        }),
+        async: false,
+        success: function(result){
+            console.log("result"+result);
+            if(result==null){
+                infouser = "你好! 请&nbsp;<a href=\"userlogin\" >登录</a>&nbsp;|&nbsp;\n" +
+                    "<a href=\"register\" >注册</a>";
+            }else{
+                infouser = "欢迎&nbsp;"+ result.name +"&nbsp;|&nbsp;\n" +
+                    "<a href=\"userlogin\" >退出</a>&nbsp;|&nbsp;<a href=\"personal\">个人中心</a>";
+            }
+            $("#userinfo").append(infouser);
+        }
+    });
+    $(function () {
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/news/findAll",
+            success: function (result) {
+                console.log(result);
+                var str = '';
+                for (i = 0; i < 3; i++) {
+                    str += '<div class="col-md-4"><a href=""><img src="' + result[i].img + '" class="img-xz" alt=""></a>';
+                    str += '<h4 class="text-left"><a href="">' + result[i].title + '</a></h4>';
+                    str += '<p>\n' + result[i].summarise + '</p>\n';
+                    str += '<p class="cen"><a href="news#news' + i + '" class="tanniu newsa">了解详情</a></p></div>';
+
+                }//循环结束
+                $('#row').append($(str));
+            }
+        });
+    })
+</script>
 </html>

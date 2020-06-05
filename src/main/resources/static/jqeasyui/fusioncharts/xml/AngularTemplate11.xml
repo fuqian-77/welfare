@@ -1,0 +1,26 @@
+<Chart bgColor="AEC0CA,FFFFFF" fillAngle="45" upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" majorTMNumber="10" majorTMHeight="8" showGaugeBorder="0" 
+ gaugeOuterRadius="95" gaugeOriginX="135" gaugeOriginY="185" gaugeInnerRadius="2" formatNumberScale="1" chartTopMargin="10" chartBottomMargin="20" 
+ chartLeftMargin="25" chartRightMargin="25" numberPrefix="$" displayValueDistance="30" decimalPrecision="2" tickMarkDecimalPrecision="1" pivotRadius="17" 
+ showPivotBorder="1" pivotBorderColor="000000" pivotBorderThickness="5" pivotFillMix="FFFFFF,000000">
+  <colorRange>
+    <color minValue="%lowerlimit%" maxValue="%colorrange1%" />
+    <color minValue="%colorrange1%" maxValue="%colorrange2%" /> 
+    <color minValue="%colorrange2%" maxValue="%upperlimit%" /> 
+  </colorRange>
+  <dials>
+    <dial value="%value1%" borderAlpha="0" bgColor="000000" baseWidth="28" topWidth="1" editMode="1" radius="95"/>
+  </dials>
+  <annotations>
+  <!-- Draw the background arcs -->
+    <annotationGroup xPos="135" yPos="186.5">
+	<annotation type="circle" xPos="0" yPos="2.5" radius="105" startAngle="0" endAngle="180" fillPattern="linear" fillAsGradient="1" fillColor="dddddd,666666" fillAlpha="100,100"  fillRatio="50,50" fillDegree="0" showBorder="1" borderColor="444444" borderThickness="2"/>
+	<annotation type="circle" xPos="0" yPos="0" radius="100" startAngle="0" endAngle="180" fillPattern="linear" fillAsGradient="1" fillColor="666666,ffffff" fillAlpha="100,100"  fillRatio="50,50" fillDegree="0" />
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="230" showBelow="1">		
+      <annotation type="text" label="%title1%" fontColor="000000" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="245" showBelow="1">		
+      <annotation type="text" label="%title2%" fontColor="000000" fontSize="12" isBold="0"/>
+    </annotationGroup>
+  </annotations>
+</Chart>

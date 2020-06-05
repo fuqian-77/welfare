@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>寄养部门-儿童领回</title>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <script type="text/javascript" src="../js/functions.js"></script>
+    <meta charset="utf-8">
+</head>
+
+<div id="main" title="儿童管理"  paddingdata-options="fit:true" style="height:auto">
+</div>
+<body class="easyui-layout" data-options="fit:true" style="overflow:hidden;margin: 1px 1px 1px 1px;">
+<div id="tree" data-options="region:'west', split:true" style="overflow:hidden; width:129px;">
+
+</div>
+<div data-options="region:'center'" style="border-width:0px;" >
+    <div id="myForm1" class="easyui-panel" data-options="fit:true" style="">
+
+    </div>
+</div>
+
+<!--增加form表单-->
+<div id="dlg" class="easyui-dialog" style="width:300px;height:250px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+    <br id="fm" method="post" onSubmit="return checkForm()">
+    <input id="childrenid1" class="text" type="hidden" >
+    <div class="fitem">
+        <label>儿童状态:</label>
+        <select id="condition" class="easyui-combobox" required="true" style="width:138px" data-options="editable:false,panelHeight:'auto'">
+            <option value="0" selected = "selected">良好</option>
+            <option value="1">一般</option>
+            <option value="2">差</option>
+        </select>
+    </div></br>
+    <div class="fitem">
+        <label>领回原因:</label>
+        <input id="reason" class="easyui-textbox" data-options="multiline:true" style="height:50px" required="true">
+    </div></br>
+    <div class="fitem">
+        <label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</label>
+        <input id="note" class="easyui-textbox" >
+    </div></br>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveStaff()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+</div>
+<div class="mask" style="display:none;"></div>
+<!--编辑弹框-->
+<div class="bj" id="bj" style="display:none;">
+    <h3 style="margin-top: 0px">用户基础资料</h3>
+    <form action="#" method="get" style="margin-top: -30px;">
+        <label>账号：</label><input id="userid1" type="text" readonly="readonly"/></br>
+        <label>姓名：</label><input id="name1" type="text" /></br>
+        <label>性别：</label><input  id="sex1" type="text"   readonly="readonly" /></br>
+        <label>年龄：</label><input id="age1" type="text"   readonly="readonly" /></br>
+        <label>电话号码：</label><input id="phone1" type="text"  readonly="readonly" /></br>
+        <label>地址：</label><input id="address1" type="text"  readonly="readonly" /></br>
+        <label>身份证号：</label><input id="cardid1" type="text"  readonly="readonly" /></br>
+        <label>email：</label><input id="email1"type="text"  readonly="readonly" /></br>
+        <label>微信号：</label><input id="wechat1" type="text" readonly="readonly"  /></br>
+        <label>QQ：</label><input id="qq1" type="text"  readonly="readonly" /></br>
+        <label>工作：</label><input id="job1" type="text" readonly="readonly"  /></br>
+        <label>工作单位：</label><input id="work1" type="text"  readonly="readonly" /></br>
+        <div class="bc">
+            <input id="cancel" type="button" value="返回" />
+        </div>
+    </form>
+</div>
+<!--<div class="mask" style="display:none;"></div>-->
+<!--编辑弹框-->
+<div class="bj" id="bj1" style="display:none;">
+    <h3 style="margin-top: 0px">儿童基础资料</h3>
+    <form action="#" method="get" style="margin-top: -30px;">
+        <label>编号：</label><input id="childrenid" type="text" readonly="readonly"/></br>
+        <label>姓名：</label><input id="name" type="text"  readonly="readonly"/></br>
+        <label>性别：</label><input  id="sex" type="text"   readonly="readonly" /></br>
+        <label>年龄：</label><input id="age" type="text"   readonly="readonly" /></br>
+        <label>当前状态：</label><input id="status" type="text"  readonly="readonly" /></br>
+        <label>出生日期：</label><input id="birthdate" type="text"  readonly="readonly" /></br>
+        <label>身份证号：</label><input id="cardid" type="text"  readonly="readonly" /></br>
+        <label>入院时间：</label><input id="addmissiondate"type="text"  readonly="readonly" /></br>
+        <label>护理级别：</label><input id="nurse" type="text" readonly="readonly"  /></br>
+        <div class="bc">
+            <input id="cancel1" type="button" value="返回" />
+        </div>
+    </form>
+</div>
+<script>
+    var staffid=localStorage.getItem("staffid");
+    $("#tree").tree({
+        data:[{
+            "id":1,
+            "text":"全部",
+            "checked":true,
+            "children":[{
+                "id":3,
+                "text":"寄养中"
+            }, {
+                "id":2,
+                "text": "领养中"
+            }, {
+                "id": 4,
+                "text": "领回"
+            }]
+        }]
+    });
+    var str='<div id="myGrid1" class="easyui-datagrid"></div>';
+    $("#myForm1").append($(str));
+
+    $('#tree').tree({
+        onSelect:function(row) {
+            if(row.id<=3){
+                var xcolumns=[
+                    [
+                        { title: '编号', field: 'fosterageid', width: 90,  sortable: true, align: 'center'},
+                        { title: '儿童姓名', field: 'childrenid', width: 90,  sortable: true, halign:'center', align: 'center',
+                            formatter : function(value, row, index) {
+                                var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="cdetail(this)">'+value+'</a>';
+                                return str1;
+                            }	},
+                        { title: '类别', field: 'type', width: 90, halign:'center', align: 'center'},
+                        { title: '领养人', field: 'name', width: 100, halign:'center', align: 'center',
+                            formatter : function(value, row, index) {
+                                var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="detail(this)">'+value+'</a>';
+                                return str1;
+                            }	},
+                        { title: '日期', field:'date', width: 120, halign:'center', align: 'center' },
+                        { title: '开始时间', field:'starttime', width: 120, halign:'center', align: 'center' },
+                        { title: '结束时间', field:'endtime', width: 100, halign:'center', align: 'center' },
+                        { title: '记录人', field:'staffid', width: 100, halign:'center', align: 'center' },
+                        { title: '审核员工', field:'checker', width: 100, halign:'center', align: 'center' },
+                        { title: '备注', field:'note', width: 100, halign:'center', align: 'center' },
+                        {
+                            field : 'operation',
+                            title : '操作',
+                            width : 90,
+                            halign:'center', align: 'center',
+                            formatter : function(value, row,
+                                                 index) {
+                                    var str = '<a href ="#"  class="easyui-linkbutton"   onclick="back(this)">领回</a>';
+                                return str;
+                            }
+                        }
+                    ]
+                ];
+                $("#myGrid1").datagrid({
+                    iconCls: "panelIcon",
+                    width:1150,
+                    height:435,
+                    singleSelect:true,
+                    columns: xcolumns
+                });
+                if (row.id == 1) {    //全部
+                    $("#myGrid1").datagrid('hideColumn','operation');
+                    $("#myGrid1").datagrid({
+                        title: '&nbsp;儿童列表',
+                        url: 'http://localhost:8080/welfare/fosterage/findAll',
+                    });
+                } else if (row.id == 3) {     //寄养中
+                    $("#myGrid1").datagrid('showColumn','operation');
+                    $("#myGrid1").datagrid({
+                        title: '&nbsp;寄养儿童列表',
+                        url: 'http://localhost:8080/welfare/fosterage/findAllj',
+                    });
+                } else{    //领养中
+                    $("#myGrid1").datagrid('showColumn','operation');
+                    $("#myGrid1").datagrid({
+                        title: '&nbsp;领养儿童列表',
+                        url: 'http://localhost:8080/welfare/fosterage/findAlll',
+                    });
+                }
+            }else{      //领回
+                var xcolumns=[
+                    [
+                        { title: '寄养编号', field: 'fosterageid', width: 90,  sortable: true, align: 'center'},
+                        { title: '儿童姓名', field: 'childrenid', width: 90, halign:'center', align: 'center' },
+                        { title: '退回人', field:'name', width: 100, halign:'center', align: 'center' },
+                        { title: '类别', field: 'type', width: 90, halign:'center', align: 'center' },
+                        { title: '日期', field: 'date', width: 120, halign:'center', align: 'center' },
+                        { title: '原因', field:'reason', width: 190, halign:'center', align: 'center' },
+                        { title: '儿童状态', field: 'condition', width: 100, halign:'center', align: 'center' },
+                        { title: '记录人', field: 'staffid', width: 100, halign:'center', align: 'center' },
+                        { title: '审核员工', field: 'checker', width: 100, halign:'center', align: 'center' },
+                        {
+                            field : 'status',
+                            title : '状态',
+                            width : 70,
+                            halign:'center', align: 'center',
+                            formatter : function(value, row,
+                                                 index) {
+                                if(row.checker=="" || row.checker==null){//未审核
+                                    var str1 = '<span>审核中</span>';
+                                }else{      //已审核
+                                    str1 = '<span>已领回</span>';
+                                }
+                                return str1;
+                            }
+                        },
+                        {
+                            field : 'operation',
+                            title : '操作',
+                            width : 70,
+                            halign:'center', align: 'center',
+                            formatter : function(value, row,
+                                                 index) {
+                                if(row.checker=="" || row.checker==null) {//未审核
+                                    var str2 = '<a href ="#"  class="easyui-linkbutton"   onclick="reject(this)">弃领</a>';
+                                }
+                                return str2;
+                            }
+                        }
+                    ]
+                ]; //已领回
+                    $("#myGrid1").datagrid('showColumn','operation');
+                    $("#myGrid1").datagrid({
+                        title: '&nbsp;领回儿童列表',
+                        iconCls: "panelIcon",
+                        width:1190,
+                        height:435,
+                        singleSelect:true,
+                        columns: xcolumns,
+                        url: 'http://localhost:8080/welfare/back/findAll',
+                    });
+                }
+            }
+    });
+    cnodes=$('#tree').tree('getRoot');
+    cnodess=$('#tree').tree('getChildren',cnodes.target);
+    $('#tree').tree('select', cnodess[0].target);
+
+    function back(e){   //领回儿童，审核后儿童状态变成在院，寄养表中flag变为0，生成back记录且checker为空，
+
+        /*弹出增加form表单*/
+        $('#dlg').dialog('open').dialog('setTitle','领回原因！');
+        $('#reason').textbox('setValue','');
+        $('#condition').combobox('setValue','');
+        $('#note').textbox('setValue','');
+    }
+
+    function saveStaff(){
+        var row=$('#myGrid1').datagrid('getSelected');
+        var reason=$('#reason').val();
+        var condition=$('#condition').combobox('getText');
+        var date =new Date().Format("yyyy-MM-dd");
+        var note=$('#note').val();
+        if(reason=='' || reason==null){
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输出儿童领回原因！',
+                timeout:1000,
+                showType:'slide'
+            });
+        }else{
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                contentType: 'application/json',
+                url: "http://localhost:8080/welfare/fosterage/updateById",
+                data:JSON.stringify({
+                    "fosterageid":row.fosterageid,
+                    "flag":0
+                }),
+                success: function (result) {
+                    console.log(result);
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        contentType: 'application/json',
+                        url: "http://localhost:8080/welfare/back/insert",
+                        data:JSON.stringify({
+                            "childrenid":row.childrenid,
+                            "name":row.name,
+                            "type":row.type,
+                            "date":date,
+                            "fosterageid":row.fosterageid,
+                            "reason":reason,
+                            "staffid":staffid,
+                            "condition":condition,
+                            "note":note
+                        }),
+                        success: function (result) {
+                            console.log(result);
+                            $.messager.show({
+                                title:'提示信息',
+                                msg:'申请通过，已进入审核！',
+                                timeout:1000,
+                                showType:'slide'
+                            });
+                            $('#dlg').dialog('close');
+                            $("#myGrid1").datagrid("reload");
+                        }
+                    });
+                }
+            });
+        }
+
+    }
+
+    function reject(e) {
+        var row = $('#myGrid1').datagrid('getSelected');
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/back/deleteByF",
+            data: JSON.stringify({
+                "fosterageid": row.fosterageid
+            }),
+            success: function (result) {
+                console.log(result);
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/fosterage/updateById",
+                    data: JSON.stringify({
+                        "fosterageid": row.fosterageid,
+                        "flag": 1
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:'弃领成功！',
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                        $("#myGrid1").datagrid("reload");
+                    }
+                });
+            }
+        });
+    }
+
+    function detail(e){
+        var row=$('#myGrid1').datagrid('getSelected');
+        console.log("row===="+row);
+        $(".mask").show();
+        $("#bj").show();
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/user/findById",
+            data: JSON.stringify({
+                "userid": row.name
+            }),
+            success: function (result) {
+                console.log(result);
+                document.getElementById("userid1").value=row.userid;
+                document.getElementById("name1").value=result.name;
+                document.getElementById("age1").value=result.age;
+                document.getElementById("sex1").value=result.sex;
+                document.getElementById("phone1").value=result.phone;
+                document.getElementById("wechat1").value=result.wechat;
+                document.getElementById("qq1").value=result.qq;
+                document.getElementById("address1").value=result.address;
+                document.getElementById("cardid1").value=result.cardid;
+                document.getElementById("email1").value=result.email;
+                document.getElementById("job1").value=result.job;
+                document.getElementById("work1").value=result.work;
+            }
+        });
+    }
+    //	取消按钮
+    $("#cancel").click(function(){
+        $(".mask").hide();
+        $("#bj").hide();
+    });
+
+    function cdetail(e){
+        var row=$('#myGrid1').datagrid('getSelected');
+        console.log("row===="+row);
+        $(".mask").show();
+        $("#bj1").show();
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/children/findByName",
+            data: JSON.stringify({
+                "name": row.childrenid
+            }),
+            success: function (result) {
+                console.log(result);
+                document.getElementById("childrenid").value=result.childrenid;
+                document.getElementById("name").value=row.childrenid;
+                document.getElementById("age").value=result.age;
+                document.getElementById("sex").value=result.sex;
+                document.getElementById("status").value=result.status;
+                document.getElementById("addmissiondate").value=result.admissiondate;
+                document.getElementById("nurse").value=result.nurse;
+                document.getElementById("birthdate").value=result.birthdate;
+                document.getElementById("cardid").value=result.cardid;
+            }
+        });
+    }
+    $("#cancel1").click(function(){
+        $(".mask").hide();
+        $("#bj1").hide();
+    });
+
+</script>
+
+</body>
+
+</html>

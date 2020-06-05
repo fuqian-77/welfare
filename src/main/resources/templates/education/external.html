@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>教育部门-院外教育</title>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <script type="text/javascript" src="../js/functions.js"></script>
+    <meta charset="utf-8">
+</head>
+
+<div id="main" title="教育管理" paddingdata-options="fit:true" style="height:auto">
+</div>
+
+<!-- CRUD 菜单栏 -->
+<div id="tb" style="position: absolute;top:3px;left:600px;">
+    <input type="text" placeholder="请输入姓名/学校" name="" id="search" value="" style="margin-bottom:2px;height:20px;font-size: 10px"/>
+    <a id="btn1" href="javascript:search()" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: -5px"></a>
+    <!--plain="true"去掉边框-->
+    <a href="javascript:newStaff()" class="easyui-linkbutton" iconCls="icon-add" style="margin-left: 20px" plain="true">添加</a>
+    <a href="javascript:updateStaff()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+    <a href="javascript:deleteStaff()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+</div>
+
+
+<!--增加表单-->
+    <div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 40px" closed="true" draggable="true" buttons="#dlg-buttons">
+        <br id="fm" method="post" onSubmit="return checkForm()">
+        <input id="staffid1" class="text" type="hidden" >
+        <div class="fitem">
+            <label>儿童姓名:</label>
+            <input id="childrenid" class="easyui-combobox" typed="true" >
+            <span id="account_msg1"></span>
+        </div></br>
+        <div class="fitem">
+            <label>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级:</label>
+            <input id="grade" class="easyui-textbox" required="true" >
+        </div></br>
+        <div class="fitem">
+            <label>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校:</label>
+            <input id="school"  class="easyui-textbox" typed="true" style="width:190px" >
+        </div></br>
+        <div class="fitem">
+            <label>联&nbsp;&nbsp;系&nbsp;&nbsp;人:</label>
+            <input id="contact"  class="easyui-textbox" typed="true" style="width:190px" >
+        </div></br>
+        <div class="fitem">
+            <label>电话号码:</label>
+            <input id="phone"  class="easyui-textbox" typed="true" style="width:190px" >
+        </div></br>
+        <div class="fitem">
+            <label>开始时间:</label>
+            <input id="starttime" class="easyui-datebox" typed="true">
+        </div></br>
+        <div class="fitem">
+            <label>结束时间:</label>
+            <input id="endtime" class="easyui-datebox" typed="true">
+        </div></br>
+        <div class="fitem">
+            <label>成&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绩:</label>
+            <select id="score" class="easyui-combobox" typed="true" style="width:90px" data-options="editable:false,panelHeight:'auto'">
+                <option value="0" selected = "selected">优秀</option>
+                <option value="1">良好</option>
+                <option value="2">一般</option>
+                <option value="3">及格</option>
+                <option value="4">差</option>
+        </select>
+        </div></br>
+        <div class="fitem">
+            <label>社&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交:</label>
+            <select id="social" class="easyui-combobox" typed="true" style="width:90px" data-options="editable:false,panelHeight:'auto'">
+                <option value="1">良好</option>
+                <option value="2">一般</option>
+                <option value="4">差</option>
+            </select>
+        </div></br>
+        <div class="fitem">
+            <label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格:</label>
+            <input id="character" class="easyui-textbox" >
+        </div></br>
+        <div class="fitem">
+            <label>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务:</label>
+            <input id="post" class="easyui-textbox" >
+        </div></br>
+        <div class="fitem">
+            <label>能否适应:</label>
+            <select id="flag" class="easyui-combobox" typed="true" style="width:90px" data-options="editable:false,panelHeight:'auto'">
+                <option value="1">能</option>
+                <option value="2">否</option>
+            </select>
+        </div></br>
+        <div class="fitem">
+            <label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</label>
+            <input id="note" class="easyui-textbox" >
+        </div></br>
+        </form>
+    </div>
+    <div id="dlg-buttons">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveStaff()">保存</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+    </div>
+
+<div class="mask" style="display:none;"></div>
+<!--编辑弹框-->
+<div class="bj" style="display:none;">
+    <h3 style="margin-top: 0px">儿童基础资料</h3>
+    <form action="#" method="get" style="margin-top: -30px;">
+        <label>编号：</label><input id="userid1" type="text" readonly="readonly"/></br>
+        <label>姓名：</label><input id="name1" type="text" /></br>
+        <label>性别：</label><input  id="sex1" type="text"   readonly="readonly" /></br>
+        <label>年龄：</label><input id="age1" type="text"   readonly="readonly" /></br>
+        <label>当前状态：</label><input id="status1" type="text"  readonly="readonly" /></br>
+        <label>出生日期：</label><input id="birthdate1" type="text"  readonly="readonly" /></br>
+        <label>身份证号：</label><input id="cardid1" type="text"  readonly="readonly" /></br>
+        <label>入院时间：</label><input id="addmissiondate1"type="text"  readonly="readonly" /></br>
+        <label>护理级别：</label><input id="nurse1" type="text" readonly="readonly"  /></br>
+        <div class="bc">
+            <input id="cancel" type="button" value="返回" />
+        </div>
+    </form>
+</div>
+<script>
+    var staffid = localStorage.getItem("staffid");
+    var str='<div id="myGrid1" class="easyui-datagrid"></div>';
+    $("#main").append($(str));
+                var xcolumns = [
+                    [
+                        {title: '儿童姓名', field: 'childrenid', width: 80, sortable: true, align: 'center',
+                            formatter : function(value, row, index) {
+                                var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="detail(this)">'+value+'</a>';
+                                return str1;
+                            }},
+                        {title: '年级', field: 'grade', width: 80, sortable: true, align: 'center'},
+                        {title: '学校', field: 'school', width: 120, halign: 'center', align: 'center'},
+                        {title: '联系人', field: 'contact', width: 120, halign: 'center', align: 'center'},
+                        {title: '电话号码', field: 'phone', width: 120, halign: 'center', align: 'center'},
+                        {title: '开始时间', field: 'starttime', width: 120, halign: 'center', align: 'center'},
+                        {title: '结束时间', field: 'endtime', width: 120, halign: 'center', align: 'center'},
+                        {title: '成绩', field: 'score', width: 90, halign: 'center', align: 'center'},
+                        {title: '社交', field: 'social', width: 90, halign: 'center', align: 'center'},
+                        {title: '性格', field: 'character', width: 100, halign: 'center', align: 'center'},
+                        {title: '能否适应', field: 'flag', width: 70, halign: 'center', align: 'center'},
+                        {title: '职务', field: 'post', width: 90, halign: 'center', align: 'center'},
+                        {title: '备注', field: 'note', width: 90, halign: 'center', align: 'center'},
+                        {title: '记录人', field: 'recorder', width: 70, halign: 'center', align: 'center'}
+                    ]
+                ];
+                $("#myGrid1").datagrid({
+                    title: '&nbsp;教育记录',
+                    iconCls: "panelIcon",
+                    width: 1400,
+                    height: 435,
+                    singleSelect: true,
+                    columns: xcolumns,
+                    url: 'http://localhost:8080/welfare/education/findAll'
+                });
+
+    //儿童下拉框的数据加载
+    $('#childrenid').combobox({
+        url:'http://localhost:8080/welfare/children/findAll',
+        valueField:'childrenid',
+        textField:'name'
+    });
+
+    /*弹出增加form表单*/
+
+    // 新增医嘱单
+    function newStaff(){
+        flag1=1;
+        $('#dlg').dialog('open').dialog('setTitle','新增教育记录');
+        $('#childrenid').combobox('readonly',false);
+        $('#childrenid').combobox('setValue','');
+        $('#grade').textbox('setValue','');
+        $('#endtime').datebox('setValue','');
+        $('#note').textbox('setValue','');
+        $('#character').textbox('setValue','');
+        $('#flag').combobox('setValue','');
+        $('#score').combobox('setValue','');
+        $('#social').combobox('setValue','');
+        $('#contact').textbox('setValue','');
+        $('#phone').textbox('setValue','');
+        $('#school').textbox('setValue','');
+        $('#post').textbox('setValue','');
+        $('#starttime').datebox('setValue','');
+    }
+    // 修改
+    function updateStaff() {
+        $('#dlg').dialog('open').dialog('setTitle', '修改教育记录');
+        flag1 = 2;
+        var row = $('#myGrid1').datagrid('getSelected');
+        $('#childrenid').combobox('readonly',true);
+        $('#grade').textbox('readonly',true);
+        $('#childrenid').combobox('setValue',row.childrenid);
+        $('#endtime').datebox('setValue',row.endtime);
+        $('#note').textbox('setValue',row.note);
+        $('#contact').textbox('setValue',row.contact);
+        $('#flag').combobox('setValue',row.flag);
+        $('#starttime').datebox('setValue',row.starttime);
+        $('#grade').textbox('setValue',row.grade);
+        $('#character').textbox('setValue',row.character);
+        $('#score').combobox('setValue',row.score);
+        $('#social').combobox('setValue',row.social);
+        $('#phone').textbox('setValue',row.phone);
+        $('#school').textbox('setValue',row.school);
+        $('#post').textbox('setValue',row.post);
+    }
+    // 删除
+    function deleteStaff(adviceid){
+        $.messager.confirm('确认提示', '确定删除成长信息？', function (r) {
+            if (r) {
+                var row = $('#myGrid1').datagrid('getSelected');
+                console.log("row" + row);
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/education/delete",
+                    data: JSON.stringify({
+                        "childrenid": row.childrenid,
+                        "grade": row.grade
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:'删除成功！',
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                        $("#myGrid1").datagrid("reload");
+                    }
+                });
+            }
+        })
+    }
+    //点击确认修改按钮
+    function  saveStaff() {
+        var row = $('#myGrid1').datagrid('getSelected');
+        var n = $('#myGrid1').datagrid('getRowIndex', row);
+        var childrenid = $('#childrenid').combobox('getText');
+        var grade = $('#grade').val();
+        var note = $('#note').val();
+        var phone = $('#phone').val();
+        var school = $('#school').val();
+        var starttime = $("#starttime").datebox('getValue');
+        var endtime = $("#endtime").datebox('getValue');
+        var flag = $('#flag').combobox('getText');
+        var score = $('#score').combobox('getText');
+        var social = $('#social').combobox('getText');
+        var contact = $('#contact').val();
+        var post = $('#post').val();
+        var character = $('#character').val();
+        if (childrenid == null || childrenid == "") {
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入儿童姓名！',
+                timeout:1000,
+                showType:'slide'
+            });
+        } else if (grade == null || grade == "") {
+            $.messager.show({
+                title:'提示信息',
+                msg:'请输入年级！',
+                timeout:1000,
+                showType:'slide'
+            });
+        } else {
+            if (flag1 == 1) {//插入
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/education/insert",
+                    data: JSON.stringify({
+                        "childrenid": childrenid,
+                        "grade":grade,
+                        "school":school,
+                        "phone":phone,
+                        "character":character,
+                        "social":social,
+                        "score":score,
+                        "post":post,
+                        "note": note,
+                        "starttime": starttime,
+                        "endtime": endtime,
+                        "flag": flag,
+                        "contact": contact,
+                        "recorder": staffid
+                    }),
+                    success: function (result) {
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:'添加成功！',
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                            $("#myGrid1").datagrid("reload");
+                            $('#dlg').dialog('close');
+                            var data = $('#myGrid1').datagrid('getData');
+                            $('#myGrid1').datagrid('selectRow', data.rows.length);
+
+                    }
+                });
+            } else if (flag1 == 2) {//修改
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/education/updateById",
+                    data: JSON.stringify({
+                        "childrenid": childrenid,
+                        "grade":grade,
+                        "school":school,
+                        "phone":phone,
+                        "character":character,
+                        "social":social,
+                        "score":score,
+                        "post":post,
+                        "note": note,
+                        "starttime": starttime,
+                        "endtime": endtime,
+                        "flag": flag,
+                        "contact": contact,
+                        "recorder": staffid
+                    }),
+                    success: function (result) {
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:'修改成功！',
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                        $('#dlg').dialog('close');
+                        $("#myGrid1").datagrid("reload");
+                    }
+                });
+            }
+        }
+    }
+
+    function detail(e){
+        var row=$('#myGrid1').datagrid('getSelected');
+        console.log("row===="+row);
+        $(".mask").show();
+        $(".bj").show();
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            contentType: 'application/json',
+            url: "http://localhost:8080/welfare/children/findByName",
+            data: JSON.stringify({
+                "name": row.childrenid
+            }),
+            success: function (result) {
+                console.log(result);
+                document.getElementById("userid1").value=result.childrenid;
+                document.getElementById("name1").value=row.childrenid;
+                document.getElementById("age1").value=result.age;
+                document.getElementById("sex1").value=result.sex;
+                document.getElementById("status1").value=result.status;
+                document.getElementById("addmissiondate1").value=result.admissiondate;
+                document.getElementById("nurse1").value=result.nurse;
+                document.getElementById("birthdate1").value=result.birthdate;
+                document.getElementById("cardid1").value=result.cardid;
+            }
+        });
+    }
+    //	取消按钮
+    $("#cancel").click(function(){
+        $(".mask").hide();
+        $(".bj").hide();
+    });
+
+    //病程记录的搜索
+    function search(){
+        var keywords = document.getElementById("search").value;
+        $.ajax({
+            url: "/welfare/education/findByCondition",
+            type: "POST",
+            dataType:"json",
+            contentType : 'application/json',
+            data: JSON.stringify({"childrenid":keywords}),
+            async: false,
+            success: function(result){
+                console.log(result);
+                $("#myGrid1").datagrid('loadData',result);
+            }
+        });
+    }
+
+</script>
+
+</body>
+
+</html>

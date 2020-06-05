@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.VisitorMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Visitor" >
+    <id column="visitorid" property="visitorid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="aim" property="aim" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="VARCHAR" />
+    <result column="endtime" property="endtime" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="cardid" property="cardid" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="recordid" property="recordid" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    *
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `visitor`
+    where visitorid = #{visitorid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `visitor`
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `visitor`
+  </select>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.Visitor" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `visitor`
+    where name like CONCAT('%',#{name},'%') or note like CONCAT('%',#{name},'%')
+  </select>
+
+  <select id="visitNum" parameterType="com.welfare.entity.Visitor" resultType="Integer">
+    select count(*)
+    FROM  `visitor`
+    where `name`= #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="childrenNum" parameterType="com.welfare.entity.Visitor" resultType="com.welfare.entity.VisitResult">
+    select name,note,count(*) as num
+    FROM  `visitor`
+    group by name,note
+    having `name`= #{name,jdbcType=VARCHAR}
+    order by num desc
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from `visitor`
+    where visitorid = #{visitorid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Visitor" >
+    insert into `visitor` (visitorid, `name`,sex,  age,
+      starttime,endtime,aim, cardid,
+      phone, note, recordid)
+    values (#{visitorid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+      #{age,jdbcType=INTEGER}, #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR},
+      #{aim,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{recordid,jdbcType=VARCHAR})
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.welfare.entity.Visitor" >
+    update `visitor`
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="aim != null" >
+        aim = #{aim,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="recordid != null" >
+        recordid = #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="cardid != null" >
+        cardid = #{cardid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where visitorid = #{visitorid,jdbcType=INTEGER}
+  </update>
+
+
+
+</mapper>

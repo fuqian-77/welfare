@@ -1,0 +1,25 @@
+<chart bgCOlor="FFFFFF" upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" showAboutMenuItem="0" baseFontColor="FFFFFF"  
+  majorTMNumber="9" majorTMColor="FFFFFF"  majorTMHeight="8" majorTMThickness="5" minorTMNumber="5" minorTMColor="FFFFFF" 
+  minorTMHeight="3" minorTMThickness="2" pivotRadius="10" pivotBgColor="000000" pivotBorderColor="FFFFFF" 
+  pivotBorderThickness="2" hoverCapBorderColor="FFFFFF" toolTipBgColor="333333"  gaugeOuterRadius="130" 
+  gaugeScaleAngle="300" gaugeAlpha="0" decimalPrecision="0" displayValueDistance="0" showColorRange="0" 
+  placeValuesInside="1" pivotFillMix="" showPivotBorder="1" annRenderDelay="0">
+  <dials> 	
+    <dial value="%value1%" bgColor="000000" borderColor="FFFFFF" borderAlpha="100" baseWidth="4" topWidth="4" editMode="1" borderThickness="2"/>
+  </dials>	
+  <annotations>
+  <!-- Draw the black background -->
+    <annotationGroup xPos="135" yPos="135">	
+      <annotation type="circle" radius="130" startAngle="0" endAngle="360" fillAsGradient="1" fillColor="4B4B4B, AAAAAA" fillAlpha="100,100"  fillRatio="95,5" />
+      <annotation type="circle" xPos="0" yPos="0" radius="120" startAngle="0" endAngle="360" showBorder="1" borderColor= "cccccc" fillAsGradient="1"  fillColor="ffffff, 000000"  fillAlpha="50,100"  fillRatio="1,99" />
+    </annotationGroup>
+    <!-- To display indicator-->
+    <annotationGroup xPos='135' yPos='180' showBelow='1'>		
+      <annotation type="text" label="%title1%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos='140' yPos='195' showBelow='1'>		
+      <annotation type="text" label="%title2%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+  </annotations>
+</chart>
+

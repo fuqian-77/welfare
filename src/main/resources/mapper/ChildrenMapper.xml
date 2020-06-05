@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.ChildrenMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Children" >
+    <id column="childrenid" property="childrenid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="cardid" property="cardid" jdbcType="VARCHAR" />
+    <result column="birthdate" property="birthdate" jdbcType="VARCHAR" />
+    <result column="admissiondate" property="admissiondate" jdbcType="VARCHAR" />
+    <result column="nurse" property="nurse" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="looks" property="looks" jdbcType="VARCHAR" />
+    <result column="belongings" property="belongings" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="place" property="place" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="condition" property="condition" jdbcType="VARCHAR" />
+    <result column="foster" property="foster" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="health" property="health" jdbcType="VARCHAR" />
+    <result column="recorderid" property="recorderid" jdbcType="VARCHAR" />
+    <result column="checker" property="checker" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    *
+  </sql>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from `children`
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `children`
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <!--全部-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `children`
+  </select>
+
+  <!--在院儿童-->
+  <select id="selectIn" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `children` where `status`="在院"
+  </select>
+
+
+  <!--已审核-->
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `children` where checker!=''
+  </select>
+
+  <!--未审核-->
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `children` where checker='' or checker is null
+  </select>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.Children" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `children`
+    where `name` like CONCAT('%',#{name},'%') or `status` like  CONCAT('%',#{name},'%')
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from `children`
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Children" >
+    insert into `children` (childrenid, name, sex,age,cardid,
+      birthdate, admissiondate, nurse,`status`,looks,belongings,
+      date, place,img,`condition`,foster,phone,health,recorderid,checker,note)
+    values (#{childrenid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+      #{age,jdbcType=VARCHAR},#{cardid,jdbcType=VARCHAR}, #{birthdate,jdbcType=VARCHAR},
+      #{admissiondate,jdbcType=VARCHAR},#{nurse,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{looks,jdbcType=VARCHAR}, #{belongings,jdbcType=VARCHAR},
+      #{date,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR},#{img,jdbcType=DATE}, #{condition,jdbcType=VARCHAR},
+      #{foster,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{health,jdbcType=VARCHAR},
+      #{recorderid,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateById" parameterType="com.welfare.entity.Children" >
+    update `children`
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="cardid != null" >
+        cardid = #{cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        `date` = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+
+      <if test="birthdate != null" >
+        birthdate = #{birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="admissiondate != null" >
+        admissiondate = #{admissiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="nurse != null" >
+        nurse = #{nurse,jdbcType=VARCHAR},
+      </if>
+
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="looks != null" >
+        looks = #{looks,jdbcType=VARCHAR},
+      </if>
+
+      <if test="belongings != null" >
+        belongings = #{belongings,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null" >
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        `condition` = #{condition,jdbcType=VARCHAR},
+      </if>
+      <if test="foster != null" >
+        foster = #{foster,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null" >
+        health = #{health,jdbcType=VARCHAR},
+      </if>
+
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+
+      <if test="recorderid != null" >
+        recorderid = #{recorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByName" parameterType="com.welfare.entity.Children" >
+    update `children`
+    <set >
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="cardid != null" >
+        cardid = #{cardid,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        `date` = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+
+      <if test="birthdate != null" >
+        birthdate = #{birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="admissiondate != null" >
+        admissiondate = #{admissiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="nurse != null" >
+        nurse = #{nurse,jdbcType=VARCHAR},
+      </if>
+
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="looks != null" >
+        looks = #{looks,jdbcType=VARCHAR},
+      </if>
+
+      <if test="belongings != null" >
+        belongings = #{belongings,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null" >
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        `condition` = #{condition,jdbcType=VARCHAR},
+      </if>
+      <if test="foster != null" >
+        foster = #{foster,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null" >
+        health = #{health,jdbcType=VARCHAR},
+      </if>
+
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+
+      <if test="recorderid != null" >
+        recorderid = #{recorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+
+
+</mapper>

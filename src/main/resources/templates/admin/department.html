@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>院长办公室-部门管理</title>
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <script type="text/javascript" src="../js/functions.js"></script>
+    <meta charset="utf-8">
+    </head>
+
+<div id="main" title="职工管理"  paddingdata-options="fit:true" style="height:auto">
+</div>
+
+<!-- CRUD 菜单栏 -->
+<div id="tb" style="position: absolute;top:10px;left:600px;margin-top: 0px; ">
+    <input type="text" placeholder="请输入姓名/部门" name="" id="search" value="" style="margin-bottom:2px;height:20px;font-size: 10px"/>
+    <a id="btn" href="javascript:search()" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: -5px"></a>
+    <!--plain="true"去掉边框-->
+    <a href="javascript:newStaff()" class="easyui-linkbutton" iconCls="icon-add" plain="true" style="margin-left: 20px">添加</a>
+    <a href="javascript:updateStaff()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+    <a href="javascript:deleteStaff()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+</div>
+
+<!--增加form表单-->
+<div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+    <br id="fm" method="post" onSubmit="return checkForm()">
+        <input id="staffid1" class="text" type="hidden" >
+    <div class="fitem" style="margin-left: 40px">
+        <label>职工编号:</label>
+        <input id="staffid" class="easyui-textbox" required="true" >
+        <span id="account_msg1"></span>
+    </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>职工姓名:</label>
+            <input id="name"  class="easyui-textbox" required="true" >
+            <span id="account_msg"></span>
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
+            <input id="sex" class="easyui-textbox" >
+
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄:</label>
+            <input id="age" class="easyui-textbox">
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+            <input id="password"   class="easyui-textbox" required="true">
+            <span id="pswd_msg" ></span>
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>所属部门:</label>
+            <select id="department" class="easyui-combobox" required="true" style="width:90px" data-options="editable:false,panelHeight:'auto'">
+                <option value="院长办公室" selected = "selected">院长办公室</option>
+                <option value="社工部门">社工部门</option>
+                <option value="护理部门" >护理部门</option>
+                <option value="寄养部门">寄养部门</option>
+                <option value="医护部门" >医护部门</option>
+                <option value="教育部门">教育部门</option>
+            </select>
+        </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位:</label>
+        <input id="job" class="easyui-combobox" required="true" style="width:90px" data-options="editable:false,panelHeight:'auto',valueField: 'id', textField: 'text'">
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>电话号码:</label>
+        <input id="phone" class="easyui-textbox" required="true">
+    </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>当前状态:</label>
+            <select id="state" class="easyui-combobox" required="true" style="width:60px" data-options="editable:false,panelHeight:'auto'">
+                <option value="0" selected = "selected">在院</option>
+                <option value="1">离开</option>
+            </select>
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>身份证号:</label>
+            <input id="cardid" class="easyui-textbox" required="true">
+        </div></br>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveStaff()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+</div>
+
+    <script>
+
+        var str='<div id="myGrid1" class="easyui-datagrid" style="margin: 0px"></div>';
+        $("#main").append($(str));
+        var xcolumns=[
+            [
+                { title: '职工编号', field: 'staffid', width: 70,  sortable: true, align: 'center'},
+                { title: '姓名', field: 'name', width: 60,  sortable: true, halign:'center', align: 'left'	},
+            { title: '性别', field: 'sex', width: 70, halign:'center', align: 'center', },
+            { title: '年龄', field: 'age', width: 70, halign:'center', align: 'center' },
+            { title: '密码', field: 'password', width: 110, halign:'center', align: 'center' },
+            { title: '所属部门', field: 'department', width: 140, halign:'center', align: 'center' },
+                { title: '职位', field: 'job', width: 140, halign:'center', align: 'center' },
+                { title: '当前状态', field: 'state', width: 100, halign:'center', align: 'center' },
+            { title: '联系电话', field:'phone', width: 110, halign:'center', align: 'left' },
+            { title: '入院时间', field:'admissiondate', width: 110, halign:'center', align: 'left' },
+            { title: '身份证号', field:'cardid', width: 140, halign:'center', align: 'left' }
+        ]
+        ];
+        $("#myGrid1").datagrid({
+            title: '&nbsp;职员列表',
+            iconCls: "panelIcon",
+            width:1050,
+            height:450,
+            singleSelect:true,
+            columns: xcolumns,
+            url: 'http://localhost:8080/welfare/staff/findAll',
+        });
+
+        $("#department").combobox({
+            onSelect:function(record){
+                console.log("record==="+record.value);
+                if(record.value=='医护部门'){
+                    $("#job").combobox({
+                                valueField:'id',
+                                textField:'text',
+                                data:[{
+                                    "id":'医生',
+                                    "text":"医生",
+                                    "selected":true
+                                },{
+                                    "id":'护士',
+                                    "text":"护士"
+                                },{
+                                    "id":'药师',
+                                    "text":"药师"
+                                }]
+                            });
+                        }else{
+                            $("#job").combobox({
+                                valueField:'id',
+                                textField:'text',
+                                data:[{
+                                    "id":'管理员',
+                                    "text":"管理员",
+                                    "selected":true
+                                },{
+                                    "id":'普通员工',
+                                    "text":"普通员工"
+                                }]
+                            });
+                }
+            }
+        });
+
+        /*弹出增加form表单*/
+        function newStaff(){
+             flag=1;
+            $('#dlg').dialog('open').dialog('setTitle','新增职工');
+            $('#staffid').textbox('textbox').attr('readonly',false);
+            $('#sex').textbox('textbox').attr('readonly',true);
+            $('#age').textbox('textbox').attr('readonly',true);
+            $('#staffid').textbox('setValue','');
+            $('#name').textbox('setValue','');
+            $('#sex').textbox('setValue','');
+            $('#age').textbox('setValue','');
+            $('#state').combobox('setValue','');
+            $('#phone').textbox('setValue','');
+            $('#department').combobox('setValue','');
+            $('#job').combobox('setValue','');
+            $('#cardid').textbox('setValue','');
+            $('#password').textbox('setValue','');
+        }
+        function updateStaff(staffid) {
+            $('#dlg').dialog('open').dialog('setTitle', '修改职工信息');
+            flag = 2;
+            var row = $('#myGrid1').datagrid('getSelected');
+            console.log(row.staffid);
+            $('#staffid').textbox('textbox').attr('readonly',true);
+            $('#sex').textbox('textbox').attr('readonly',true);
+            $('#age').textbox('textbox').attr('readonly',true);
+            $('#sex').textbox('setValue',row.sex);
+            $('#age').textbox('setValue',row.age);
+            $('#staffid').textbox('setValue',row.staffid);
+            $('#name').textbox('setValue',row.name);
+            $('#state').combobox('setValue',row.state);
+            $('#phone').textbox('setValue',row.phone);
+            $('#department').combobox('setValue',row.department);
+            $('#job').combobox('setValue',row.job);
+            $('#cardid').textbox('setValue',row.cardid);
+            $('#password').textbox('setValue',row.password);
+        }
+
+        // 删除
+        function deleteStaff(staffid){
+            $.messager.confirm('确认提示', '确定删除职工信息？', function (r) {
+                if (r) {
+                    var row = $('#myGrid1').datagrid('getSelected');
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        contentType: 'application/json',
+                        url: "http://localhost:8080/welfare/staff/delete",
+                        data: JSON.stringify({
+                            "staffid": row.staffid
+                        }),
+                        success: function (result) {
+                            console.log(result);
+                            $.messager.show({
+                                title:'提示信息',
+                                msg:'删除成功！',
+                                timeout:1000,
+                                showType:'slide'
+                            });
+                            $("#myGrid1").datagrid("reload");
+                        }
+                    });
+                }
+            })
+        }
+        //点击确认修改按钮
+        function  saveStaff() {
+            var row=$('#myGrid1').datagrid('getSelected');
+            var n=$('#myGrid1').datagrid('getRowIndex', row);
+                var staffid=$('#staffid').val();
+               var  name=$('#name').val();
+            var sex=$('#sex').val();
+            var age=$('#age').val();
+               var department=$('#department').combobox('getText');
+            var job=$('#job').combobox('getText');
+            var state=$('#state').combobox('getText');
+            var admissiondate=new Date().Format("yyyy-MM-dd hh:mm:ss");
+            var phone=$('#phone').val();
+            var cardid=$('#cardid').val();
+            var password=$('#password').val();
+            var res = IdCodeValid(cardid);
+            var data= analyzeIDCard(cardid);
+            var pcheck=checkPhone(phone);
+            if(staffid== null || staffid==""){
+                $.messager.show({
+                    title:'提示信息',
+                    msg:'请输入编号！',
+                    timeout:1000,
+                    showType:'slide'
+                });
+            }else if(name== null || name==""){
+                $.messager.show({
+                    title:'提示信息',
+                    msg:'请输入职工姓名！',
+                    timeout:1000,
+                    showType:'slide'
+                });
+            }else{
+                if(pcheck==true){
+                    if(res.pass==true){
+                        if (flag==1) {//插入
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                contentType: 'application/json',
+                                url: "http://localhost:8080/welfare/staff/register",
+                                data:JSON.stringify({
+                                    "staffid":staffid,
+                                    "name": name,
+                                    "sex": data.sex,
+                                    "age":data.age,
+                                    "department":department,
+                                    "state":state,
+                                    "phone":phone,
+                                    "cardid":cardid,
+                                    "admissiondate":admissiondate,
+                                    "password":password,
+                                    "job":job
+                                }),
+                                success: function (result) {
+                                    var userinfo = JSON.stringify(result);
+                                    console.log(userinfo);
+                                    newData = eval("("+userinfo+")");
+                                    console.log(newData);
+                                    if(newData.Msg =="添加成功!" ){
+                                        $.messager.show({
+                                            title:'提示信息',
+                                            msg:'添加成功！',
+                                            timeout:1000,
+                                            showType:'slide'
+                                        });
+                                        $("#myGrid1").datagrid("reload");
+                                        $('#dlg').dialog('close');
+                                        var data=$('#myGrid1').datagrid('getData');
+                                        $('#myGrid1').datagrid('selectRow', data.rows.length);
+                                    }else{
+                                        $.messager.show({
+                                            title:'提示信息',
+                                            msg:newData.Msg,
+                                            timeout:1000,
+                                            showType:'slide'
+                                        });
+                                    }
+                                }
+                            });
+                        }else {//修改
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                contentType: 'application/json',
+                                url: "http://localhost:8080/welfare/staff/updateById",
+                                data:JSON.stringify({
+                                    "staffid":row.staffid,
+                                    "name": name,
+                                    "sex": sex,
+                                    "age":age,
+                                    "department":department,
+                                    "state":state,
+                                    "phone":phone,
+                                    "cardid":cardid,
+                                    "admissiondate":admissiondate,
+                                    "password":password,
+                                    "job":job
+                                }),
+                                success: function (result) {
+                                    console.log(result);
+                                    $.messager.show({
+                                        title:'提示信息',
+                                        msg:'修改成功！',
+                                        timeout:1000,
+                                        showType:'slide'
+                                    });
+                                    $('#dlg').dialog('close');
+                                    $('#myGrid1').datagrid('selectRow', n);
+                                    $("#myGrid1").datagrid("reload");
+                                    console.log(n);
+                                }
+                            });
+                        }
+                    }else{
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:res.msg,
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                        $('#cardid').textbox('setValue','');
+                    }
+                }else{
+                    $.messager.show({
+                        title:'提示信息',
+                        msg:'请输入正确的电话号码！',
+                        timeout:1000,
+                        showType:'slide'
+                    });
+                }
+            }
+        }
+
+        function search(){
+            var keywords = document.getElementById("search").value;
+            $.ajax({
+                url: "/welfare/staff/findByCondition",
+                type: "POST",
+                dataType:"json",
+                contentType : 'application/json',
+                data: JSON.stringify({"name":keywords}),
+                async: false,
+                success: function(result){
+                    console.log(result);
+                    $("#myGrid1").datagrid('loadData',result);
+                }
+            });
+        }
+
+    </script>
+
+    </body>
+
+    </html>

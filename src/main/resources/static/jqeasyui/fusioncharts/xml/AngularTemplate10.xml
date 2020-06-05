@@ -1,0 +1,37 @@
+<chart bgAlpha="0" bgColor="FFFFFF" upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" numberSuffix="%25" showBorder="0" 
+basefontColor="FFFFDD" chartTopMargin="25" chartBottomMargin="80" chartLeftMargin="15" chartRightMargin="15" 
+toolTipBgColor="80A905" gaugeFillMix="{dark-10},FFFFFF,{dark-10}" gaugeFillRatio="3">
+   <colorRange>
+    <color minValue="%lowerlimit%" maxValue="%colorrange1%" />
+    <color minValue="%colorrange1%" maxValue="%colorrange2%" /> 
+    <color minValue="%colorrange2%" maxValue="%upperlimit%" /> 
+   </colorRange>
+   <dials>
+      <dial value="%value1%" rearExtension="10" editMode="1"/>
+   </dials>
+   <trendpoints>
+      <point value="%value2%" displayValue="Ô¤¾¯Öµ" fontcolor="FF4400" useMarker="1" dashed="1" dashLen="2" dashGap="2" valueInside="1" />
+   </trendpoints>
+
+   <!--Rectangles behind the gauge -->
+   <annotations>
+      <annotationGroup id="Grp1" showBelow="1" >
+         <annotation type="rectangle" x="5" y="5" toX="270" toY="270" radius="10" color="009999,333333" showBorder="0" />
+      </annotationGroup>
+    <annotationGroup xPos="135" yPos="220" showBelow="1">		
+      <annotation type="text" label="%title1%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="235" showBelow="1">		
+      <annotation type="text" label="%title2%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+   </annotations>
+
+   <styles>
+      <definition>
+         <style name="RectShadow" type="shadow" strength="3"/>
+      </definition>
+      <application>
+         <apply toObject="Grp1" styles="RectShadow" />
+      </application>
+   </styles>
+</chart>

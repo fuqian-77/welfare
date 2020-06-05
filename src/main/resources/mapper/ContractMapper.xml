@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.ContractMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Contract" >
+    <id column="contractid" property="contractid" jdbcType="VARCHAR" />
+    <result column="childrenid" property="childrenid" jdbcType="VARCHAR" />
+    <result column="adopter" property="adopter" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="starttime" property="starttime" jdbcType="DATE" />
+    <result column="endtime" property="endtime" jdbcType="DATE" />
+    <result column="cardid" property="cardid" jdbcType="VARCHAR" />
+    <result column="condition" property="condition" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+
+    <result column="staffid" property="staffid" jdbcType="VARCHAR" />
+    <result column="checker" property="checker" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    contractid, childrenid, adopter,date,type,starttime,endtime,
+    cardid,condition,phone,wechat,qq,address,staffid,checker,note
+  </sql>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from `contract`
+    where contractid = #{contractid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByCId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `contract`
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `contract`
+  </select>
+
+  <delete id="deleteByPId" parameterType="java.lang.Long" >
+    delete from `contract`
+    where contractid = #{contractid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Contract" >
+    insert into `contract` (contractid, childrenid,adopter,date,starttime,endtime,
+    condition, cardid,wechat,qq,phone,address,type,
+    staffid,checker,note)
+    values (#{contractid,jdbcType=VARCHAR}, #{childrenid,jdbcType=VARCHAR}, #{adopter,jdbcType=VARCHAR},
+      #{date,jdbcType=DATE}, #{starttime,jdbcType=DATE}, #{endtime,jdbcType=DATE},
+      #{condition,jdbcType=VARCHAR},#{cardid,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+       #{staffid,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR},
+      #{note,jdbcType=VARCHAR},
+      UNIX_TIMESTAMP(NOW(3)) * 1000, UNIX_TIMESTAMP(NOW(3)) * 1000,
+      0, 1)
+  </insert>
+
+  <update id="updateById" parameterType="com.welfare.entity.Contract" >
+    update `contract`
+    <set >
+      <if test="childrenid != null" >
+        childrenid = #{childrenid,jdbcType=VARCHAR},
+      </if>
+      <if test="adopter != null" >
+        adopter = #{adopter,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        condition = #{condition,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=DATE},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=DATE},
+      </if>
+      <if test="cardid != null" >
+      cardid = #{cardid,jdbcType=VARCHAR},
+    </if>
+      <if test="wechat != null" >
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+
+
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffid = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where contractid = #{contractid,jdbcType=VARCHAR}
+  </update>
+
+
+
+</mapper>

@@ -1,0 +1,22 @@
+<!--450*450-->
+<chart bgColor='FFFFFF' bgAlpha='0' showBorder='0' caption='%title1%' subCaption='%title2%' numberPrefix='$' isSliced='1' 
+streamlinedData='0' isHollow='0' chartRightMargin='40'>
+   <set label='%label%' value='%value%'/>
+   <annotations>
+      <annotationGroup id='Grp1' showBelow='1'>
+         <annotation type='rectangle' x='0' y='0' toX='450' toY='450' radius='10' fillColor='AEC0CA, 333333, AEC0CA' fillAngle='90' />
+         <annotation type='rectangle' x='5' y='5' toX='445' toY='445' radius='10' fillColor='333333, C3D0D8, 333333' fillAngle='90' />
+         <annotation type='rectangle' x='10' y='10' toX='440' toY='440' radius='10' fillColor='C4D5DC, A3A5A4' fillAngle='180' />
+      </annotationGroup>
+   </annotations>
+   <styles>
+      <definition>
+         <style type='font' name='captionFont' size='15' />
+         <style type='font' name='subcaptionFont' size='13' />
+      </definition>
+      <application>
+      <apply toObject='CAPTION' styles='captionFont' />
+      <apply toObject='SUBCAPTION' styles='subcaptionFont' />
+      </application>
+   </styles>
+</chart>

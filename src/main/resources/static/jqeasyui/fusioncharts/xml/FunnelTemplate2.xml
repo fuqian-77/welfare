@@ -1,0 +1,13 @@
+<chart caption='%title1%' subcaption='%title2%' decimals='1' baseFontSize='11'  isSliced='0' useSameSlantAngle='1' isHollow='0' labelDistance='5'>
+   <set label="%label%" value="%value%" />
+   <styles>
+      <definition>
+         <style type='font' name='captionFont' size='15' />
+         <style type='font' name='subcaptionFont' size='13' />
+      </definition>
+      <application>
+      <apply toObject='CAPTION' styles='captionFont' />
+      <apply toObject='SUBCAPTION' styles='subcaptionFont' />
+      </application>
+   </styles>
+</chart>

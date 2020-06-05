@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>院长办公室</title>
+    <link rel="stylesheet" type="text/css" href="jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="system/css/icon.css">
+    <script type="text/javascript" src="jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="system/easyui_functions.js"></script>
+    <script type="text/javascript" src="functions/functions/functions.js"></script>
+    <meta charset="utf-8">
+    <script type="text/javascript" >
+    function openTab(text, url, iconCls) {
+    if($("#tabs").tabs("exists", text)) {
+    //如果已经存在，则使之处于选中的状态
+    $("#tabs").tabs("select", text);
+    } else {
+    //如果不存在则新增加一个
+    var content = "<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='" + url + "'></iframe>";
+    $("#tabs").tabs("add", {
+    title: text, //标题
+    // iconCls: iconCls, //图标
+    closable: true, //可以关闭
+    content: content //内容，内嵌一个 iframe！
+    });
+    }
+    }
+    </script>
+    </head>
+
+    <body class="easyui-layout">
+
+    <div id="toppanel" data-options="region:'north'" style="overflow:hidden; height:34px; background-color:#E0ECFF;">
+            <img src="images/logo.png" height="24" width="120" style="margin:4px 0px 0px 10px;" />
+            <a href="login" class="easyui-linkbutton" data-options="plain:true" style="float:right; margin:4px 10px 0px 0px;">重新登录</a>
+    </div>
+
+    <div region="center">
+        <div class="easyui-tabs" fit="true" border="false" id="tabs">
+            <div title="首页" data-options="iconCls:'icon-help'">
+                <div align="center" style="padding-top: 100px">
+                <font color="green" size="10">欢迎使用</font>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div region="west" style="width: 150px" title="导航菜单" split="true">
+        <div style="padding-top: 0px;padding-left: 0px;">
+            <a href="javascript:openTab('信息审核','admin/check')" class="easyui-linkbutton" data-options="plain:true" style="width:143px">信息审核</a>
+            <a href="javascript:openTab('数据统计','admin/total')" class="easyui-linkbutton" data-options="plain:true" style="width:143px">数据统计</a>
+            <a href="javascript:openTab('部门人员管理','admin/department')" class="easyui-linkbutton" data-options="plain:true" style="width:143px" >部门人员管理</a>
+            <a href="javascript:openTab('儿童综合信息','admin/contract')" class="easyui-linkbutton" data-options="plain:true" style="width:143px">儿童综合信息</a>
+        </div>
+    </div>
+
+        <div region="south" style="height:50px;adding: 5px" >
+            <span id="department" style="padding: 5px 1px 1px 170px" ></span>
+            <span>:</span>
+            <span id="result" style="padding: 5px 1px 1px 5px" ></span>
+    </div>
+    <script>
+        document.getElementById("department").innerHTML = localStorage.getItem("department");
+        document.getElementById("result").innerHTML = localStorage.getItem("name");
+    </script>
+
+    </body>
+
+    </html>

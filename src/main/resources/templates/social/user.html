@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>社工部门-用户管理</title>
+    <link rel="stylesheet" type="text/css" href="../css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <script type="text/javascript" src="../js/functions.js"></script>
+    <meta charset="utf-8">
+    </head>
+
+<div id="main" title="用户管理"  paddingdata-options="fit:true" style="height:auto">
+</div>
+
+<!-- CRUD 菜单栏 -->
+<div id="tb" style="position: absolute;top:2px;left:600px;margin-top: 0px; ">
+    <input type="text" placeholder="请输入账号/姓名" name="" id="search" value="" style="margin-bottom:2px;height:20px;font-size: 10px"/>
+    <a id="btn" href="javascript:search()" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: -5px"></a>
+    <!--plain="true"去掉边框-->
+    <a href="javascript:newStaff()" class="easyui-linkbutton" iconCls="icon-add" plain="true" style="margin-left: 20px">添加</a>
+    <a href="javascript:updateStaff()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+    <a href="javascript:deleteStaff()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+</div>
+
+<!--增加form表单-->
+<div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 20px" closed="true" draggable="true" buttons="#dlg-buttons">
+    <br id="fm" method="post" onSubmit="return checkForm()">
+        <input id="staffid1" class="text" type="hidden" >
+    <div class="fitem" style="margin-left: 40px">
+        <label>用户编号:</label>
+        <input id="userid" class="easyui-textbox" required="true" >
+        <span id="account_msg1"></span>
+    </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>用户姓名:</label>
+            <input id="name"  class="easyui-textbox" required="true" >
+            <span id="account_msg"></span>
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>性&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 别:</label>
+            <input id="sex" class="easyui-textbox" required="true">
+
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>年&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 龄:</label>
+            <input id="age" class="easyui-textbox" required="true">
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+            <input id="password"   class="easyui-textbox" required="true">
+            <span id="pswd_msg" ></span>
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>联系号码:</label>
+            <input id="phone" class="easyui-textbox" required="true">
+        </div></br>
+
+        <div class="fitem" style="margin-left: 40px">
+            <label>微&nbsp;信&nbsp;号:&nbsp;</label>
+            <input id="wechat" class="easyui-textbox" required="true">
+        </div></br>
+        <div class="fitem" style="margin-left: 40px">
+            <label>身份证号:</label>
+            <input id="cardid" class="easyui-textbox" required="true">
+        </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 址:</label>
+        <input id="address" class="easyui-textbox" required="true">
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>email:&nbsp; &nbsp;&nbsp;&nbsp; </label>
+        <input id="email" class="easyui-textbox" required="true">
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>QQ:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input id="qq" class="easyui-textbox" required="true">
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp作:</label>
+        <input id="job" class="easyui-textbox" required="true">
+    </div></br>
+    <div class="fitem" style="margin-left: 40px">
+        <label>工作单位:</label>
+        <input id="work" class="easyui-textbox" required="true">
+    </div></br>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveStaff()">保存</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+</div>
+<div class="mask" style="display:none;"></div>
+<!--编辑弹框-->
+<div class="bj" style="display:none;width:300px;">
+    <h3 style="margin-top: 0px">更多数据</h3>
+    <form action="#" method="get" style="margin-top: -30px;">
+        <label>用户姓名:</label><input style="width:70px" id="name2" type="text" readonly="readonly"/></br>
+        <!--<label>拜访总次数：</label><input style="width:70px" id="userid1" type="text" readonly="readonly"/></br>-->
+        <!--<label>常探望儿童：</label><input id="name1" type="text"  readonly="readonly"/></br>-->
+        <label>参加活动次数：</label><input style="width:70px" id="activity" type="text" readonly="readonly"/></br>
+        <label>社工次数：</label><input id="social" type="text"  readonly="readonly"/></br>
+        <label>领/寄养儿童：</label><textarea style="height:50px;border:0px" id="foster" type="text" readonly="readonly"></textarea></br>
+        <!--<label>状态：</label><input id="status" type="text"  readonly="readonly"/></br><div class="bc">-->
+        <div class="bc">
+            <input id="cancel" type="button" value="返回" />
+        </div>
+    </form>
+</div>
+
+    <script>
+
+        var str='<div id="myGrid1" class="easyui-datagrid"></div>';
+        $("#main").append($(str));
+        var xcolumns=[
+            [
+                { title: '用户编号', field: 'userid', width: 70,  sortable: true, align: 'center',
+                    formatter : function(value, row, index) {
+                        var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="detail(this)">'+value+'</a>';
+                        return str1;
+                    }},
+                { title: '姓名', field: 'name', width: 60,  sortable: true, halign:'center', align: 'center',
+                    formatter : function(value, row, index) {
+                        var str1 = '<a href ="#"  class="easyui-linkbutton"   onclick="detail(this)">'+value+'</a>';
+                        return str1;
+                    }},
+            { title: '性别', field: 'sex', width: 70, halign:'center', align: 'center', },
+            { title: '年龄', field: 'age', width: 70, halign:'center', align: 'center' },
+                { title: '工作', field:'job', width: 90, halign:'center', align: 'center' },
+                { title: '工作单位', field:'work', width: 115, halign:'center', align: 'left' },
+            { title: '地址', field: 'address', width: 140, halign:'center', align: 'left' },
+            { title: '联系电话', field: 'phone', width: 100, halign:'center', align: 'left' },
+                { title: 'email', field:'email', width: 140, halign:'center', align: 'left' },
+                { title: '微信号', field: 'wechat', width: 100, halign:'center', align: 'left' },
+                { title: 'QQ', field: 'qq', width: 90, halign:'center', align: 'left' },
+            { title: '身份证号', field:'cardid', width: 140, halign:'center', align: 'left' },
+                { title: '密码', field: 'password', width: 100, halign:'center', align: 'center' }
+
+        ]
+        ];
+        $("#myGrid1").datagrid({
+            title: '&nbsp;用户列表',
+            iconCls: "panelIcon",
+            width:1290,
+            height:450,
+            singleSelect:true,
+            columns: xcolumns,
+            url: 'http://localhost:8080/welfare/user/findAll',
+        });
+
+        /*弹出增加form表单*/
+        function newStaff(){
+             flag=1;
+            $('#dlg').dialog('open').dialog('setTitle','新增用户');
+            $('#userid').textbox('textbox').attr('readonly',false);
+            $('#sex').textbox('textbox').attr('readonly',true);
+            $('#age').textbox('textbox').attr('readonly',true);
+            $('#userid').textbox('setValue','');
+            $('#name').textbox('setValue','');
+            $('#sex').textbox('setValue','');
+            $('#age').textbox('setValue','');
+            $('#address').textbox('setValue','');
+            $('#wechat').textbox('setValue','');
+            $('#phone').textbox('setValue','');
+            $('#job').textbox('setValue','');
+            $('#cardid').textbox('setValue','');
+            $('#password').textbox('setValue','');
+            $('#qq').textbox('setValue','');
+            $('#email').textbox('setValue','');
+            $('#work').textbox('setValue','');
+        }
+        function updateStaff(userid) {
+            $('#dlg').dialog('open').dialog('setTitle', '修改用户信息');
+            flag = 2;
+            var row = $('#myGrid1').datagrid('getSelected');
+            console.log(row.userid);
+            $('#userid').textbox('textbox').attr('readonly',true);
+            $('#userid').textbox('setValue',row.userid);
+            $('#name').textbox('setValue',row.name);
+            $('#sex').textbox('setValue',row.sex);
+            $('#age').textbox('setValue',row.age);
+            $('#wechat').textbox('setValue',row.wechat);
+            $('#address').textbox('setValue',row.address);
+            $('#phone').textbox('setValue',row.phone);
+            $('#job').textbox('setValue',row.note);
+            $('#cardid').textbox('setValue',row.cardid);
+            $('#password').textbox('setValue',row.password);
+            $('#qq').textbox('setValue',row.qq);
+            $('#email').textbox('setValue',row.email);
+            $('#work').textbox('setValue',row.work);
+        }
+
+        // 删除
+        function deleteStaff(userid){
+            $.messager.confirm('确认提示', '确定删除用户信息？', function(r){
+                if (r){
+                    var row=$('#myGrid1').datagrid('getSelected');
+                    console.log("row"+row);
+                        $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            contentType: 'application/json',
+                            url: "http://localhost:8080/welfare/user/delete",
+                            data:JSON.stringify({
+                                "userid":row.userid
+                            }),
+                            success: function (result) {
+                                $.messager.show({
+                                    title:'提示信息',
+                                    msg:'删除成功！',
+                                    timeout:1000,
+                                    showType:'slide'
+                                });
+                                console.log(result);
+                                $("#myGrid1").datagrid({
+                                    url: 'http://localhost:8080/welfare/user/findAll',
+                                });
+                            }
+                        });
+                 }
+        })
+        }
+        //点击确认修改按钮
+        function  saveStaff() {
+            var row = $('#myGrid1').datagrid('getSelected');
+            var n = $('#myGrid1').datagrid('getRowIndex', row);
+            var userid = $('#userid').val();
+            var name = $('#name').val();
+            var wechat = $('#wechat').val();
+            var job = $('#job').val();
+            var work = $('#work').val();
+            var address = $('#address').val();
+            var phone = $('#phone').val();
+            var cardid = $('#cardid').val();
+            var password = $('#password').val();
+            var qq = $('#qq').val();
+            var sex=$('#sex').val();
+            var age=$('#age').val();
+            var email = $('#email').val();
+            var res = IdCodeValid(cardid);
+            var data = analyzeIDCard(cardid);
+            var pcheck = checkPhone(phone);
+            console.log(data.sex);
+            console.log(data.age);
+            console.log("res.mas------" + res.msg);
+            console.log("res.mas------" + res.pass);
+            if (userid == null || userid == "") {
+                $.messager.show({
+                    title:'提示信息',
+                    msg:'请输入编号！',
+                    timeout:1000,
+                    showType:'slide'
+                });
+            } else if (name == null || name == "") {
+                $.messager.show({
+                    title:'提示信息',
+                    msg:'请输入姓名！',
+                    timeout:1000,
+                    showType:'slide'
+                });
+            } else {
+                if (pcheck == true) {
+                    if (res.pass == true) {
+                        if (flag == 1) {//插入
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                contentType: 'application/json',
+                                url: "http://localhost:8080/welfare/user/register",
+                                data: JSON.stringify({
+                                    "userid": userid,
+                                    "name": name,
+                                    "sex": data.sex,
+                                    "age":data.age,
+                                    "address": address,
+                                    "job": job,
+                                    "qq": qq,
+                                    "phone": phone,
+                                    "cardid": cardid,
+                                    "password": password,
+                                    "wechat": wechat,
+                                    "email": email,
+                                    "work":work
+                                }),
+                                success: function (result) {
+                                    var userinfo = JSON.stringify(result);
+                                    console.log(userinfo);
+                                    newData = eval("(" + userinfo + ")");
+                                    console.log(newData);
+                                    if (newData.Msg == "注册成功!") {
+                                        $.messager.show({
+                                            title:'提示信息',
+                                            msg:'插入成功！',
+                                            timeout:1000,
+                                            showType:'slide'
+                                        });
+                                        $("#myGrid1").datagrid("reload");
+                                        $('#dlg').dialog('close');
+                                        var data = $('#myGrid1').datagrid('getData');
+                                        console.log('当前页数据量:' + data.rows.length);
+                                        $('#myGrid1').datagrid('selectRow', data.rows.length);
+                                    } else {
+                                        alert(newData.Msg);
+                                    }
+                                }
+                            });
+                        } else {//修改
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                contentType: 'application/json',
+                                url: "http://localhost:8080/welfare/user/updateById",
+                                data: JSON.stringify({
+                                    "userid": row.userid,
+                                    "name": name,
+                                    "sex": sex,
+                                    "age":age,
+                                    "address": address,
+                                    "job": job,
+                                    "qq": qq,
+                                    "phone": phone,
+                                    "cardid": cardid,
+                                    "password": password,
+                                    "wechat": wechat,
+                                    "email": email,
+                                    "work":work
+                                }),
+                                success: function (result) {
+                                    console.log(result);
+                                    $.messager.show({
+                                        title:'提示信息',
+                                        msg:'修改成功！',
+                                        timeout:1000,
+                                        showType:'slide'
+                                    });
+                                    $('#dlg').dialog('close');
+                                    $('#myGrid1').datagrid('selectRow', n);
+                                    $("#myGrid1").datagrid("reload");
+                                    console.log(n);
+
+                                }
+                            });
+                        }
+                    } else {
+                        $.messager.show({
+                            title:'提示信息',
+                            msg:res.msg,
+                            timeout:1000,
+                            showType:'slide'
+                        });
+                        $('#cardid').textbox('setValue', '');
+                    }
+                } else {
+                    $.messager.show({
+                        title:'提示信息',
+                        msg:'请输入正确的电话号码！',
+                        timeout:1000,
+                        showType:'slide'
+                    });
+                }
+            }
+        }
+        //search
+        function search(){
+            var keywords = document.getElementById("search").value;
+            $.ajax({
+                url: "/welfare/user/findByCondition",
+                type: "POST",
+                dataType:"json",
+                contentType : 'application/json',
+                data: JSON.stringify({"name":keywords}),
+                async: false,
+                success: function(result){
+                    console.log(result);
+                    $("#myGrid1").datagrid('loadData',result);
+                }
+            });
+        }
+        //拜访信息
+        function detail(e){
+            var row=$('#myGrid1').datagrid('getSelected');
+            document.getElementById("name2").value=row.name;
+            console.log("row===="+row.userid);
+            $(".mask").show();
+            $(".bj").show();
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                contentType: 'application/json',
+                url: "http://localhost:8080/welfare/recruit/activityNum",
+                data: JSON.stringify({
+                    "userid": row.userid
+                }),
+                success: function (result) {
+                    console.log("huod"+result);
+                    document.getElementById("activity").value=result+"次";
+                    // document.getElementById("name1").value=result.name;
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        contentType: 'application/json',
+                        url: "http://localhost:8080/welfare/recruit/socialNum",
+                        data: JSON.stringify({
+                            "userid": row.userid
+                        }),
+                        success: function (result) {
+                            console.log("shejiao"+result);
+                            document.getElementById("social").value=result+"次";
+                            $.ajax({
+                                type: "post",
+                                dataType: "json",
+                                contentType: 'application/json',
+                                url: "http://localhost:8080/welfare/fosterage/findByUser",
+                                data: JSON.stringify({
+                                    "name": row.userid
+                                }),
+                                success: function (result) {
+                                    console.log(result);
+                                    if(result==null || result==""){
+                                        document.getElementById("foster").value = "无";
+                                        // document.getElementById("status").value = "无";
+                                    }else{
+                                        var str='';
+                                        for(var i=0;i<result.length;i++){
+                                            if( result[i].flag==1){
+                                                str+=result[i].childrenid+"("+result[i].type+"中);\n";
+                                            }else{
+                                                str+=result[i].childrenid+"("+result[i].type+",已领回);\n";
+                                            }
+                                        }
+                                        console.log("str===="+str);
+                                        document.getElementById("foster").value = str;
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        //	取消按钮
+        $("#cancel").click(function(){
+            $(".mask").hide();
+            $(".bj").hide();
+        });
+    </script>
+
+    </body>
+
+    </html>

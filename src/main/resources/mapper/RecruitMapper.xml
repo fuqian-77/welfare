@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.RecruitMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Recruit" >
+    <id column="recruitid" property="recruitid" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="VARCHAR" />
+    <result column="endtime" property="endtime" jdbcType="VARCHAR" />
+    <result column="require" property="require" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="recordid" property="recordid" jdbcType="VARCHAR" />
+    <result column="checker" property="checker" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    *
+  </sql>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from `recruit`
+    where recruitid = #{recruitid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="activityNum" resultType="Integer" parameterType="com.welfare.entity.Recruit" >
+    select count(*) as num
+    from `recruit`
+    where state='已完成' and category='活动' and userid = #{userid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="socialNum" resultType="Integer" parameterType="com.welfare.entity.Recruit" >
+    select count(*) as num
+    from `recruit`
+    where state='已完成' and category='社工' and userid = #{userid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.Recruit" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `recruit`
+    where category like CONCAT('%',#{recruitid},'%') or `content` like CONCAT('%',#{recruitid},'%')
+  </select>
+
+  <select id="selectByUId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  select
+  <include refid="Base_Column_List" />
+  from `recruit`
+  where userid = #{userid,jdbcType=VARCHAR} or flag= #{userid,jdbcType=VARCHAR}
+    order by `date`
+</select>
+
+  <select id="apply" resultMap="BaseResultMap" parameterType="com.welfare.entity.RecruitKey" >
+    select
+    <include refid="Base_Column_List" />
+    from `recruit`
+    where userid = #{userid,jdbcType=VARCHAR}
+    and recruitid=#{recruitid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `recruit`
+    where `type`=1
+  </select>
+
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `recruit`
+    where state='审核中' and `type`=1
+  </select>
+
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `recruit`
+    where state='招聘中' and `type`=1
+  </select>
+
+  <select id="selectAll3" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `recruit`
+    where state='已完成' and `type`=1
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from `recruit`
+    where recruitid = #{recruitid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Recruit" >
+    insert into `recruit` (recruitid, category, content,
+      starttime, endtime, note,
+      recordid, `require`, checker,
+      userid, state,date,flag,`type`)
+    values (#{recruitid}, #{category}, #{content},
+      #{starttime},#{endtime}, #{note},
+      #{recordid},#{require},#{checker},
+      #{userid}, #{state},#{date},#{flag},#{type})
+  </insert>
+
+  <update id="updateById" parameterType="com.welfare.entity.Recruit" >
+    update `recruit`
+    <set >
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="require != null" >
+        `require` = #{require,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="recordid != null" >
+        recordid = #{recordid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where recruitid = #{recruitid,jdbcType=VARCHAR}
+  </update>
+
+
+
+</mapper>

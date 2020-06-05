@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>个人中心-领养申请</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mygrxx.css" />
+    <link rel="stylesheet" type="text/css" href="plug/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="plug/Font-Awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+</head>
+<body>
+<header>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12 col-sm-6 ">
+                    <!--<p><i class="fa fa-phone"> </i> 400-800-9696</p>-->
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-6 text-right">
+                    <form class="navbar-form text-right" role="search">
+                        <div class="form-group" style="font-size:12px;color:#000; ">
+                            <div class="sou fl">
+                                <div id="userinfo" class="fl"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="index">
+                    <img class="logo" src="images/logo1.png" alt="">
+                    <h1>儿童福利院</h1>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index">首页</a></li>
+                    <!--<li><a href="products">来访预约</a></li>-->
+                    <li><a href="news">新闻动态</a></li>
+                    <li><a href="about">社工/活动招聘</a></li>
+                    <li><a href="join">领养申请</a></li>
+                    <li><a href="profuile">福利院介绍</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<div class="Bott">
+        <div class="wrapper clearfix">
+            <div class="zuo fl">
+                <div>
+                    <ul >
+                        <li><a href="personal">个人信息</a></li>
+                        <li><a href="apply">社工/活动</a></li>
+                        <li><a style="color:red"  href="foster">领养申请</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="you fl">
+                <h2>领养申请</h2>
+                <div class="gxin">
+                    <div class="xx">
+                        <h3 class="clearfix"><strong class="fl">领养信息</strong></h3>
+                        <div style="display:none;">编号：<span id="applyid"></span></div>
+                        <div>类型：<span id="type"></span></div>
+                        <div>要求：<span id="request"></span></div>
+                        <div>申请时间：<span id="date"></span></div>
+                        <div>证件是否齐全：<span id="flag">是</span></div>
+                        <div>结果：<span id="result" style="color:red"></span></div>
+                        <a href="javascript:lastApply()" id="last" style="background-color: #3884c0;color:#fff;" class="tanniu newsa">上一条</a>
+                        <a href="javascript:nextApply()" id="next" style="background-color: #3884c0;color:#fff;" class="tanniu newsa">下一条</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!------------------------------Bott------------------------------>
+
+<!--footer-->
+<footer style="margin-top: 5px;">
+    <!--footer-->
+    <!--备案号-->
+    <div class="footer-button">
+        <div class="container">
+            <p>Copyright &copy; 2006 - 2019 福利院 All rights reserved. 鲁ICP备13018343号</p>
+            <p>Powered by Fuqian X3.2. Theme designed by 符倩.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/user.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<!--自己写的js-->
+<script type="text/javascript" th:src="@{/js/main.min.js}"></script>
+<script>
+    var userid=window.localStorage.getItem("userid");
+    var infouser="";
+    console.log("userid"+userid);
+    $.ajax({
+        url: "/welfare/user/findById",
+        type: "POST",
+        dataType:"json",
+        contentType : 'application/json',
+        data: JSON.stringify({"userid":userid
+        }),
+        async: false,
+        success: function(result){
+            console.log("result"+result);
+            if(result==null){
+                infouser = "你好! 请&nbsp;<a href=\"userlogin\" >登录</a>&nbsp;|&nbsp;\n" +
+                    "<a href=\"register\" >注册</a>";
+            }else{
+                infouser = "欢迎&nbsp;"+ result.name +"&nbsp;|&nbsp;\n" +
+                    "<a href=\"userlogin\" >退出</a>&nbsp;|&nbsp;<a style=\"color:red\"  href=\"personal\">个人中心</a>";
+            }
+            $("#userinfo").append(infouser);
+        }
+    });
+    var flag1=document.getElementById("result");
+    $.ajax({
+        url: "/welfare/apply/findByUId",
+        type: "POST",
+        dataType: "json",
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "userid": userid
+        }),async:false,
+        success: function (result) {
+            console.log("result----"+result);
+            for (var i = 0; i < result.length; i++) {
+                $("#applyid").html(result[i].applyid);
+                $("#type").html(result[i].type);
+                $("#request").html(result[i].request);
+                $("#date").html(result[i].date);
+                $("#flag").html(result[i].flag);
+                if(result[i].estimate=="审核中"){
+                    flag1.innerHTML="审核中"
+                }else if(result[i].estimate=="未通过"){
+                    flag1.innerHTML="很抱歉，目前您还不符合我们的要求"
+                }else{
+                    flag1.innerHTML="申请已通过，我们会稍后联系您"
+                }
+            }
+        }
+    });
+
+    //下一条
+    function nextApply(){
+        var applyid=document.getElementById("applyid").innerHTML;
+        console.log("applyid==="+applyid);
+        $.ajax({
+            url: "/welfare/apply/findByUId",
+            type: "POST",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "userid": userid
+            }),
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    console.log("result[i+1]"+result[i+1]);
+                    if(result[i].applyid==applyid){
+                        if(result[i+1]!='' || result[i+1]!=null || result[i+1]!=undefined){
+                            $("#applyid").html(result[i+1].applyid);
+                            $("#type").html(result[i+1].type);
+                            $("#date").html(result[i+1].date);
+                            $("#request").html(result[i+1].request);
+                            $("#flag").html(result[i+1].flag);
+                            if(result[i+1].estimate=="审核中"){
+                                flag1.innerHTML="审核中"
+                            }else if(result[i+1].estimate=="未通过"){
+                                flag1.innerHTML="很抱歉，目前您还不符合我们的要求"
+                            }else{
+                                flag1.innerHTML="申请已通过，我们会稍后联系您"
+                            }
+                        }else{
+                            // var button=document.getElementById("next");
+                            // $("#next").attr("disabled",true);
+                            // $("#next").css("pointer-events","none");
+                        }
+                    }
+
+                }
+            }
+        });
+    }
+
+    //上一条
+    function lastApply(){
+        var applyid=document.getElementById("applyid").innerHTML;
+        console.log("applyid==="+applyid);
+        $.ajax({
+            url: "/welfare/apply/findByUId",
+            type: "POST",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "userid": userid
+            }),
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    console.log("result[i-1]"+result[i-1]);
+                    if(result[i].applyid==applyid){
+                        if(result[i-1]!='' || result[i-1]!=null || result[i-1]!=undefined){
+                            $("#applyid").html(result[i-1].applyid);
+                            $("#type").html(result[i-1].type);
+                            $("#date").html(result[i-1].date);
+                            $("#request").html(result[i-1].request);
+                            $("#flag").html(result[i-1].flag);
+                            if(result[i-1].estimate=="审核中"){
+                                flag1.innerHTML="审核中"
+                            }else if(result[i-1].estimate=="未通过"){
+                                flag1.innerHTML="很抱歉，目前您还不符合我们的要求"
+                            }else{
+                                flag1.innerHTML="申请已通过，我们会稍后联系您"
+                            }
+                        }else{
+                            // $("#next").attr("disabled",true);
+                            // $("#next").css("pointer-events","none");
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

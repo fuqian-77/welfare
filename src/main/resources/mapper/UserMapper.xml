@@ -5,34 +5,42 @@
     <id column="userid" property="userid" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <!--<result column="salt" property="salt" jdbcType="VARCHAR" />-->
-    <!--<result column="email" property="email" jdbcType="VARCHAR" />-->
-    <!--<result column="type" property="type" jdbcType="INTEGER" />-->
-    <!--<result column="status" property="status" jdbcType="INTEGER" />-->
-    <!--<result column="activation_code" property="activationCode" jdbcType="VARCHAR" />-->
-    <!--<result column="header_url" property="headerUrl" jdbcType="VARCHAR" />-->
-    <!--<result column="create_time" property="createTime" jdbcType="BIGINT" />-->
-    <!--<result column="update_time" property="updateTime" jdbcType="BIGINT" />-->
-    <!--<result column="version" property="version" jdbcType="INTEGER" />-->
-    <!--<result column="is_vailed" property="isVailed" jdbcType="INTEGER" />-->
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="cardid" property="cardid" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="work" property="work" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
-    userid, name, password
+    userid, name, password,sex,age,address,cardid,phone,email,wechat,qq,note,job,`work`
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from `user`
-    where id = #{id,jdbcType=BIGINT}
+    from `users`
+    where userid = #{userid,jdbcType=VARCHAR}
   </select>
 
   <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
-    from `user`
-    where username = #{username,jdbcType=BIGINT}
+    from `users`
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `users`
+    where `name` like CONCAT('%',#{name},'%') or `userid` like  CONCAT('%',#{name},'%')
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap">
@@ -41,65 +49,67 @@
     FROM  `users`
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from `user`
-    where id = #{id,jdbcType=BIGINT}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from `users`
+    where userid = #{userid,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="insert" parameterType="com.welfare.entity.User" useGeneratedKeys="true" keyProperty="id">
-    insert into `user` (id, username, password,
-      salt, email, `type`,
-      status, activation_code, header_url, 
-      create_time, update_time, version, 
-      is_vailed)
-    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{activationCode,jdbcType=VARCHAR}, #{headerUrl,jdbcType=VARCHAR}, 
-      UNIX_TIMESTAMP(NOW(3)) * 1000, UNIX_TIMESTAMP(NOW(3)) * 1000,
-      0, 1)
+  <insert id="insert" parameterType="com.welfare.entity.User" >
+    insert into `users` (userid, name, password,
+      sex, email, age,
+      qq, wechat, cardid,
+      phone, note, address,job,`work`)
+    values (#{userid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+      #{qq,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{cardid,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+       #{job,jdbcType=VARCHAR}, #{work,jdbcType=VARCHAR})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.welfare.entity.User" >
-    update `user`
+    update `users`
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="salt != null" >
-        salt = #{salt,jdbcType=VARCHAR},
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
-        `type` = #{type,jdbcType=INTEGER},
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="activationCode != null" >
-        activation_code = #{activationCode,jdbcType=VARCHAR},
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
       </if>
-      <if test="headerUrl != null" >
-        header_url = #{headerUrl,jdbcType=VARCHAR},
+      <if test="wechat != null" >
+        wechat = #{wechat,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=INTEGER},
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=INTEGER},
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="version != null" >
-        version = #{version,jdbcType=INTEGER},
+      <if test="cardid != null" >
+        cardid = #{cardid,jdbcType=VARCHAR},
       </if>
-      <if test="isVailed != null" >
-        is_vailed = #{isVailed,jdbcType=INTEGER},
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="work != null" >
+        `work` = #{work,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where userid = #{userid,jdbcType=VARCHAR}
   </update>
 
 

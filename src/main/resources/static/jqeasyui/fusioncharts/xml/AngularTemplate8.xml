@@ -1,0 +1,27 @@
+<chart palette="4" upperLimit="%upperlimit%" lowerLimit="%lowerlimit%" gaugeStartAngle="220" gaugeEndAngle="-40" 
+  numberSuffix="%25" bgColor="FFFFFF" showBorder="0" basefontColor="FFFFFF" gaugeOuterRadius="90"
+  gaugeInnerRadius="75" chartTopMargin="45" toolTipBgColor="AEC0CA" toolTipBorderColor="FFFFFF" pivotRadius="6">
+  <colorRange>
+    <color minValue="%lowerlimit%" maxValue="%upperlimit%" code="F6BD0F"/>
+  </colorRange>
+  <trendpoints>
+    <point startValue="%value2%" endValue="%upperlimit%" color="E10000" radius="75" innerRadius="70" alpha="70"/>
+  </trendpoints>
+    <dials>
+      <dial value="%value1%" rearExtension="10" baseWidth="6" editMode="1" />
+    </dials>
+    <annotations>
+    <!--Rectangles below the gauge-->
+      <annotationGroup id="Grp1" showBelow="1">
+	<annotation type="rectangle" x="0" y="0" toX="270" toY="270" radius="10" fillColor="AEC0CA, 333333, AEC0CA" fillAngle="90" />
+	<annotation type="rectangle" x="5" y="5" toX="265" toY="265" radius="10" fillColor="333333, C3D0D8, 333333" fillAngle="90" />
+	<annotation type="rectangle" x="10" y="10" toX="260" toY="260" radius="10" fillColor="C4D5DC, A3A5A4" fillAngle="180" />
+    </annotationGroup>
+    <annotationGroup xPos="130" yPos="195" showBelow="1">		
+      <annotation type="text" label="%title1%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+    <annotationGroup xPos="135" yPos="210" showBelow="1">		
+      <annotation type="text" label="%title2%" fontColor="FFFFFF" fontSize="12" isBold="0"/>
+    </annotationGroup>
+  </annotations>
+</chart>

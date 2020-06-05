@@ -1,0 +1,13 @@
+<chart caption='%title1%' subCaption='%title2%' numberPrefix='$' is2D='1' isSliced='1' showPlotBorder='1' plotBorderThickness='1' plotBorderAlpha='100' plotBorderColor='FFFFFF' enableSmartLabels='0' chartLeftMargin='0'>
+   <set label='%label%' value='%value%' />
+   <styles>
+      <definition>
+         <style type="font" name="captionFont" size="15" />
+         <style type="font" name="subcaptionFont" size="13" />
+      </definition>
+      <application>
+      <apply toObject="CAPTION" styles="captionFont" />
+      <apply toObject="SUBCAPTION" styles="subcaptionFont" />
+      </application>
+   </styles>
+</chart> 

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.AdviceMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Advice" >
+    <id column="adviceid" property="adviceid" jdbcType="VARCHAR" />
+    <result column="doctorid" property="doctorid" jdbcType="VARCHAR" />
+    <result column="childrenid" property="childrenid" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="VARCHAR" />
+    <result column="endtime" property="endtime" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="dnote" property="dnote" jdbcType="VARCHAR" />
+    <result column="nurseid" property="nurseid" jdbcType="VARCHAR" />
+    <result column="condition" property="condition" jdbcType="VARCHAR" />
+    <result column="nnote" property="nnote" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    adviceid, doctorid, childrenid,date,`type`,content,starttime,endtime,flag,dnote,nurseid,`condition`,nnote
+  </sql>
+
+
+  <select id="selectByCId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `advice`
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.Advice" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `advice`
+    where childrenid like CONCAT('%',#{childrenid},'%') or `type` like CONCAT('%',#{childrenid},'%')
+  </select>
+
+  <select id="selectByDId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `advice`
+    where doctorid = #{doctorid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `advice`
+    where adviceid = #{adviceid,jdbcType=VARCHAR}
+  </select>
+
+<!--全部-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `advice`
+  </select>
+<!--执行中-->
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `advice` where `condition`='执行中'
+  </select>
+<!--未执行-->
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `advice` where `condition`='未执行'
+  </select>
+  <!--已完成-->
+  <select id="selectAll3" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `advice` where `condition`='已完成'
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from `advice`
+    where adviceid = #{adviceid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Advice" >
+    insert into `advice` (adviceid, doctorid, childrenid,
+      date, content,
+      `type`, starttime,endtime,
+      flag,dnote,nurseid,`condition`,nnote)
+    values (#{adviceid,jdbcType=VARCHAR}, #{doctorid,jdbcType=VARCHAR}, #{childrenid,jdbcType=VARCHAR},
+      #{date,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+      #{type,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR},
+      #{flag,jdbcType=VARCHAR},#{dnote,jdbcType=VARCHAR}, #{nurseid,jdbcType=VARCHAR},
+       #{condition,jdbcType=VARCHAR},#{nnote,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateById" parameterType="com.welfare.entity.Advice" >
+    update `advice`
+    <set >
+      <if test="doctorid != null" >
+        doctorid = #{doctorid,jdbcType=VARCHAR},
+      </if>
+      <if test="childrenid != null" >
+        childrenid = #{childrenid,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="dnote != null" >
+        dnote = #{dnote,jdbcType=VARCHAR},
+      </if>
+      <if test="nurseid != null" >
+        nurseid = #{nurseid,jdbcType=VARCHAR},
+      </if>
+      <if test="nnote != null" >
+        nnote = #{nnote,jdbcType=VARCHAR},
+      </if>
+      <if test="condition != null" >
+        `condition` = #{condition,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where adviceid = #{adviceid,jdbcType=VARCHAR}
+  </update>
+
+
+
+</mapper>

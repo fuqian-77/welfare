@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.StaffMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Staff" >
+    <id column="staffid" property="staffid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="admissiondate" property="admissiondate" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="cardid" property="cardid" jdbcType="CHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    *
+  </sql>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from `staff`
+    where staffid = #{staffid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `staff`
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `staff`
+  </select>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.Staff" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  staff
+    where `name` like CONCAT('%',#{name},'%') or `department` like  CONCAT('%',#{name},'%')
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from `staff`
+    where staffid = #{staffid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Staff" >
+    insert into `staff` (staffid, name, password,
+      sex, email, `age`,
+      admissiondate, department,state,
+      cardid, address, qq,wechat,
+      phone,note ,date,job)
+    values (#{staffid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+      #{admissiondate,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR},
+      #{cardid,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{qq,jdbcType=VARCHAR},
+      #{wechat,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{note,jdbcType=VARCHAR},
+      #{date,jdbcType=VARCHAR},#{job,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateById" parameterType="com.welfare.entity.Staff" >
+    update `staff`
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="admissiondate != null" >
+        admissiondate = #{admissiondate,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="cardid != null" >
+        cardid = #{cardid,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+      `age` = #{age,jdbcType=INTEGER},
+    </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where staffid = #{staffid,jdbcType=VARCHAR}
+  </update>
+
+
+
+</mapper>

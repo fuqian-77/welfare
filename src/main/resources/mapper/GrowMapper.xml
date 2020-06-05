@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.welfare.dao.GrowMapper">
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Grow">
+    <id column="growid" jdbcType="VARCHAR" property="growid" />
+    <result column="childrenid" jdbcType="VARCHAR" property="childrenid" />
+    <result column="growth" jdbcType="VARCHAR" property="growth" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="adapt" jdbcType="VARCHAR" property="adapt" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="social" jdbcType="VARCHAR" property="social" />
+    <result column="height" jdbcType="DOUBLE" property="height" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="notes" jdbcType="VARCHAR" property="notes" />
+    <result column="recorderid" jdbcType="VARCHAR" property="recorderid" />
+    <result column="checker" jdbcType="VARCHAR" property="checker" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    growid, childrenid, growth, date, adapt, language, social, height, weight, notes,checker,
+    recorderid
+  </sql>
+
+  <!--全部-->
+  <select id="selectAll" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List"/>
+  FROM  `grow`
+</select>
+
+  <!--已审核-->
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `grow` where checker!=''
+  </select>
+
+  <!--未审核-->
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `grow`  where checker='' or checker is null
+  </select>
+
+  <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from grow
+    where growid = #{growid,jdbcType=VARCHAR}
+  </select>
+  <select id="findByCondition" parameterType="com.welfare.entity.Grow" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  grow
+    where childrenid like CONCAT('%',#{childrenid},'%')
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from grow
+    where growid = #{growid,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteByCId" parameterType="java.lang.String">
+    delete from grow
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Grow">
+    insert into grow (growid, childrenid, growth,
+      date, adapt, language,
+      social, height, weight,
+      notes, recorderid,checker)
+    values (#{growid,jdbcType=VARCHAR}, #{childrenid,jdbcType=VARCHAR}, #{growth,jdbcType=VARCHAR},
+      #{date,jdbcType=DATE}, #{adapt,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR},
+      #{social,jdbcType=VARCHAR}, #{height,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE},
+      #{notes,jdbcType=VARCHAR}, #{recorderid,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateById" parameterType="com.welfare.entity.Grow">
+    update grow
+    set childrenid = #{childrenid,jdbcType=VARCHAR},
+      growth = #{growth,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      adapt = #{adapt,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      social = #{social,jdbcType=VARCHAR},
+      height = #{height,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      notes = #{notes,jdbcType=VARCHAR},
+      recorderid = #{recorderid,jdbcType=VARCHAR},
+      checker = #{checker,jdbcType=VARCHAR}
+    where growid = #{growid,jdbcType=VARCHAR}
+  </update>
+</mapper>

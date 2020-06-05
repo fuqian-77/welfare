@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+    xa:link {  text-decoration: none}
+    xa:hover { text-decoration: underline}
+    .xmypanel-header {
+        background-color: #E0ECFF;
+    }
+</style>
+<head>
+    <title>寄养部门-儿童信息</title>
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/default/easyui.me.css">
+    <link rel="stylesheet" type="text/css" href="../jqeasyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../system/css/icon.css">
+    <script type="text/javascript" src="../jqeasyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../jqeasyui/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="../system/easyui_functions.js"></script>
+    <script type="text/javascript" src="../functions/functions/functions.js"></script>
+    <meta charset="utf-8">
+    </head>
+
+<div id="main" title="儿童信息"  paddingdata-options="fit:true" style="height:auto">
+</div>
+
+<!-- CRUD 菜单栏 -->
+<div id="tb" style="margin-left: 4px;margin-bottom: 8px">
+        <label style="font-size: 13px">儿童姓名:</label>
+        <input id="childrenid1" class="easyui-combobox" data-options="editable:false,panelHeight:'auto'">
+</div>
+
+<!--表单-->
+<div id="aa" class="easyui-panel" style="width:1060px;height:420px;" title="综合信息">
+    <div  style="width:98%;padding:10px;">
+        <table style="width:98%" id="table">
+            <!--基本信息-->
+            <tr>
+                <td><h4>基本信息</h4></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>儿童编号:</label>
+                    <span id="childrenid"></span>
+                </td>
+                <td>
+                    <label>儿童姓名:</label>
+                    <span id="name"></span>
+                </td>
+                <td>
+                    <label>性别:</label>
+                    <span id="sex"></span>
+                </td>
+                <td>
+                    <label>年龄:</label>
+                    <span id="age"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>护理级别:</label>
+                    <span id="nurse"></span>
+                </td>
+                <td>
+                    <label>当前状态:</label>
+                    <span id="status"></span>
+                </td>
+                <td>
+                    <label>出生日期:</label>
+                    <span id="birthdate"></span>
+                </td>
+                <td>
+                    <label>身份证号:</label>
+                    <span id="cardid"></span>
+                </td>
+            </tr>
+            <!--病程信息-->
+            <tr>
+                <td>
+                    <label>所患疾病:</label>
+                    <span id="disease"></span>
+                </td>
+                <td>
+                    <label>状态:</label>
+                    <span id="flag"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><h4>入院信息</h4></td>
+            </tr>
+                <td>
+                    <label>入院时间:</label>
+                    <span id="admissiondate"></span>
+                </td>
+                <td>
+                    <label>入院携带的随身物品:</label>
+                    <span id="belongings"></span>
+                </td>
+                <td>
+                    <label>入院特征描述:</label>
+                    <span id="looks"></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>入院状态:</label>
+                    <span id="condition"></span>
+                </td>
+                <td>
+                    <label>送养人:</label>
+                    <span id="foster"></span>
+                </td>
+                <td>
+                    <label>联系电话:</label>
+                    <span id="phone"></span>
+                </td>
+                <td>
+                    <label>入院健康状态:</label>
+                    <span id="health"></span>
+                </td>
+            </tr>
+
+            <!--教育信息-->
+            <tr>
+                <td> <h4>教育信息</h4></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>所在学校:</label>
+                    <span id="school"></span>
+                </td>
+                <td>
+                    <label>当前年级:</label>
+                    <span id="grade"></span>
+                </td>
+                <td>
+                    <label>班主任:</label>
+                    <span id="contact"></span>
+                </td>
+                <td>
+                    <label>联系电话:</label>
+                    <span id="phone1"></span>
+                </td>
+            <!--寄养信息-->
+            <tr>
+                <td><h4>寄/领养信息</h4></td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>类型:</label>
+                    <span id="type"></span>
+                </td>
+                <td>
+                    <label id="foster1"></label>
+                    <span id="name1"></span>
+                </td>
+                <td>
+                    <label>年龄:</label>
+                    <span id="age1"></span>
+                </td>
+                <td>
+                    <label>性别:</label>
+                    <span id="sex1"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>联系方式:</label>
+                    <span id="phone2"></span>
+                </td>
+                <td>
+                    <label>地址:</label>
+                    <span id="address"></span>
+                </td>
+                <td>
+                    <label>日期:</label>
+                    <span id="date"></span>
+                </td>
+                <td>
+                    <label>状态:</label>
+                    <span id="flag1"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+    <script>
+        $('#childrenid1').combobox({
+            url:'http://localhost:8080/welfare/children/findAll',
+            valueField:'childrenid',
+            textField:'name'
+        });
+        $('#childrenid1').combobox({
+            onSelect:function(record){
+                console.log("record"+record.childrenid);
+                console.log("record"+record.name);
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/children/findById",
+                    data:JSON.stringify({
+                        "childrenid":record.childrenid
+                    }),
+                    success: function (result) {
+                        console.log(result);
+                        $("#childrenid").html(result.childrenid);
+                        $("#name").html(result.name);
+                        $("#sex").html(result.sex);
+                        $("#age").html(result.age);
+                        $("#nurse").html(result.nurse);
+                        $("#status").html(result.status);
+                        $("#admissiondate").html(result.admissiondate);
+                        $("#cardid").html(result.cardid);
+                        $("#belongings").html(result.belongings);
+                        $("#looks").html(result.looks);
+                        $("#health").html(result.health);
+                        $("#foster").html(result.foster);
+                        $("#phone").html(result.phone);
+                        $("#condition").html(result.condition);
+                        $("#birthdate").html(result.birthdate);
+                        $.ajax({
+                            type: "post",
+                            dataType: "json",
+                            contentType: 'application/json',
+                            url: "http://localhost:8080/welfare/treatment/findByCId",
+                            data:JSON.stringify({
+                                "childrenid":record.name
+                            }),
+                            success: function (result) {
+                                console.log(result);
+                                if(result=="" || result==null){
+                                    $("#disease").html("无");
+                                    $('#flag').html("无");
+                                }else{
+                                    for(var i=0;i<1;i++){
+                                        $.ajax({
+                                            type: "post",
+                                            dataType: "json",
+                                            contentType: 'application/json',
+                                            url: "http://localhost:8080/welfare/treatment/findByD",
+                                            data:JSON.stringify({
+                                                "childrenid":record.name,
+                                                "disease":result[i].disease
+                                            }),
+                                            success: function (result) {
+                                                console.log("result=="+result);
+                                                for(var j=0;j<result.length;j++){
+                                                    $("#disease").html(result[0].disease);
+                                                    $('#flag').html(result[0].flag);
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+
+                            }
+                        });
+                    }
+                });
+                $.ajax({ //教育
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/education/findByCId",
+                    data:JSON.stringify({
+                        "childrenid":record.name
+                    }),
+                    success: function (result) {
+                        console.log("result=="+result);
+                        for(var j=0;j<1;j++){
+                            $("#school").html(result[0].school);
+                            $('#grade').html(result[0].grade);
+                            $("#contact").html(result[0].contact);
+                            $('#phone1').html(result[0].phone);
+                        }
+                    }
+                });
+
+                $.ajax({ //寄养
+                    type: "post",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    url: "http://localhost:8080/welfare/fosterage/findByCId",
+                    data:JSON.stringify({
+                        "childrenid":record.name
+                    }),
+                    success: function (result) {
+                        console.log("result=="+result);
+                        for(var j=0;j<1;j++){
+                            $("#type").html(result[0].type);
+                            $('#foster1').html(result[0].type+"人:");
+                            $("#name1").html(result[0].name);
+                            $('#sex1').html(result[0].sex);
+                            $("#age1").html(result[0].age);
+                            $('#address').html(result[0].address);
+                            $("#phone2").html(result[0].phone);
+                            $('#date').html(result[0].date);
+                            if(result[0].flag==0){
+                                $("#flag1").html("已领回");
+                            }else{
+                                $("#flag1").html(result[0].type+"中");
+                            }
+                        }
+                    }
+                });
+            }
+
+        })
+
+
+    </script>
+
+    </body>
+
+    </html>

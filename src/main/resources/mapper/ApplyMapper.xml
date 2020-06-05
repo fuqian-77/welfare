@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.welfare.dao.ApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Apply" >
+    <id column="applyid" property="applyid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="request" property="request" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="estimate" property="estimate" jdbcType="VARCHAR" />
+    <result column="staffid" property="staffid" jdbcType="VARCHAR" />
+    <result column="checker" property="checker" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    applyid, userid, date,`type`,request,flag,estimate,staffid,checker,note,code
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from `apply`
+    where applyid = #{applyid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByUId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from `apply`
+    where userid = #{userid,jdbcType=VARCHAR} and `type`="寄养" or `type`="领养"
+    order by `date`
+  </select>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `apply` where code='寄养部门' and estimate!='未通过'
+  </select>
+
+<!--已完成-->
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `apply` where  checker!='' and code='寄养部门' and estimate!='未通过'
+  </select>
+
+<!--复审中-->
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `apply` where (checker='' or checker is null) and staffid!='' and code='寄养部门' and estimate!='未通过'
+  </select>
+
+<!--审核中-->
+  <select id="selectAll3" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `apply` where (staffid='' or staffid is null) and code='寄养部门' and estimate!='未通过'
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from `apply`
+    where applyid = #{applyid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Apply" >
+    insert into `apply` (applyid, userid, `type`,
+      date, request, flag,
+      estimate, staffid,checker,note,code)
+    values (#{applyid,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
+      #{date,jdbcType=VARCHAR}, #{request,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR},
+      #{estimate,jdbcType=VARCHAR}, #{staffid,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR},
+      #{note,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateById" parameterType="com.welfare.entity.Apply" >
+    update `apply`
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="request != null" >
+        request = #{request,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="estimate != null" >
+        estimate = #{estimate,jdbcType=VARCHAR},
+      </if>
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffid = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where applyid = #{applyid,jdbcType=INTEGER}
+  </update>
+
+
+
+</mapper>
