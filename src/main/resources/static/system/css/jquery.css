@@ -1,0 +1,8 @@
+body {
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	font-size: 62.5%;
+}
+input{ 
+	padding-left: 4px; padding-right: 4px; padding-top: 3px; 
+	padding-bottom:3px; font-size: 12px;
+}	

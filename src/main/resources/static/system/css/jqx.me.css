@@ -1,0 +1,32 @@
+﻿.jqx-tree-item{
+    margin-bottom: -6px !important;
+	//margin-left: -2px !important;	
+	//padding: 3px !important;
+	//text-indent: -2px !important;
+}
+
+.jqx-tree-item-u-last{
+   //margin: -10px 0px 0px -20px !important;
+   //background-image: url(system/images/icon-left.png)!important;
+}
+.jqx-tree-dropdown{
+    padding: 0px 0px 0px 20px !important;  //父节点上下层缩进indent
+}
+.jqx-tree-item-arrow-collapse, .jqx-tree-item-arrow-collapse-hover{
+    padding-right: 0px;
+    width: 17px;
+    height: 17px;
+    //background-image: url(system/images/folder.gif)!important;
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.jqx-tree-item-arrow-expand, .jqx-tree-item-arrow-expand-hover{
+    padding-right: 0px;
+    width: 17px;
+    height: 17px;
+    //background-image: url(system/images/folder-open.gif)!important;
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}

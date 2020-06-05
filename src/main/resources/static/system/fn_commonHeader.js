@@ -1,0 +1,10 @@
+Ext.onReady(function(){
+	sysSetMessageText();
+	Ext.Msg.alert('系统提示','登录超时!',function(){
+		if(window.top!=window.self){
+			window.top.location.href='login.jsp';
+		}else{
+			window.location.href='login.jsp';
+		}
+	});
+});

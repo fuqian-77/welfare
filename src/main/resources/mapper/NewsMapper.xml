@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.welfare.dao.NewsMapper">
+  <resultMap id="BaseResultMap" type="com.welfare.entity.News">
+    <id column="newid" jdbcType="INTEGER" property="newid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="staffid" jdbcType="VARCHAR" property="staffid" />
+    <result column="summarise" jdbcType="VARCHAR" property="summarise" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    newid, title, content, img, date, staffid, summarise
+  </sql>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from news
+    order by `date` desc
+  </select>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.News" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `news`
+    where title like CONCAT('%',#{title},'%') or `content` like CONCAT('%',#{title},'%')
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from news
+    where newid = #{newid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from news
+    where title = #{title,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from news
+    where newid = #{newid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.welfare.entity.News">
+    insert into news (newid, title, content, 
+      img, date, staffid, summarise
+      )
+    values (#{newid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{staffid,jdbcType=VARCHAR}, #{summarise,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.welfare.entity.News">
+    update news
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null">
+        staffid = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="summarise != null">
+        summarise = #{summarise,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where newid = #{newid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByTitle" parameterType="com.welfare.entity.News">
+    update news
+    <set>
+      <if test="newid != null">
+        newid = #{newid,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null">
+        staffid = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="summarise != null">
+        summarise = #{summarise,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where title = #{title,jdbcType=VARCHAR}
+  </update>
+</mapper>

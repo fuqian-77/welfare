@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+.textgrid{
+	//text-align: center;
+	float:left; 
+	border-width:1px;
+	background-color:#fff; 
+	margin:0px -1px 0px 0px; 
+	padding:0px 0px 0px 0px; 
+	border-style:solid; border-color:#95B8E7} 
+.textgridheader{
+	float:left; 
+	border-width:1px;
+	background-color:#fff;  
+	margin:0px -1px 0px 0px; 
+	padding:0px 0px 0px 0px; 
+	border-style:solid; border-color:#95B8E7} 
+}
+.textbox-text{
+	//text-align: right;
+	//color: red;
+	border: 2px solid #fafafa;
+	background-color:#fff;
+}
+.textbox-focused {
+	border-color: #ccc;
+	box-shadow: 0 0 3px 0 #fafafa;
+}	 

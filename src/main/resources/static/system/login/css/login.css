@@ -1,0 +1,199 @@
+@import 'css3.css';
+
+* {
+	margin:0; padding:0;
+}
+
+body {
+ position:relative;
+ //height:100%;
+ background:#fff url('../assets/loginbg.png') left top repeat-x;
+ //font-family:Tahoma, Arial, sans-serif;
+ font-family: Arial, Century Gothic, Lucida Grande, 微軟正黑體, 微软雅黑;
+}
+
+img {
+	border:0;
+}
+
+#container {
+	width:960px;
+	margin:0 auto;
+}
+
+#container .logo {
+	width:230px;
+	margin:240px auto 0;
+}
+
+#container #box {
+ //clear:both;
+ float:none;
+ width:70%;
+ margin:50px auto 0;
+}
+
+#loading{
+	float: right;
+	margin-right: 10px;
+	font-family: Arial, Century Gothic, Lucida Grande, 微軟正黑體, 微软雅黑;
+	//opacity: 1;	
+	//transition:opacity 2.25s linear 2s;
+	//-webkit-transition:opacity 2.25s linear 2s;
+}
+
+p.main label {
+ float:left;
+ padding:5px;
+ display:inline;
+ margin-left:60px;
+ font-size:13px;
+ color:#000;
+ margin-right:10px;
+ font-family: Arial, Century Gothic, Lucida Grande, 微軟正黑體, 微软雅黑;
+}
+
+#box p {
+ clear:both;
+ float:none;
+ width:100%;
+}
+
+p.main INPUT {
+ background:url('../assets/input.png') 0 0 repeat-x;
+ border:1px solid #d3d3d3;
+ color:#555;
+ padding:5px;
+ float:left;
+ width:212px;
+ height: 28px;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ border-radius: 5px;	
+}
+
+p.main INPUT:focus{
+  transition:border linear .2s,box-shadow linear .5s;
+  -moz-transition:border linear .2s,-moz-box-shadow linear .5s;
+  -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
+  outline:none;
+  border-color:#fcf8e3;//发光
+  box-shadow:0 0 6px #fcf8e3;
+  -moz-box-shadow:0 0 6px #fcf8e3;
+  -webkit-box-shadow:0 0 6px #fcf8e3;
+}
+
+input.login {
+ float:right;
+ padding:3px 10px 3px 10px;
+ color:#fff;
+ font-size:12px;
+ text-decoration:none;
+ border:1px solid #555;
+ background-color: #555;
+ //background:url('../assets/rep1.png') 50% 50% repeat-x;
+ display:inline;
+ margin-right:5px;
+ font-family: Arial, Century Gothic, Lucida Grande, 微軟正黑體, 微软雅黑;
+ cursor:pointer; 
+ box-shadow: 0 0 1px rgba(100, 100, 100, 0.2) inset,1px 1px 1px #CCC;//阴影效果(内阴影,外阴影)
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ border-radius: 5px;
+ transition:border linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+ -moz-transition:border linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+ -webkit-transition:border linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+}
+
+input.login:hover{
+	color: black;
+	background-color: #fcf8e3;
+	border: 1px solid #fcf8e3;
+	transition:border linear .5s, background-color linear .5s, color linear .5s;
+    -moz-transition:border linear .5s, background-color linear .5s, color linear .5s;
+    -webkit-transition:border linear .5s, background-color linear .5s, color linear .5s;
+}
+
+span {
+ font-size:13px;
+ color:#666;
+}
+
+.space {
+ padding-top:15px;
+}
+
+#results{
+	float: left;
+	margin-left: 124px;
+ 	margin-right: 5px;
+}
+
+.result{
+	font-family: Arial, Century Gothic, Lucida Grande, 微軟正黑體, 微软雅黑;
+	padding: 4px 14px 4px 14px;
+  	//margin-bottom: 20px;
+ 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	//background-color: #fcf8e3;
+	border: 1px solid #fbeed5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;	
+	box-shadow: 0 0 1px rgba(100, 100, 100, 0.2) inset,1px 1px 1px #ededed;//阴影效果(内阴影,外阴影)
+	vertical-align: middle;
+}
+
+//淡出
+.hide{	
+	opacity: 0;	
+	transition: opacity 2.25s linear 0s;
+	-webkit-transition: opacity .25s linear 0s;
+}
+
+//淡入
+.show{	
+	opacity: 1;	
+	//transition:opacity .25s linear 0s;
+	//-webkit-transition:opacity .25s linear 0s;
+}
+
+.warn{
+	color: #b94a48;
+	border-color: #f1aa2d;
+	background-color: #feffc8;
+	transition:border-color linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+    -moz-transition:border-color linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+    -webkit-transition:border-color linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+}
+
+.error{
+	color: #b94a48;
+	background-color: #fdcea4;
+	border-color: #eed3d7;
+	transition:border-color linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+    -moz-transition:border-color linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+    -webkit-transition:border-color linear 1.5s, background-color linear 1.5s, color linear 1.5s;
+}
+
+.information{
+	background:#c3e4fd;
+	border-color: #688fdc;
+	transition:border-color linear 1.5s, background-color linear 1.5s;
+    -moz-transition:border-color linear 1.5s, background-color linear 1.5s;
+    -webkit-transition:border-color linear 1.5s, background-color linear 1.5s;
+}
+
+.success{
+	border-color: #fcf8e3;
+	background-color: #d4f684;
+	transition:border-color linear 1.5s, background-color linear 1.5s;
+    -moz-transition:border-color linear 1.5s, background-color linear 1.5s;
+    -webkit-transition:border-color linear 1.5s, background-color linear 1.5s;
+}
+/*span input {
+ margin-left:125px;
+ margin-right:5px;
+ border:1px solid #111;
+ background:#444;
+ color:#fff;
+}*/

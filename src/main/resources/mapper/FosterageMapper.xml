@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.welfare.dao.FosterageMapper">
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Fosterage">
+    <id column="fosterageid" jdbcType="VARCHAR" property="fosterageid" />
+    <result column="childrenid" jdbcType="VARCHAR" property="childrenid" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="staffid" jdbcType="VARCHAR" property="staffid" />
+    <result column="checker" jdbcType="VARCHAR" property="checker" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="starttime" jdbcType="VARCHAR" property="starttime" />
+    <result column="endtime" jdbcType="VARCHAR" property="endtime" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fosterageid, childrenid, type, name, age, sex, phone, address, staffid, checker, 
+    note, starttime, endtime, date,userid,flag
+  </sql>
+
+  <!--全部-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `fosterage`
+  </select>
+
+  <!--寄养-->
+  <select id="selectAllj" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `fosterage` where type='寄养' and flag=1
+  </select>
+  <!--领养-->
+  <select id="selectAlll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `fosterage` where type='领养' and flag=1
+  </select>
+
+  <!--已审核-->
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `fosterage` where checker!=''
+  </select>
+
+  <!--未审核-->
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `fosterage`  where checker='' or checker is null
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fosterage
+    where fosterageid = #{fosterageid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByUser" parameterType="com.welfare.entity.Fosterage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fosterage
+    where `name` = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByCId" parameterType="com.welfare.entity.Fosterage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fosterage
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fosterage
+    where fosterageid = #{fosterageid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.welfare.entity.Fosterage">
+    insert into fosterage (fosterageid, childrenid, `type`,
+      name, age, sex, phone, 
+      address, staffid, checker, 
+      note, starttime, endtime, 
+      date,flag)
+    values (#{fosterageid,jdbcType=VARCHAR}, #{childrenid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{staffid,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR},
+      #{date,jdbcType=VARCHAR},#{flag,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.welfare.entity.Fosterage">
+    update `fosterage`
+    <set >
+    <if test="childrenid != null" >
+      childrenid = #{childrenid,jdbcType=VARCHAR},
+    </if>
+    <if test="type != null" >
+      `type` = #{type,jdbcType=VARCHAR},
+    </if>
+    <if test="name != null" >
+      name = #{name,jdbcType=VARCHAR},
+    </if>
+    <if test="age != null" >
+      age = #{age,jdbcType=INTEGER},
+    </if>
+    <if test="sex != null" >
+      sex = #{sex,jdbcType=VARCHAR},
+    </if>
+    <if test="phone != null" >
+      phone = #{phone,jdbcType=VARCHAR},
+    </if>
+    <if test="userid != null" >
+      userid = #{userid,jdbcType=VARCHAR},
+    </if>
+    <if test="address != null" >
+      address = #{address,jdbcType=VARCHAR},
+    </if>
+    <if test="staffid != null" >
+      staffid = #{staffid,jdbcType=VARCHAR},
+    </if>
+    <if test="checker != null" >
+      checker = #{checker,jdbcType=VARCHAR},
+    </if>
+    <if test="note != null" >
+      note = #{note,jdbcType=VARCHAR},
+    </if>
+    <if test="starttime != null" >
+      starttime = #{starttime,jdbcType=VARCHAR},
+    </if>
+    <if test="endtime != null" >
+      endtime = #{endtime,jdbcType=VARCHAR},
+    </if>
+    <if test="date != null" >
+      date = #{date,jdbcType=VARCHAR},
+    </if>
+    <if test="flag != null" >
+      flag = #{flag,jdbcType=VARCHAR},
+    </if>
+    </set>
+    where fosterageid = #{fosterageid,jdbcType=VARCHAR}
+  </update>
+</mapper>

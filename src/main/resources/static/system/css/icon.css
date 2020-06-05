@@ -1,0 +1,174 @@
+.panelIcon{ 
+	background-image:url(../images/window.png) !important;
+}
+/************************��ҳ**************************/
+/**��¼����--��¼��ť*/
+.loginIcon{ 
+	background-image:url(../images/login.png) !important;
+}
+/**��¼����--ѡ�ť*/
+.chooseIcon{ 
+	background-image:url(../images/return.png) !important;
+}
+/****��ѡ����--ϵͳ��ť***/
+.lockIcon {
+	background-image: url(../images/lock.png) !important;
+}
+/****��ѡ����--ϵͳ��--����ť***/
+.keyIcon {
+	background-image: url(../images/key.png) !important;
+}
+/****��ѡ����--ϵͳ��--����ť***/
+.reloginIcon{
+	background-image: url(../images/relogin.png) !important;
+}
+/****��ѡ���а�ť***/
+.config2Icon {
+	background-image: url(../images/config2.png) !important;
+}
+/****��ҳ�رհ�ť***/
+.cancelIcon {
+	background-image: url(../images/cancel.png) !important;
+}
+.stopIcon {
+	background-image: url(../images/stop.png) !important;
+}
+/************************��ҳ**************************/
+.icon{display:none  !important}
+.bulletIcon{	background-image: url(../images/bullet.png) !important;}
+.connectIcon{	background-image: url(../images/connect.png) !important;}
+.addIcon {	background-image: url( ../images/addnew.png ) !important;}
+.insertIcon {	background-image: url( ../images/insert.png ) !important;}
+.editIcon {	background-image: url( ../images/edit.png ) !important;	background-repeat: no-repeat;}
+.deletefileIcon {	background-image: url( ../images/deletefile.png) !important;}
+.deleteIcon {	background-image: url( ../images/erase.png) !important;}
+.searchIcon {	background-image: url( ../images/search.png) !important;}
+.locateIcon {	background-image: url( ../images/locate.png) !important;}
+.refreshIcon {	background-image: url( ../images/refresh.gif) !important;}
+.detailsIcon{ 	background-image:url(../images/details.gif) !important;}
+.saveIcon{ 	background-image:url(../images/save.png) !important;}
+.submitIcon{ 	background-image:url(../images/submit.png) !important;}
+.exitIcon{ 	background-image:url(../images/exit.png) !important;}
+.menuIcon{ 	background-image:url(../images/menu.png) !important;}
+.closeIcon{ 	background-image:url(../images/close.png) !important;}
+.helpIcon{ 	background-image:url(../images/helpme.gif) !important;}
+.confirmIcon{ 	background-image:url(../images/confirm.png) !important;}
+.pluginIcon{ 	background-image:url(../images/plugin.gif) !important;}
+.addviewIcon{ 	background-image:url(../images/addView.gif) !important;}
+.goIcon{ 	background-image:url(../images/application_go.png) !important;}
+.returnIcon{ 	background-image:url(../images/return.png) !important;}
+.rightIcon{ 	background-image:url(../images/found.png) !important;}
+.printerIcon {	background-image:url(../images/printer.png) !important;}
+.resetIcon{	background-image:url(../images/reset.png)!important; }
+.runIcon{	background-image:url(../images/run.png)!important; }
+.arrowrightIcon{	background-image:url(../images/arrowright.png)!important; }
+.arrowleftIcon{	background-image:url(../images/arrowleft.png)!important; }
+.arrowbackIcon{	background-image:url(../images/arrowback.png)!important; }
+.arrowforwardIcon{	background-image:url(../images/arrowforward.png)!important; }
+.arrowupIcon{	background-image:url(../images/arrowup.png)!important; }
+.arrowdownIcon{	background-image:url(../images/arrowdown.png)!important; }
+.arrowexitIcon{	background-image:url(../images/arrowexit.png)!important; }
+.backIcon{	background-image:url(../images/trackback.png)!important; }
+.cartIcon{	background-image:url(../images/cart.png)!important; }
+.textIcon{	background-image:url(../images/text.png)!important; }
+.setIcon{	background-image:url(../images/set.png)!important; }
+.databaseIcon{	background-image:url(../images/database.png)!important; }
+
+.pagefirstIcon{	background-image:url(../images/page-first.gif)!important; }
+.pagelastIcon{	background-image:url(../images/page-last.gif)!important; }
+.pagenextIcon{	background-image:url(../images/page-next.gif)!important; }
+.pageprevIcon{	background-image:url(../images/page-prev.gif)!important; }
+.uploadIcon{    background-image:url(../images/upload.png)!important; }
+.downloadIcon{	background-image:url(../images/download.png)!important; }
+.downfileIcon{	background-image:url(../images/downfile.png)!important; }
+.leafnode{      background-image:url(../images/leafnode.gif)!important; }
+.leafnodeIcon{      background-image:url(../images/leafnode.gif)!important; }
+.sortIcon{      background-image:url(../images/sort.gif)!important; }
+.sortascIcon{      background-image:url(../images/sort_asc.gif)!important; }
+.sortdescIcon{      background-image:url(../images/sort_desc.gif)!important; }
+.folderopenIcon{      background-image:url(../images/folder-open.gif)!important; }
+.gridIcon{      background-image:url(../images/grid.png)!important; }
+.treeIcon{      background-image:url(../images/tree.gif)!important; }
+.chncheckedIcon{      background-image:url(../images/chnchecked.png)!important; }
+.wordIcon{      background-image:url(../images/word.gif)!important; }
+.excelIcon{      background-image:url(../images/excel.gif)!important; }
+.pdfIcon{      background-image:url(../images/pdf.gif)!important; }
+
+.ux-rangemenu-gt {    background-image: url(../images/greater_than.png);    background-repeat: no-repeat !important;}
+.ux-rangemenu-lt {    background-image: url(../images/less_than.png);    background-repeat: no-repeat !important;}
+.ux-rangemenu-eq {    background-image: url(../images/equals.png);    background-repeat: no-repeat !important;}
+/**********************�û�Ȩ�������û�********************************/
+
+
+/********************ͼ��ר��*************************************/
+
+.column2Icon{
+	background-image: url(../images/chart/2dcolumn.ico) !important ;
+}
+.column3Icon{
+	background-image: url(../images/chart/3dcolumn.ico) !important ;
+}
+.pie2Icon{
+	background-image: url(../images/chart/2dpie.ico) !important ;
+}
+.pie3Icon{
+	background-image: url(../images/chart/3dpie.ico) !important ;
+}
+.lineIcon{
+	background-image: url(../images/chart/line.ico) !important ;
+}
+.areaIcon{
+	background-image: url(../images/chart/area.ico) !important ;
+}
+.barIcon{
+	background-image: url(../images/chart/bar.ico) !important ;
+}
+.circleIcon{
+	background-image: url(../images/chart/circle.ico) !important ;
+}
+/*********************************************************************/
+.checkIcon{
+	background-image: url(../images/check.png) !important ;	
+}
+.uncheckIcon{
+	background-image: url(../images/uncheck.png) !important ;	
+}
+.allcheckIcon{
+	background-image: url(../images/allcheck.png) !important ;	
+}
+.alluncheckIcon{
+	background-image: url(../images/alluncheck.png) !important ;	
+}
+.leafIcon{
+	background-image: url(../images/leaf.png) !important ;
+}
+
+.userIcon{
+	background-image: url(../images/user.png) !important ;
+}
+.pdfIcon{
+	background-image: url(../images/pdf.gif) !important ;
+}
+.excelIcon{
+	background-image: url(../images/excel.gif) !important ;
+}
+.wordIcon{
+	background-image: url(../images/word.gif) !important ;
+}
+
+.userIcon{
+	background-image: url(../images/user.gif) !important ;
+}
+.blankIcon{
+	background-image: url(../images/s.gif) !important ;
+}
+.dateIcon{
+	background-image: url(../images/date.png) !important ;
+}
+
+.field-align-right {
+	text-align: right;
+}
+.field-align-center {
+	text-align: center;
+}

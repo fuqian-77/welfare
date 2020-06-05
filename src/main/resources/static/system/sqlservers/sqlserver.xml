@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="GB2312" ?>
+<servers>
+  <host name="localhost" password="sql2008" />
+  <host name="local" password="sql2008" />
+</servers>
+

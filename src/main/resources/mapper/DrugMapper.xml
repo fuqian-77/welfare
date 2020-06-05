@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.welfare.dao.DrugMapper">
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Drug">
+    <id column="drugid" jdbcType="VARCHAR" property="drugid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="packing" jdbcType="VARCHAR" property="packing" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    drugid, name, quantity, spec, packing, unit, note
+  </sql>
+
+  <select id="findByCondition" parameterType="com.welfare.entity.Drug" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `drug`
+    where drugid like CONCAT('%',#{drugid},'%') or name like CONCAT('%',#{drugid},'%')
+  </select>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from drug
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from drug
+  where drugid = #{drugid,jdbcType=VARCHAR}
+</select>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from drug
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from drug
+    where drugid = #{drugid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.welfare.entity.Drug">
+    insert into drug (drugid, name, quantity, 
+      spec, packing, unit, 
+      note)
+    values (#{drugid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER},
+      #{spec,jdbcType=VARCHAR}, #{packing,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.welfare.entity.Drug">
+    update drug
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="packing != null">
+        packing = #{packing,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where drugid = #{drugid,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByName" parameterType="com.welfare.entity.Drug">
+    update drug
+    <set>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="packing != null">
+        packing = #{packing,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where `name` = #{name,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

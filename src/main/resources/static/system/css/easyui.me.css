@@ -1,0 +1,146 @@
+.panelIcon{ 
+	background-image:url(../images/icon-panel.png) !important;
+}
+.panelColor{ 
+	background-color: #E0ECFF; !important;
+}
+
+.loginIcon{ 
+	background-image:url(../images/login.png) !important;
+}
+/**��¼����--ѡ�ť*/
+.chooseIcon{ 
+	background-image:url(../images/return.png) !important;
+}
+/****��ѡ����--ϵͳ��ť***/
+.lockIcon {
+	background-image: url(../images/lock.png) !important;
+}
+/****��ѡ����--ϵͳ��--����ť***/
+.keyIcon {
+	background-image: url(../images/key.png) !important;
+}
+/****��ѡ����--ϵͳ��--����ť***/
+.reloginIcon{
+	background-image: url(../images/relogin.png) !important;
+}
+/****��ѡ���а�ť***/
+.config2Icon {
+	background-image: url(../images/config2.png) !important;
+}
+/****��ҳ�رհ�ť***/
+/************************��ҳ**************************/
+.icon{display:none  !important}
+.connectIcon{	background-image: url(../images/connect.png) !important;}
+.addIcon {	background-image: url( ../images/add.png ) !important;}
+.editIcon {	background-image: url( ../images/edit.png ) !important;	background-repeat: no-repeat;}
+.deleteIcon {	background-image: url( ../images/page_del.png) !important;}
+.searchIcon {	background-image: url( ../images/search.png) !important;}
+.locateIcon {	background-image: url( ../images/locate.png) !important;}
+.refreshIcon {	background-image: url( ../images/refresh.png) !important;}
+.detailsIcon{ 	background-image:url(../images/details.gif) !important;}
+.saveIcon{ 	background-image:url(../images/save.gif) !important;}
+.pluginIcon{ 	background-image:url(../images/plugin.gif) !important;}
+.addviewIcon{ 	background-image:url(../images/addView.gif) !important;}
+.goIcon{ 	background-image:url(../images/application_go.png) !important;}
+.refreshIcon{ 	background-image:url(../images/refresh.png) !important;}
+.returnIcon{ 	background-image:url(../images/return.png) !important;}
+.rightIcon{ 	background-image:url(../images/found.png) !important;}
+.printerIcon {	background-image:url(../images/printer.png) !important;}
+.resetIcon{	background-image:url(../images/reset.png)!important; }
+.pagefirstIcon{	background-image:url(../images/page-first.gif)!important; }
+.pagelastIcon{	background-image:url(../images/page-last.gif)!important; }
+.pagenextIcon{	background-image:url(../images/page-next.gif)!important; }
+.pageprevIcon{	background-image:url(../images/page-prev.gif)!important; }
+.downloadIcon{	background-image:url(../images/download.gif)!important; }
+.uploadIcon{    background-image:url(../images/upload.gif)!important; }
+.leafnode{      background-image:url(../images/leafnode.gif)!important; }
+.leafnodeIcon{      background-image:url(../images/leafnode.gif)!important; }
+.sortascIcon{      background-image:url(../images/sort_asc.gif)!important; }
+.sortdescIcon{      background-image:url(../images/sort_desc.gif)!important; }
+.folderopenIcon{      background-image:url(../images/folder-open.gif)!important; }
+.gridIcon{      background-image:url(../images/grid.png)!important; }
+.treeIcon{      background-image:url(../images/tree.gif)!important; }
+.chncheckedIcon{      background-image:url(../images/chnchecked.png)!important; }
+.wordIcon{      background-image:url(../images/word.gif)!important; }
+.excelIcon{      background-image:url(../images/excel.gif)!important; }
+.pdfIcon{      background-image:url(../images/pdf.gif)!important; }
+
+.ux-rangemenu-gt {    background-image: url(../images/greater_than.png);    background-repeat: no-repeat !important;}
+.ux-rangemenu-lt {    background-image: url(../images/less_than.png);    background-repeat: no-repeat !important;}
+.ux-rangemenu-eq {    background-image: url(../images/equals.png);    background-repeat: no-repeat !important;}
+/**********************�û�Ȩ�������û�********************************/
+
+
+/********************ͼ��ר��*************************************/
+
+.column2Icon{
+	background-image: url(../images/chart/2dcolumn.ico) !important ;
+}
+.column3Icon{
+	background-image: url(../images/chart/3dcolumn.ico) !important ;
+}
+.pie2Icon{
+	background-image: url(../images/chart/2dpie.ico) !important ;
+}
+.pie3Icon{
+	background-image: url(../images/chart/3dpie.ico) !important ;
+}
+.lineIcon{
+	background-image: url(../images/chart/line.ico) !important ;
+}
+.areaIcon{
+	background-image: url(../images/chart/area.ico) !important ;
+}
+.barIcon{
+	background-image: url(../images/chart/bar.ico) !important ;
+}
+.circleIcon{
+	background-image: url(../images/chart/circle.ico) !important ;
+}
+/*********************************************************************/
+.checkIcon{
+	background-image: url(../images/check.png) !important ;	
+}
+.uncheckIcon{
+	background-image: url(../images/uncheck.png) !important ;	
+}
+.allcheckIcon{
+	background-image: url(../images/allcheck.png) !important ;	
+}
+.alluncheckIcon{
+	background-image: url(../images/alluncheck.png) !important ;	
+}
+.leafIcon{
+	background-image: url(../images/leaf.png) !important ;
+}
+
+.userIcon{
+	background-image: url(../images/user.png) !important ;
+}
+.pdfIcon{
+	background-image: url(../images/pdf.gif) !important ;
+}
+.excelIcon{
+	background-image: url(../images/excel.gif) !important ;
+}
+.wordIcon{
+	background-image: url(../images/word.gif) !important ;
+}
+
+.userIcon{
+	background-image: url(../images/user.gif) !important ;
+}
+.blankIcon{
+	background-image: url(../images/s.gif) !important ;
+}
+.dateIcon{
+	background-image: url(../images/date.png) !important ;
+}
+
+.field-align-right {
+	text-align: right;
+}
+.field-align-center {
+	text-align: center;
+}

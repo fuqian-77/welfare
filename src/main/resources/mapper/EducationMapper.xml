@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.welfare.dao.EducationMapper">
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Education">
+    <id column="childrenid" jdbcType="VARCHAR" property="childrenid" />
+    <id column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="starttime" jdbcType="VARCHAR" property="starttime" />
+    <result column="endtime" jdbcType="VARCHAR" property="endtime" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="recorder" jdbcType="VARCHAR" property="recorder" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="checker" jdbcType="VARCHAR" property="checker" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
+    <result column="social" jdbcType="VARCHAR" property="social" />
+    <result column="character" jdbcType="VARCHAR" property="character" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="post" jdbcType="VARCHAR" property="post" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    childrenid, grade, starttime, endtime, school, contact, phone, recorder, note, checker, 
+    score, social, `character`, flag, post
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.welfare.entity.EducationKey" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from education
+  where childrenid = #{childrenid,jdbcType=VARCHAR}
+  and grade = #{grade,jdbcType=VARCHAR}
+</select>
+
+  <select id="selectByCId" parameterType="com.welfare.entity.Education" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from education
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+    order by grade desc
+  </select>
+  <select id="findByCondition" parameterType="com.welfare.entity.Education" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `education`
+    where childrenid like CONCAT('%',#{childrenid},'%') or school like CONCAT('%',#{childrenid},'%')
+  </select>
+
+<!--全部-->
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from education
+  </select>
+<!--未审核-->
+  <select id="findAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from education
+    where  checker='' or checker is null
+  </select>
+  <!--已审核-->
+  <select id="findAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from education
+    where checker!=''
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="com.welfare.entity.EducationKey">
+    delete from education
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+      and grade = #{grade,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Education">
+    insert into education (childrenid, grade, starttime, 
+      endtime, school, contact, 
+      phone, recorder, note, 
+      checker, score, social, 
+      `character`, flag, post
+      )
+    values (#{childrenid,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{starttime,jdbcType=VARCHAR},
+      #{endtime,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{recorder,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{checker,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, #{social,jdbcType=VARCHAR}, 
+      #{character,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.welfare.entity.Education">
+    update education
+    <set>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="recorder != null">
+        recorder = #{recorder,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="checker != null">
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="social != null">
+        social = #{social,jdbcType=VARCHAR},
+      </if>
+      <if test="character != null">
+        `character` = #{character,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        post = #{post,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where childrenid = #{childrenid,jdbcType=VARCHAR}
+      and grade = #{grade,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

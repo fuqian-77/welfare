@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.welfare.dao.RecipelMapper">
+  <resultMap id="BaseResultMap" type="com.welfare.entity.Recipel">
+    <id column="recipelid" jdbcType="INTEGER" property="recipelid" />
+    <result column="doctorid" jdbcType="VARCHAR" property="doctorid" />
+    <result column="childrenid" jdbcType="VARCHAR" property="childrenid" />
+    <result column="adviceid" jdbcType="VARCHAR" property="adviceid" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="druggist" jdbcType="VARCHAR" property="druggist" />
+    <result column="drugid" jdbcType="VARCHAR" property="drugid" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="ddate" jdbcType="VARCHAR" property="ddate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    recipelid, doctorid, childrenid, adviceid, date, state, druggist, drugid, quantity, 
+    note, ddate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recipel
+    where adviceid = #{adviceid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `recipel`
+  </select>
+
+  <select id="selectAll1" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `recipel`
+    where state="未配"
+  </select>
+
+  <select id="selectAll2" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  `recipel`
+    where state="已配"
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from recipel
+    where  adviceid= #{adviceid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.welfare.entity.Recipel">
+    insert into recipel (recipelid, doctorid, childrenid, 
+      adviceid, date, state, 
+      druggist, drugid, quantity, 
+      note, ddate)
+    values (#{recipelid,jdbcType=INTEGER}, #{doctorid,jdbcType=VARCHAR}, #{childrenid,jdbcType=VARCHAR}, 
+      #{adviceid,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR},
+      #{druggist,jdbcType=VARCHAR}, #{drugid,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR}, #{ddate,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.welfare.entity.Recipel">
+    update recipel
+    <set>
+      <if test="doctorid != null">
+        doctorid = #{doctorid,jdbcType=VARCHAR},
+      </if>
+      <if test="childrenid != null">
+        childrenid = #{childrenid,jdbcType=VARCHAR},
+      </if>
+      <if test="adviceid != null">
+        adviceid = #{adviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="druggist != null">
+        druggist = #{druggist,jdbcType=VARCHAR},
+      </if>
+      <if test="drugid != null">
+        drugid = #{drugid,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ddate != null">
+        ddate = #{ddate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where adviceid = #{adviceid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

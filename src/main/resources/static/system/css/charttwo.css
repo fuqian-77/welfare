@@ -1,0 +1,37 @@
+/* CSS Document */
+body{margin:0; background:url(../../Ext/images/back-strip.gif) repeat-x top #c5e1ed;}
+.header{
+	width:774px; 
+	height:70px;
+	background-color: #f4ebe4;
+}
+
+.logo {
+	width: 220px;
+	float: left;
+}
+
+.headline {
+	width: 300px;
+	float: right;
+	margin-top: 30px;
+	margin-right: 10px;
+	text-align: right;
+	font-size: 18px;
+}
+.body{background-color:#fbf9f6; font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; line-height:16px; color:#6b6864;}
+.msgText{font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; font-weight:normal; line-height:16px; color:#2D2C2B;}
+.divider-shadow{background:url(../../Ext/images/divider-strip.gif) repeat-y; padding:27px 0px 0px 26px;}
+.left-shadow{background:url(../../Ext/images/shadow-strip.gif) repeat-y;}
+.right-shadow{background:url(../../Ext/images/right-shadow-strip.gif) repeat-y;}
+
+.footer{height:125px; background:url(../../Ext/images/footer-strip.gif) repeat-x top #505050; font-family:Verdana, Arial, Helvetica, sans-serif;  font-weight: normal; font-size:11px; color:#9e907d; line-height:20px; }
+.footer A:link{font-family:Verdana, Arial, Helvetica, sans-serif normal; font-size:11px; color:#bfb6a9; text-decoration:none; border-bottom: 1px dotted #bfb6a9}
+.footer A:active{font-family:Verdana, Arial, Helvetica, sans-serif normal; font-size:11px; color:#bfb6a9; text-decoration:none;}
+.footer A:visited{font-family:Verdana, Arial, Helvetica, sans-serif normal; font-size:11px; color:#bfb6a9; text-decoration:none;}
+.footer A:hover{font-family:Verdana, Arial, Helvetica, sans-serif normal; font-size:11px; color:#e4ded5; text-decoration:none; border-bottom: 1px dotted #e4ded5}
+
+.gauge-back{background-color:#f7f2ea; border:1px solid #e5ddd0;}
+.gauge-header{background-color:#efe8dc; border:1px solid #e4dbcf; font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:12px; font-weight:bold; color:#6a6357;}
+.select-tab{background:url(../../Ext/images/select-tab-bg.gif) repeat-x bottom; }
+.stab-info{background:url(../../Ext/images/stab-info-bg.gif) repeat-x top #cad2d5; font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px; font-weight:bold; color:#2A4552;}
